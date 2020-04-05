@@ -1,2 +1,6 @@
 rootProject.name='Setlist.fm-Pro'
 include ':presentation'
+include ':domain'
+include ':data'
+include ':remote'
+include ':persistance'
