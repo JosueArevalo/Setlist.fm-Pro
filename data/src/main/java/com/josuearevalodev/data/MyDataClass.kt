@@ -1,3 +1,5 @@
 package com.josuearevalodev.data
 
-class MyDataClass
+import com.josuearevalodev.domain.MyDomainClass
+
+class MyDataClass(val a: MyDomainClass)

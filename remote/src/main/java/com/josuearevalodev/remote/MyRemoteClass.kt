@@ -1,3 +1,6 @@
 package com.josuearevalodev.remote
 
-class MyRemoteClass
+import com.josuearevalodev.data.MyDataClass
+import com.josuearevalodev.domain.MyDomainClass
+
+class MyRemoteClass(val a: MyDataClass, val b: MyDomainClass)

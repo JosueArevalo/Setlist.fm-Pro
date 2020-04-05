@@ -1,3 +1,6 @@
 package com.josuearevalodev.persistance
 
-class MyPersistanceClass
+import com.josuearevalodev.data.MyDataClass
+import com.josuearevalodev.domain.MyDomainClass
+
+class MyPersistanceClass(val a: MyDataClass, val b: MyDomainClass)
