@@ -1,4 +1,3 @@
 package com.josuearevalodev.domain
 
-public class MyDomainClass {
-}
+class MyDomainClass
