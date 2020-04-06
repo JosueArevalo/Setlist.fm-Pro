@@ -41,14 +41,6 @@ dependencies {
     // RecyclerView
     implementation "androidx.recyclerview:recyclerview:1.1.0"
 
-    // AppCompat? "androidx.appcompat:appcompat:$support_version",
-
-    // Support? "androidx.legacy:legacy-support-v4:$support_version",
-
-    // Meterial Design? "com.google.android.material:material:1.2.0-alpha04",
-
-    // Lifecycle? android.arch.lifecycle:extensions:$archLifecycle_Version
-
     // Gson
     implementation 'com.google.code.gson:gson:2.8.6'
 
@@ -67,6 +59,8 @@ dependencies {
     implementation "io.reactivex.rxjava3:rxandroid:3.0.0"
 
     // Room
+    implementation 'android.arch.persistence.room:runtime:1.1.1'
+    annotationProcessor 'android.arch.persistence.room:compiler:1.1.1'
 
     // Koin (Core)
     implementation "org.koin:koin-core:2.1.5" // Koin for Kotlin
@@ -80,7 +74,7 @@ dependencies {
     implementation "org.koin:koin-android-ext:2.1.5" // Koin AndroidX Experimental features
 
     // Firebase?
-    
+
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
@@ -89,4 +83,11 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // Doubts:
+    // Support? "androidx.legacy:legacy-support-v4:$support_version"
+    // Lifecycle? android.arch.lifecycle:extensions:$archLifecycle_Version //ViewModel and LiveData ???
+    // Material Components for Android
+    //implementation "com.google.android.material:material:1.2.0-alpha05" // https://github.com/material-components/material-components-android/blob/master/docs/getting-started.md
+
 }
