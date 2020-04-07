@@ -3,13 +3,13 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "com.josuearevalodev.setlistfmpro"
-        minSdkVersion 21
-        targetSdkVersion 29
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
@@ -38,8 +38,56 @@ dependencies {
     implementation project (':domain')
     implementation project (':data')
 
+    // RecyclerView
+    implementation "androidx.recyclerview:recyclerview:1.1.0"
+
+    // Gson
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    // Okhttp
+    implementation "com.squareup.okhttp3:logging-interceptor:4.2.1"
+    implementation "com.squareup.okhttp3:okhttp:4.2.1"
+    implementation "com.squareup.okhttp3:okhttp-urlconnection:3.11.0"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:2.8.1"
+    implementation "com.squareup.retrofit2:converter-gson:2.5.0"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.8.1"
+
+    // RXJava
+    implementation "io.reactivex.rxjava3:rxjava:3.0.1"
+    implementation "io.reactivex.rxjava3:rxandroid:3.0.0"
+
+    // Room
+    implementation 'android.arch.persistence.room:runtime:1.1.1'
+    annotationProcessor 'android.arch.persistence.room:compiler:1.1.1'
+
+    // Koin (Core)
+    implementation "org.koin:koin-core:2.1.5" // Koin for Kotlin
+    implementation "org.koin:koin-core-ext:2.1.5" // Koin extended & experimental features
+    implementation "org.koin:koin-test:2.1.5" // Koin for Unit tests
+
+    // Koin (AndroidX)
+    implementation "org.koin:koin-androidx-scope:2.1.5" // Koin AndroidX Scope features
+    implementation "org.koin:koin-androidx-viewmodel:2.1.5" // Koin AndroidX ViewModel features
+    implementation "org.koin:koin-androidx-fragment:2.1.5" // Koin AndroidX Fragment features
+    implementation "org.koin:koin-android-ext:2.1.5" // Koin AndroidX Experimental features
+
+    // Firebase?
+
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
     // Default test libraries from initial project
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // Doubts:
+    // Support? "androidx.legacy:legacy-support-v4:$support_version"
+    // Lifecycle? android.arch.lifecycle:extensions:$archLifecycle_Version //ViewModel and LiveData ???
+    // Material Components for Android
+    //implementation "com.google.android.material:material:1.2.0-alpha05" // https://github.com/material-components/material-components-android/blob/master/docs/getting-started.md
+
 }
