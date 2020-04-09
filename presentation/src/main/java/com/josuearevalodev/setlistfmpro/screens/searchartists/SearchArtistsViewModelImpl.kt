@@ -2,10 +2,37 @@ package com.josuearevalodev.setlistfmpro.screens.searchartists
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.josuearevalodev.base.Failure
+import com.josuearevalodev.base.Success
+import com.josuearevalodev.usecases.setlists.searchartistsbyname.SearchArtistsByName
+import io.reactivex.schedulers.Schedulers
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
 
-class SearchArtistsViewModelImpl : ViewModel(), SearchArtistsViewModel {
+class SearchArtistsViewModelImpl(private val searchArtistsByNamesUseCase: SearchArtistsByName) : ViewModel(), SearchArtistsViewModel {
 
-    override fun printHello() {
-        Log.d("TEST", "TEST - Hello world!")
+    val composite by lazy { CompositeDisposable() }
+    
+    override fun searchByName(text: String) {
+        searchArtistsByNamesUseCase(text)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSuccess { result ->
+                when (result) {
+                    is Success -> { Log.d("TEST", "TEST: Success: ${result.value}")}
+                    is Failure -> { Log.d("TEST", "TEST: Failure: ${result.error}")}
+                    }
+            }
+            .doOnError {
+                Log.d("TEST", "TEST: Error: $it")
+            }
+            .subscribe()
+            .addTo(composite)
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        composite.clear()
     }
 }
