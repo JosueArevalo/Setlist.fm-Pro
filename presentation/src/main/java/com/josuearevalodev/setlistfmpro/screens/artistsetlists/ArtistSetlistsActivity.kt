@@ -24,7 +24,7 @@ class ArtistSetlistsActivity : AppCompatActivity(R.layout.activity_artist_setlis
             startActivity(Intent(this, SetlistDetailActivity::class.java))
         }
 
-        viewModel.printBye()
+        viewModel.searchSetlists("idArtist", 0)
     }
 
     private fun initList() {
