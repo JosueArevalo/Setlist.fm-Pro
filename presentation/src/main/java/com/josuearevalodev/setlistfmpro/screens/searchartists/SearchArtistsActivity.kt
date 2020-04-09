@@ -15,10 +15,10 @@ class SearchArtistsActivity : AppCompatActivity(R.layout.activity_search_artists
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel.printHello()
-
         bNavigate.setOnClickListener {
             startActivity(Intent(this, ArtistSetlistsActivity::class.java))
         }
+
+        viewModel.searchByName("The Beatles")
     }
 }

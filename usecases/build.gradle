@@ -1,0 +1,28 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+
+dependencies {
+
+    // Default libraries from initial project
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    // RXJava
+    implementation "io.reactivex.rxjava2:rxjava:2.1.16"
+    implementation "io.reactivex.rxjava2:rxkotlin:2.4.0"
+
+    // Koin (Core)
+    implementation "org.koin:koin-core:2.1.5" // Koin for Kotlin
+    implementation "org.koin:koin-core-ext:2.1.5" // Koin extended & experimental features
+    implementation "org.koin:koin-test:2.1.5" // Koin for Unit tests
+
+    implementation project(':domain')
+    implementation project(':base')
+
+    // Gson TODO: Delete. Used for mocks
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+}
+
+sourceCompatibility = "7"
+targetCompatibility = "7"

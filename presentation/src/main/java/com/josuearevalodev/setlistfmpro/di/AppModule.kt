@@ -8,7 +8,7 @@ import org.koin.dsl.module
 
 val appModule = module {
 
-    viewModel { SearchArtistsViewModelImpl() } bind SearchArtistsViewModel::class
+    viewModel { SearchArtistsViewModelImpl(get()) } bind SearchArtistsViewModel::class
 
     viewModel { ArtistSetlistsViewModelImpl() } bind ArtistSetlistsViewModel::class
 
