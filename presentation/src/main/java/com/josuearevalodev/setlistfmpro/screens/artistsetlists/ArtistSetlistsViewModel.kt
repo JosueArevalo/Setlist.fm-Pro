@@ -2,5 +2,5 @@ package com.josuearevalodev.setlistfmpro.screens.searchartists
 
 interface ArtistSetlistsViewModel {
 
-    fun printBye()
+    fun searchSetlists(idArtist: String, page: Int)
 }

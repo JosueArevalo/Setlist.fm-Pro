@@ -10,7 +10,7 @@ val appModule = module {
 
     viewModel { SearchArtistsViewModelImpl(get()) } bind SearchArtistsViewModel::class
 
-    viewModel { ArtistSetlistsViewModelImpl() } bind ArtistSetlistsViewModel::class
+    viewModel { ArtistSetlistsViewModelImpl(get()) } bind ArtistSetlistsViewModel::class
 
     viewModel { SetlistDetailViewModelImpl() } bind SetlistDetailViewModel::class
 
