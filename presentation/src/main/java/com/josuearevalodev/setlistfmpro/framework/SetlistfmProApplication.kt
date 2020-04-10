@@ -1,6 +1,7 @@
 package com.josuearevalodev.setlistfmpro.framework
 
 import android.app.Application
+import com.josuearevalodev.data.di.dataModule
 import com.josuearevalodev.setlistfmpro.di.appModule
 import com.josuearevalodev.usecases.di.userCaseModule
 import org.koin.android.ext.koin.androidContext
@@ -18,7 +19,8 @@ class SetlistfmProApplication : Application() {
         startKoin {
             androidContext(this@SetlistfmProApplication)
             modules(appModule,
-                userCaseModule)
+                userCaseModule,
+                dataModule)
         }
     }
 }

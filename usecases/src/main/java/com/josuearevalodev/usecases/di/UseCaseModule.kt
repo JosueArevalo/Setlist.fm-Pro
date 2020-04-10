@@ -9,7 +9,7 @@ import org.koin.dsl.module
 
 val userCaseModule = module {
 
-    factory { GetArtistSetlistsImpl() } bind GetArtistSetlists::class
+    factory { GetArtistSetlistsImpl(get()) } bind GetArtistSetlists::class
 
-    factory { SearchArtistsByNameImpl() } bind SearchArtistsByName::class
+    factory { SearchArtistsByNameImpl(get()) } bind SearchArtistsByName::class
 }

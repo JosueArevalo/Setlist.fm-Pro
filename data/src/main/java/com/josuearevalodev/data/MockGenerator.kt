@@ -1,4 +1,4 @@
-package com.josuearevalodev
+package com.josuearevalodev.data
 
 import com.google.gson.Gson
 import com.google.gson.JsonParser
