@@ -19,6 +19,6 @@ class SearchArtistsActivity : AppCompatActivity(R.layout.activity_search_artists
             startActivity(Intent(this, ArtistSetlistsActivity::class.java))
         }
 
-        viewModel.searchByName("The Beatles")
+        viewModel.searchByName("Avalanch")
     }
 }

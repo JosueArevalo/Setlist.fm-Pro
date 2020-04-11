@@ -1,10 +1,10 @@
-package com.josuearevalodev.domain.repository
+package com.josuearevalodev.data.setlistfm.datasource
 
 import com.josuearevalodev.domain.entities.ArtistSetlistsResponse
-import io.reactivex.Single
 import com.josuearevalodev.domain.entities.SearchArtistsResponse
+import io.reactivex.Single
 
-interface SetListFmRepository {
+interface SetListFmDataSource {
 
     fun getArtists(artistName: String): Single<SearchArtistsResponse>
 
