@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.josuearevalodev.setlistfmpro.R
 import com.josuearevalodev.setlistfmpro.screens.searchartists.ArtistSetlistsViewModel
 import com.josuearevalodev.setlistfmpro.screens.setlistdetail.SetlistDetailActivity
@@ -24,7 +23,8 @@ class ArtistSetlistsActivity : AppCompatActivity(R.layout.activity_artist_setlis
             startActivity(Intent(this, SetlistDetailActivity::class.java))
         }
 
-        viewModel.searchSetlists("idArtist", 0)
+        viewModel.searchSetlists(idArtist = "c4707a18-2236-4426-9e67-429ce023777c",
+            page = 1)
     }
 
     private fun initList() {

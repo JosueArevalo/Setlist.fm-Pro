@@ -1,3 +1,3 @@
 package com.josuearevalodev.domain.entities
 
-data class SongEntity(val name: String)
+data class SongEntity(val name: String = "")

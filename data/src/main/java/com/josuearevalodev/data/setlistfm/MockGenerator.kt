@@ -1,7 +1,6 @@
-package com.josuearevalodev
+package com.josuearevalodev.data.setlistfm
 
 import com.google.gson.Gson
-import com.google.gson.JsonParser
 import com.josuearevalodev.domain.entities.ArtistSetlistsResponse
 import com.josuearevalodev.domain.entities.SearchArtistsResponse
 
@@ -128,25 +127,4 @@ object MockGenerator {
             "  \"page\" : 1,\n" +
             "  \"itemsPerPage\" : 20\n" +
             "}"
-
-
-
-
-
-
-    /*val gson = Gson()
-    val json = when (this) {
-        is String -> gson.toJson(JsonParser.parseString(this))
-        else -> gson.toJson(this)
-    }
-
-    return gson.fromJson<Output>(json, type.java)
-
-
-    // ====
-
-    val json = "{\"title\":\"Related expense\",\"categoryTitle\":\"Ceremony Venue Fee\",\"editLink\":{\"title\":\"Edit budget\",\"utl\":\"https://www.weddingwire.com/tools/Budget#cat1\"},\"paidTitle\":\"Paid\",\"paid\":\"\$ 0\",\"estimatedCostTitle\":\"Estimated cost\",\"estimatedCost\":\"\$320\"}"
-    val response = json.convert(type = RemoteBudgetEntity::class)
-
-    return Single.just(Success(value = response))*/
 }
