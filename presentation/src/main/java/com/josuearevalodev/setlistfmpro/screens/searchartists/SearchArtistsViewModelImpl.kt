@@ -7,18 +7,7 @@ import com.josuearevalodev.base_android.rxdisposablemanager.RxDisposableManagerI
 import com.josuearevalodev.usecases.setlists.searchartistsbyname.SearchArtistsByName
 import io.reactivex.rxkotlin.addTo
 
-class SearchArtistsViewModelImpl(private val searchArtistsByNamesUseCase: SearchArtistsByName) : ViewModel(), SearchArtistsViewModel, RxDisposableManager by RxDisposableManagerImpl() {
-
-    override fun searchByName(text: String) {
-        searchArtistsByNamesUseCase(text)
-            .subscribeOn(ioThread)
-            .observeOn(mainThread)
-            .subscribe(
-                { searchArtistsResponse -> Log.d("TEST", "TEST: Success! $searchArtistsResponse") },
-                { error -> Log.e("TEST", "TEST: Error! $error") }
-            )
-            .addTo(composite)
-    }
+class SearchArtistsViewModelImpl() : ViewModel(), SearchArtistsViewModel, RxDisposableManager by RxDisposableManagerImpl() {
 
     override fun onCleared() {
         super.onCleared()

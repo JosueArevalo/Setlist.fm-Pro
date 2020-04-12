@@ -2,7 +2,6 @@ package com.josuearevalodev.setlistfmpro.screens.artistsetlists
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.josuearevalodev.setlistfmpro.R
@@ -18,14 +17,13 @@ class ArtistSetlistsActivity : AppCompatActivity(R.layout.activity_artist_setlis
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        prepareUi()
         handleIntentData()
+        prepareUi()
+        fetchSearchArtist()
     }
 
     private fun handleIntentData() {
         getArtistNameFromIntent()?.let {
-            Log.d("TEST", "TEST: Received $it")
             viewModel.artistName = it
         }
     }
@@ -35,9 +33,6 @@ class ArtistSetlistsActivity : AppCompatActivity(R.layout.activity_artist_setlis
         bNavigate.setOnClickListener {
             startActivity(Intent(this, SetlistDetailActivity::class.java))
         }
-
-        viewModel.searchSetlists(idArtist = "c4707a18-2236-4426-9e67-429ce023777c",
-            page = 1)
     }
 
     private fun initList() {
@@ -45,5 +40,9 @@ class ArtistSetlistsActivity : AppCompatActivity(R.layout.activity_artist_setlis
             layoutManager = LinearLayoutManager(this@ArtistSetlistsActivity)
             adapter = this@ArtistSetlistsActivity.adapter
         }
+    }
+
+    private fun fetchSearchArtist() {
+        viewModel.searchArtistByName(viewModel.artistName)
     }
 }
