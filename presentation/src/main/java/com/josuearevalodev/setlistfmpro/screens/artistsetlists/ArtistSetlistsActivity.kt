@@ -2,6 +2,7 @@ package com.josuearevalodev.setlistfmpro.screens.artistsetlists
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.josuearevalodev.setlistfmpro.R
@@ -18,6 +19,18 @@ class ArtistSetlistsActivity : AppCompatActivity(R.layout.activity_artist_setlis
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        prepareUi()
+        handleIntentData()
+    }
+
+    private fun handleIntentData() {
+        getArtistNameFromIntent()?.let {
+            Log.d("TEST", "TEST: Received $it")
+            viewModel.artistName = it
+        }
+    }
+
+    private fun prepareUi() {
         initList()
         bNavigate.setOnClickListener {
             startActivity(Intent(this, SetlistDetailActivity::class.java))
