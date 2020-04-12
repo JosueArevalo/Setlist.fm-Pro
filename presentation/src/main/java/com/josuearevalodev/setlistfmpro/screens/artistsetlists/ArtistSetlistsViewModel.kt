@@ -4,5 +4,7 @@ interface ArtistSetlistsViewModel {
 
     var artistName: String
 
+    fun searchArtistByName(text: String)
+
     fun searchSetlists(idArtist: String, page: Int)
 }
