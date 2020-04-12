@@ -9,6 +9,8 @@ import io.reactivex.rxkotlin.addTo
 
 class ArtistSetlistsViewModelImpl(private val getArtistSetlistsUseCase: GetArtistSetlists) : ViewModel(), ArtistSetlistsViewModel, RxDisposableManager by RxDisposableManagerImpl() {
 
+    override var artistName: String = ""
+
     override fun searchSetlists(idArtist: String, page: Int) {
     getArtistSetlistsUseCase(artistId = idArtist, page = page)
         .subscribeOn(ioThread)
