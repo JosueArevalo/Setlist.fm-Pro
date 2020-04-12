@@ -14,11 +14,16 @@ class SearchArtistsActivity : AppCompatActivity(R.layout.activity_search_artists
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        prepareUi()
+    }
 
-        bNavigate.setOnClickListener {
-            startActivity(Intent(this, ArtistSetlistsActivity::class.java))
+    private fun prepareUi() {
+        handleListeners()
+    }
+
+    private fun handleListeners() {
+        tilSearch.setEndIconOnClickListener {
+            viewModel.searchByName(tilSearch.editText?.text.toString().trim())
         }
-
-        viewModel.searchByName("Avalanch")
     }
 }

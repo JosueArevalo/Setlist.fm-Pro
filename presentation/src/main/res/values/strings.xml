@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Setlist.fm-Pro</string>
+    <string name="search_artist_hint">Introduce el artista</string>
 </resources>
