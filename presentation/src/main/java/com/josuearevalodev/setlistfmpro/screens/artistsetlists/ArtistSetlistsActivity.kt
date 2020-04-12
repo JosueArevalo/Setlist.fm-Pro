@@ -9,6 +9,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.josuearevalodev.base.classes.ViewState
 import com.josuearevalodev.base_android.extensions.gone
 import com.josuearevalodev.base_android.extensions.visible
+import com.josuearevalodev.domain.entities.ArtistSetlistsResponse
 import com.josuearevalodev.setlistfmpro.R
 import com.josuearevalodev.setlistfmpro.screens.searchartists.ArtistSetlistsViewModel
 import com.josuearevalodev.setlistfmpro.screens.setlistdetail.SetlistDetailActivity
@@ -47,6 +48,7 @@ class ArtistSetlistsActivity : AppCompatActivity(R.layout.activity_artist_setlis
                     evError.gone()
                 }
                 is ViewState.Content<*> -> {
+                    adapter.addSetlists((viewState.value as ArtistSetlistsResponse).setlist)
                     clContent.visible()
                     lvLoading.gone()
                     evError.gone()

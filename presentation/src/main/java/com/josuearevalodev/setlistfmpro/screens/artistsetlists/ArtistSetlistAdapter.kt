@@ -1,20 +1,30 @@
 package com.josuearevalodev.setlistfmpro.screens.artistsetlists
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.josuearevalodev.base_android.extensions.inflate
+import com.josuearevalodev.domain.entities.SetlistEntity
+import com.josuearevalodev.setlistfmpro.R
 
 class ArtistSetlistAdapter() : RecyclerView.Adapter<SetlistViewHolder>() {
 
+    private val setlists: MutableList<SetlistEntity> = mutableListOf()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SetlistViewHolder {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return SetlistViewHolder(parent.inflate(R.layout.cell_setlist))
     }
 
     override fun onBindViewHolder(holder: SetlistViewHolder, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        holder.bind(setlists[position])
     }
 
     override fun getItemCount(): Int {
-        return 0
+        return setlists.size
     }
 
+    fun addSetlists(setlists: List<SetlistEntity>) {
+        this.setlists.addAll(setlists)
+        notifyDataSetChanged()
+    }
 }
