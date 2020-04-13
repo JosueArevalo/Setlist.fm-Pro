@@ -31,7 +31,7 @@ class ArtistSetlistsViewModelImpl(private val searchArtistsByNamesUseCase: Searc
                 },
                 { error ->
                     Log.e("TEST", "TEST: Error! $error")
-                    viewState.postValue(ViewState.Error(Throwable()))
+                    viewState.postValue(ViewState.Error(error))
                 }
             )
             .addTo(composite)
