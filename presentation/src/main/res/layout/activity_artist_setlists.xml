@@ -4,18 +4,28 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvList"
+    <!-- Content -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Loading -->
+    <com.josuearevalodev.setlistfmpro.customviews.LoadingView
+        android:id="@+id/lvLoading"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/bNavigate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Go to Setlist Detail"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+    <!-- Error -->
+    <com.josuearevalodev.setlistfmpro.customviews.ErrorView
+        android:id="@+id/evError"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
