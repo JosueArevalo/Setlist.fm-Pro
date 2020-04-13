@@ -1,12 +1,16 @@
 package com.josuearevalodev.remote.datasource
 
 import com.josuearevalodev.domain.entities.ArtistSetlistsResponse
+import com.josuearevalodev.domain.entities.RemoteSearchArtistsResponse
 import com.josuearevalodev.domain.entities.SearchArtistsResponse
+import com.josuearevalodev.remote.error.*
 import com.josuearevalodev.remote.service.SetlistFmService
 import com.josuearevalodev.remote.httpclient.HttpClient
 import com.josuearevalodev.remote.mapper.mapToArtistSetlistsResponse
 import com.josuearevalodev.remote.mapper.mapToSearchArtistsResponse
 import io.reactivex.Single
+import io.reactivex.SingleSource
+import retrofit2.HttpException
 
 class RemoteSetlistFmDataSourceImpl(
     private val httpClient: HttpClient,
@@ -16,6 +20,11 @@ class RemoteSetlistFmDataSourceImpl(
     override fun getArtists(artistName: String): Single<SearchArtistsResponse> {
         return httpClient.create(SetlistFmService::class.java, baseUrl)
             .getArtists(artistName)
+            .onErrorResumeNext {
+                (it as? HttpException)?.let { httpException ->
+                    httpException.toRemoteDataError
+                }
+            }
             .map { it.mapToSearchArtistsResponse }
     }
 
@@ -23,5 +32,16 @@ class RemoteSetlistFmDataSourceImpl(
         return httpClient.create(SetlistFmService::class.java, baseUrl)
             .getArtistSetlists(artistId, page)
             .map { it.mapToArtistSetlistsResponse }
+    }
+
+    val HttpException.toRemoteDataError: SingleSource<out RemoteSearchArtistsResponse>
+    get() {
+        return when (code()) {
+            400 -> Single.error(BadRequest(this))
+            401 -> Single.error(Unauthorized(this))
+            404 -> Single.error(NotFound(this))
+            429 -> Single.error(TooManyRequests(this))
+            else -> Single.error(Unexpected(this))
+        }
     }
 }
