@@ -22,7 +22,7 @@ class RemoteSetlistFmDataSourceImpl(
             .getArtists(artistName)
             .onErrorResumeNext {
                 (it as? HttpException)?.let { httpException ->
-                    httpException.toRemoteDataError
+                    httpException.toRemoteDataError as SingleSource<out RemoteSearchArtistsResponse>
                 } ?: Single.error(Unexpected(it))
             }
             .map { it.mapToSearchArtistsResponse }
@@ -32,16 +32,5 @@ class RemoteSetlistFmDataSourceImpl(
         return httpClient.create(SetlistFmService::class.java, baseUrl)
             .getArtistSetlists(artistId, page)
             .map { it.mapToArtistSetlistsResponse }
-    }
-
-    val HttpException.toRemoteDataError: SingleSource<out RemoteSearchArtistsResponse>
-    get() {
-        return when (code()) {
-            400 -> Single.error(BadRequest(this))
-            401 -> Single.error(Unauthorized(this))
-            404 -> Single.error(NotFound(this))
-            429 -> Single.error(TooManyRequests(this))
-            else -> Single.error(Unexpected(this))
-        }
     }
 }
