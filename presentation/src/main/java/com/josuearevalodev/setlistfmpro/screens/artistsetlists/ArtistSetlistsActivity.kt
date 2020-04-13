@@ -57,7 +57,7 @@ class ArtistSetlistsActivity : AppCompatActivity(R.layout.activity_artist_setlis
                     clContent.gone()
                     lvLoading.gone()
                     evError.visible()
-                    Snackbar.make(clContent, "Error", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(clContent, "Error: ${viewState.error.cause}", Snackbar.LENGTH_LONG).show()
                 }
             }
         })
