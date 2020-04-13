@@ -1,6 +1,7 @@
 package com.josuearevalodev.remote.datasource
 
 import com.josuearevalodev.domain.entities.ArtistSetlistsResponse
+import com.josuearevalodev.domain.entities.RemoteArtistSetlistsResponse
 import com.josuearevalodev.domain.entities.RemoteSearchArtistsResponse
 import com.josuearevalodev.domain.entities.SearchArtistsResponse
 import com.josuearevalodev.remote.error.*
@@ -22,7 +23,7 @@ class RemoteSetlistFmDataSourceImpl(
             .getArtists(artistName)
             .onErrorResumeNext {
                 (it as? HttpException)?.let { httpException ->
-                    httpException.toRemoteDataError as SingleSource<out RemoteSearchArtistsResponse>
+                    httpException.toRemoteDataError as SingleSource<RemoteSearchArtistsResponse>
                 } ?: Single.error(Unexpected(it))
             }
             .map { it.mapToSearchArtistsResponse }
@@ -31,6 +32,11 @@ class RemoteSetlistFmDataSourceImpl(
     override fun getArtistSetlists(artistId: String, page: Int): Single<ArtistSetlistsResponse> {
         return httpClient.create(SetlistFmService::class.java, baseUrl)
             .getArtistSetlists(artistId, page)
+            .onErrorResumeNext {
+                (it as? HttpException)?.let { httpException ->
+                    httpException.toRemoteDataError as SingleSource<RemoteArtistSetlistsResponse>
+                } ?: Single.error(Unexpected(it))
+            }
             .map { it.mapToArtistSetlistsResponse }
     }
 }

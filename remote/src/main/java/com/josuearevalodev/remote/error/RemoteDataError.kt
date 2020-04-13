@@ -16,7 +16,7 @@ data class TooManyRequests(override val cause: Throwable? = null) : RemoteDataEr
 
 data class Unexpected(override val cause: Throwable? = null) : RemoteDataError()
 
-val HttpException.toRemoteDataError: SingleSource<out Any>
+val HttpException.toRemoteDataError: SingleSource<Any>
     get() {
         return when (code()) {
             400 -> Single.error(BadRequest(this))
