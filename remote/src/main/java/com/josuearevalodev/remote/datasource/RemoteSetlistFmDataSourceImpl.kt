@@ -23,7 +23,7 @@ class RemoteSetlistFmDataSourceImpl(
             .onErrorResumeNext {
                 (it as? HttpException)?.let { httpException ->
                     httpException.toRemoteDataError
-                }
+                } ?: Single.error(Unexpected(it))
             }
             .map { it.mapToSearchArtistsResponse }
     }
