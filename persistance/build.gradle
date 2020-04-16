@@ -40,6 +40,11 @@ dependencies {
     // RxJava support for Room
     implementation "android.arch.persistence.room:rxjava2:1.1.1"
 
+    // Koin (Core)
+    implementation "org.koin:koin-core:2.1.5" // Koin for Kotlin
+    implementation "org.koin:koin-core-ext:2.1.5" // Koin extended & experimental features
+    implementation "org.koin:koin-test:2.1.5" // Koin for Unit tests
+
     // Default test libraries from initial project
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
