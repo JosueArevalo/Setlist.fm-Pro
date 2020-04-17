@@ -1,5 +1,6 @@
 package com.josuearevalodev.remote.datasource
 
+import com.josuearevalodev.data.setlistfm.datasource.SetListFmDataSource
 import com.josuearevalodev.domain.entities.ArtistSetlistsResponse
 import com.josuearevalodev.domain.entities.RemoteArtistSetlistsResponse
 import com.josuearevalodev.domain.entities.RemoteSearchArtistsResponse
@@ -16,7 +17,7 @@ import retrofit2.HttpException
 class RemoteSetlistFmDataSourceImpl(
     private val httpClient: HttpClient,
     private val baseUrl: String
-) : RemoteSetlistFmDataSource {
+) : SetListFmDataSource {
 
     override fun getArtists(artistName: String): Single<SearchArtistsResponse> {
         return httpClient.create(SetlistFmService::class.java, baseUrl)
