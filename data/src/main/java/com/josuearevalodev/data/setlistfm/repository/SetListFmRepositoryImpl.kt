@@ -8,11 +8,18 @@ import com.josuearevalodev.domain.entities.SearchArtistsResponse
 import com.josuearevalodev.domain.repository.SetListFmRepository
 import io.reactivex.Single
 
-class SetListFmRepositoryImpl(private val remoteDS: SetListFmDataSource) : SetListFmRepository {
+class SetListFmRepositoryImpl(
+    private val cacheDS: SetListFmDataSource,
+    private val remoteDS: SetListFmDataSource
+) : SetListFmRepository {
 
     override fun getArtists(artistName: String): Single<List<ArtistEntity>> {
         //return Single.just(MockGenerator.searchArtistsResponse)
-        return remoteDS.getArtists(artistName)
+
+        return cacheDS.getArtists(artistName)
+
+
+        //return remoteDS.getArtists(artistName)
     }
 
     override fun getArtistSetlists(

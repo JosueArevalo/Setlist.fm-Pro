@@ -8,5 +8,10 @@ import org.koin.dsl.module
 
 val dataModule = module {
 
-    single { SetListFmRepositoryImpl(get(named("remote"))) } bind SetListFmRepository::class
+    single {
+        SetListFmRepositoryImpl(
+            get(named("remote")),
+            get(named("cached"))
+        )
+    } bind SetListFmRepository::class
 }
