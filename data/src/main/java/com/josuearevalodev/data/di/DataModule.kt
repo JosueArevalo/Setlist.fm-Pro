@@ -11,7 +11,7 @@ val dataModule = module {
     single {
         SetListFmRepositoryImpl(
             get(named("remote")),
-            get(named("cached"))
+            get(named("database"))
         )
     } bind SetListFmRepository::class
 }
