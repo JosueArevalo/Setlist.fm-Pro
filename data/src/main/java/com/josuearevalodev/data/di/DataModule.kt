@@ -10,8 +10,8 @@ val dataModule = module {
 
     single {
         SetListFmRepositoryImpl(
-            get(named("remote")),
-            get(named("database"))
+            get(named("database")),
+            get(named("remote"))
         )
     } bind SetListFmRepository::class
 }
