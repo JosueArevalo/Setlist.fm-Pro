@@ -43,7 +43,7 @@ dependencies {
     implementation project (':domain')
     implementation project (':data')
     implementation project (':remote')
-    implementation project (':persistance')
+    implementation project (':persistence')
     implementation project (':usecases')
     implementation project (':base')
     implementation project (':base_android')
