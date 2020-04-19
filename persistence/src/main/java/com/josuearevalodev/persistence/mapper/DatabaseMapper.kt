@@ -13,3 +13,14 @@ val DatabaseArtistEntity.mapToArtistEntity: ArtistEntity
             url = this.url ?: ""
         )
     }
+
+val ArtistEntity.mapToDatabaseArtistEntity: DatabaseArtistEntity
+    get() {
+        return DatabaseArtistEntity(
+            mbid = mbid,
+            name = name,
+            sortName = sortName,
+            disambiguation = disambiguation,
+            url = url
+        )
+    }
