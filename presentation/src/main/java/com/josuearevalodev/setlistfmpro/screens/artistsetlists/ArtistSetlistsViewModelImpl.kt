@@ -23,9 +23,9 @@ class ArtistSetlistsViewModelImpl(private val searchArtistsByNamesUseCase: Searc
             .subscribeOn(ioThread)
             .observeOn(mainThread)
             .subscribe(
-                { searchArtistsResponse ->
-                    Log.d("TEST", "TEST: Success! $searchArtistsResponse")
-                    searchArtistsResponse.artist.firstOrNull()?.let { artist ->
+                { artists ->
+                    Log.d("TEST", "TEST: Success! $artists")
+                    artists.firstOrNull()?.let { artist ->
                         searchSetlists(artist.mbid, artistSetlistPage)
                     }
                 },
