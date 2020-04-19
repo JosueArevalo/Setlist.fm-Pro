@@ -13,13 +13,27 @@ class SetListFmRepositoryImpl(
     private val remoteDS: SetListFmDataSource
 ) : SetListFmRepository {
 
-    override fun getArtists(artistName: String): Single<List<ArtistEntity>> {
+    override fun getArtist(artistName: String): Single<ArtistEntity> {
+
+        // Remote + insert
+        return remoteDS
+            .getArtist(artistName)
+
+        // Concat
+        /*return Single.concatArray(
+            cacheDS.getArtists(artistName),
+            remoteDS.getArtists(artistName)
+        ).firstOrError()*/
+
+        // DB only
+        //return cacheDS.getArtists(artistName)
+
+        // Remote only
+        //return remoteDS.getArtists(artistName)
+
+        // Mock
         //return Single.just(MockGenerator.searchArtistsResponse)
 
-        return cacheDS.getArtists(artistName)
-
-
-        //return remoteDS.getArtists(artistName)
     }
 
     override fun getArtistSetlists(

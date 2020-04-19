@@ -7,7 +7,7 @@ import io.reactivex.Single
 
 interface SetListFmDataSource {
 
-    fun getArtists(artistName: String): Single<List<ArtistEntity>>
+    fun getArtist(artistName: String): Single<ArtistEntity>
 
     fun getArtistSetlists(artistId: String, page: Int): Single<ArtistSetlistsResponse>
 }

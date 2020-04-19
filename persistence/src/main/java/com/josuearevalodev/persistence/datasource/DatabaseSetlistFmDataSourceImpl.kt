@@ -10,11 +10,12 @@ import io.reactivex.Single
 
 class DatabaseSetlistFmDataSourceImpl(private val dbDao: SetlistFmDao) : SetListFmDataSource {
 
-    override fun getArtists(artistName: String): Single<List<ArtistEntity>> {
+    override fun getArtist(artistName: String): Single<ArtistEntity> {
         // TODO
         return dbDao
             .getArtists(artistName)
-            .map { it.map { it.mapToArtistEntity } }
+            .map { it.mapToArtistEntity }
+            //.map { it.map { it.mapToArtistEntity } }
 
         //return Single.just(listOf())
     }

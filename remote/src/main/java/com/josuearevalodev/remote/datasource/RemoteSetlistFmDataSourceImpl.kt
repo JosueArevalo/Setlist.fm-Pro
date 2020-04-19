@@ -16,7 +16,7 @@ class RemoteSetlistFmDataSourceImpl(
     private val baseUrl: String
 ) : SetListFmDataSource {
 
-    override fun getArtists(artistName: String): Single<List<ArtistEntity>> {
+    override fun getArtist(artistName: String): Single<ArtistEntity> {
         return httpClient.create(SetlistFmService::class.java, baseUrl)
             .getArtists(artistName)
             .onErrorResumeNext {
@@ -25,6 +25,7 @@ class RemoteSetlistFmDataSourceImpl(
                 } ?: Single.error(Unexpected(it))
             }
             .map { it.artist?.map { it.mapToArtistEntity } ?: listOf() }
+            .map { it.firstOrNull() }
     }
 
     override fun getArtistSetlists(artistId: String, page: Int): Single<ArtistSetlistsResponse> {
