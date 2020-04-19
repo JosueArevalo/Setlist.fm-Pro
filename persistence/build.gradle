@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: "kotlin-kapt"
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -36,6 +37,9 @@ dependencies {
     // Modules
     implementation project(':domain')
     implementation project(':data')
+
+    // Room
+    kapt "android.arch.persistence.room:compiler:1.1.1"
 
     // RxJava support for Room
     implementation "android.arch.persistence.room:rxjava2:1.1.1"
