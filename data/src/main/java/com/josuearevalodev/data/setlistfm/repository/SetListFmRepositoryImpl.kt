@@ -18,6 +18,7 @@ class SetListFmRepositoryImpl(
         // Remote + insert
         return remoteDS
             .getArtist(artistName)
+            .doOnSuccess { insertArtistInDatabase(it) }
 
         // Concat
         /*return Single.concatArray(
@@ -26,10 +27,10 @@ class SetListFmRepositoryImpl(
         ).firstOrError()*/
 
         // DB only
-        //return cacheDS.getArtists(artistName)
+        //return cacheDS.getArtist(artistName)
 
         // Remote only
-        //return remoteDS.getArtists(artistName)
+        //return remoteDS.getArtist(artistName)
 
         // Mock
         //return Single.just(MockGenerator.searchArtistsResponse)
@@ -42,5 +43,9 @@ class SetListFmRepositoryImpl(
     ): Single<ArtistSetlistsResponse> {
         //return Single.just(MockGenerator.artistSetlistsResponse)
         return remoteDS.getArtistSetlists(artistId, page)
+    }
+
+    fun insertArtistInDatabase(artist: ArtistEntity) {
+        cacheDS.insertArtist(artist)
     }
 }
