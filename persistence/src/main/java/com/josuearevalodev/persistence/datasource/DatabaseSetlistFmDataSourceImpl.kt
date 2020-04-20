@@ -30,7 +30,7 @@ class DatabaseSetlistFmDataSourceImpl(private val dbDao: SetlistFmDao) : SetList
         return dbDao.insertArtist(artist.mapToDatabaseArtistEntity)
     }*/
 
-    override fun insertArtist(artist: ArtistEntity) {
+    override fun insertArtist(artist: ArtistEntity): Completable {
         return dbDao.insertArtist(artist.mapToDatabaseArtistEntity)
     }
 }

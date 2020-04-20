@@ -17,6 +17,5 @@ interface SetlistFmDao {
     //fun getArtistSetlists(artistId: String, page: Int): Single<ArtistSetlistsResponse>
 
     @Insert(onConflict = IGNORE)
-    fun insertArtist(artist: DatabaseArtistEntity)
-    //fun insertArtist(artist: DatabaseArtistEntity): Completable
+    fun insertArtist(artist: DatabaseArtistEntity): Completable
 }

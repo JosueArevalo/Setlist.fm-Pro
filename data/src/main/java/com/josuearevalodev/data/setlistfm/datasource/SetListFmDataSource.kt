@@ -12,9 +12,7 @@ interface SetListFmDataSource {
 
     fun getArtistSetlists(artistId: String, page: Int): Single<ArtistSetlistsResponse>
 
-    /*fun insertArtist(artist: ArtistEntity): Completable {
+    fun insertArtist(artist: ArtistEntity): Completable {
         return Completable.complete()
-    }*/
-    fun insertArtist(artist: ArtistEntity) {
     }
 }

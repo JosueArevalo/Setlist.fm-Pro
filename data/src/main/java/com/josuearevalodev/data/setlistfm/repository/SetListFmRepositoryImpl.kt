@@ -6,6 +6,7 @@ import com.josuearevalodev.domain.entities.ArtistEntity
 import com.josuearevalodev.domain.entities.ArtistSetlistsResponse
 import com.josuearevalodev.domain.entities.SearchArtistsResponse
 import com.josuearevalodev.domain.repository.SetListFmRepository
+import io.reactivex.Completable
 import io.reactivex.Single
 
 class SetListFmRepositoryImpl(
@@ -16,9 +17,10 @@ class SetListFmRepositoryImpl(
     override fun getArtist(artistName: String): Single<ArtistEntity> {
 
         // Remote + insert
-        return remoteDS
+        /*return remoteDS
             .getArtist(artistName)
-            .doOnSuccess { insertArtistInDatabase(it) }
+            .doOnSuccess { insertArtistInDatabase(it)
+                .subscribe { System.out.println("TEST - Completed!") }}*/
 
         // Concat
         /*return Single.concatArray(
@@ -27,7 +29,7 @@ class SetListFmRepositoryImpl(
         ).firstOrError()*/
 
         // DB only
-        //return cacheDS.getArtist(artistName)
+        return cacheDS.getArtist(artistName)
 
         // Remote only
         //return remoteDS.getArtist(artistName)
@@ -45,7 +47,7 @@ class SetListFmRepositoryImpl(
         return remoteDS.getArtistSetlists(artistId, page)
     }
 
-    fun insertArtistInDatabase(artist: ArtistEntity) {
-        cacheDS.insertArtist(artist)
+    fun insertArtistInDatabase(artist: ArtistEntity): Completable {
+        return cacheDS.insertArtist(artist)
     }
 }
