@@ -39,10 +39,11 @@ dependencies {
     implementation project(':data')
 
     // Room
-    kapt "android.arch.persistence.room:compiler:1.1.1"
+    implementation "androidx.room:room-runtime:2.2.5"
+    kapt "androidx.room:room-compiler:2.2.5"
 
     // RxJava support for Room
-    implementation "android.arch.persistence.room:rxjava2:1.1.1"
+    implementation "androidx.room:room-rxjava2:2.2.5"
 
     // Koin (Core)
     implementation "org.koin:koin-core:2.1.5" // Koin for Kotlin
