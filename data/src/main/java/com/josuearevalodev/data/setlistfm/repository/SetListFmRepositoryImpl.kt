@@ -10,7 +10,7 @@ import io.reactivex.Completable
 import io.reactivex.Single
 
 class SetListFmRepositoryImpl(
-    private val cacheDS: SetListFmDataSource,
+    private val databaseDS: SetListFmDataSource,
     private val remoteDS: SetListFmDataSource
 ) : SetListFmRepository {
 
@@ -24,12 +24,12 @@ class SetListFmRepositoryImpl(
 
         // Concat
         /*return Single.concatArray(
-            cacheDS.getArtists(artistName),
+            databaseDS.getArtists(artistName),
             remoteDS.getArtists(artistName)
-        ).firstOrError()*/
+        ).firstOrError()
 
         // DB only
-        return cacheDS.getArtist(artistName)
+        return databaseDS.getArtist(artistName)
 
         // Remote only
         //return remoteDS.getArtist(artistName)
@@ -48,6 +48,6 @@ class SetListFmRepositoryImpl(
     }
 
     fun insertArtistInDatabase(artist: ArtistEntity): Completable {
-        return cacheDS.insertArtist(artist)
+        return databaseDS.insertArtist(artist)
     }
 }
