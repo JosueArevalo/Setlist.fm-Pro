@@ -17,19 +17,19 @@ class SetListFmRepositoryImpl(
     override fun getArtist(artistName: String): Single<ArtistEntity> {
 
         // Remote + insert
-        /*return remoteDS
+        return remoteDS
             .getArtist(artistName)
             .doOnSuccess { insertArtistInDatabase(it)
-                .subscribe { System.out.println("TEST - Completed!") }}*/
+                .subscribe { System.out.println("TEST - Completed!") }}
 
         // Concat
         /*return Single.concatArray(
-            databaseDS.getArtists(artistName),
-            remoteDS.getArtists(artistName)
-        ).firstOrError()
+            databaseDS.getArtist(artistName),
+            remoteDS.getArtist(artistName)
+        ).firstOrError()*/
 
         // DB only
-        return databaseDS.getArtist(artistName)
+        //return databaseDS.getArtist(artistName)
 
         // Remote only
         //return remoteDS.getArtist(artistName)
