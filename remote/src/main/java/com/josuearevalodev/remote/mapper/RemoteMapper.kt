@@ -1,7 +1,10 @@
 package com.josuearevalodev.remote.mapper
 
+import com.josuearevalodev.data.setlistfm.error.*
 import com.josuearevalodev.domain.entities.*
+import retrofit2.HttpException
 
+//region entities
 val RemoteSearchArtistsResponse.mapToSearchArtistsResponse: SearchArtistsResponse
     get() {
         return SearchArtistsResponse(
@@ -107,3 +110,17 @@ val RemoteCountryEntity.mapToCountryEntity: CountryEntity
             name = this.name ?: ""
         )
     }
+//endregion
+
+//region error
+val HttpException.mapToRemoteError: RemoteError
+    get() {
+        return when (code()) {
+            400 -> BadRequest(this)
+            401 -> Unauthorized(this)
+            404 -> NotFound(this)
+            429 -> TooManyRequests(this)
+            else -> Unexpected(this)
+        }
+    }
+//endregion

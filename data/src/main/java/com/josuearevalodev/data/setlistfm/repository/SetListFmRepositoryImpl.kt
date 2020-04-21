@@ -1,7 +1,7 @@
 package com.josuearevalodev.data.setlistfm.repository
 
-import com.josuearevalodev.data.setlistfm.MockGenerator
 import com.josuearevalodev.data.setlistfm.datasource.SetListFmDataSource
+import com.josuearevalodev.data.setlistfm.error.DatabaseError
 import com.josuearevalodev.domain.entities.ArtistEntity
 import com.josuearevalodev.domain.entities.ArtistSetlistsResponse
 import com.josuearevalodev.domain.entities.SearchArtistsResponse
@@ -15,28 +15,7 @@ class SetListFmRepositoryImpl(
 ) : SetListFmRepository {
 
     override fun getArtist(artistName: String): Single<ArtistEntity> {
-
-        // Remote + insert
-        return remoteDS
-            .getArtist(artistName)
-            .doOnSuccess { insertArtistInDatabase(it)
-                .subscribe { System.out.println("TEST - Completed!") }}
-
-        // Concat
-        /*return Single.concatArray(
-            databaseDS.getArtist(artistName),
-            remoteDS.getArtist(artistName)
-        ).firstOrError()*/
-
-        // DB only
-        //return databaseDS.getArtist(artistName)
-
-        // Remote only
-        //return remoteDS.getArtist(artistName)
-
-        // Mock
-        //return Single.just(MockGenerator.searchArtistsResponse)
-
+        return handleGetArtist(artistName)
     }
 
     override fun getArtistSetlists(
@@ -50,4 +29,36 @@ class SetListFmRepositoryImpl(
     fun insertArtistInDatabase(artist: ArtistEntity): Completable {
         return databaseDS.insertArtist(artist)
     }
+
+    //region private methods
+    private fun handleGetArtist(artistName: String): Single<ArtistEntity> {
+        return getArtistFromDb(artistName)
+            .onErrorResumeNext { error ->
+                System.out.println("TEST - Error getting from DB: $error")
+                handleGetArtistDbError(error, artistName)
+            }
+    }
+
+    private fun getArtistFromDb(artistName: String): Single<ArtistEntity> {
+        return databaseDS
+            .getArtist(artistName)
+    }
+
+    private fun handleGetArtistDbError(error: Throwable, artistName: String): Single<ArtistEntity> {
+        // For the moment, either NoResultsFound or other, I do a remote call
+        return when (error) {
+            is DatabaseError.NoResultsFound -> getArtistFromRemote(artistName)
+            else -> getArtistFromRemote(artistName)
+        }
+    }
+
+    private fun getArtistFromRemote(artistName: String): Single<ArtistEntity> {
+        return remoteDS
+            .getArtist(artistName)
+            .doOnSuccess {
+                insertArtistInDatabase(it)
+                    .subscribe { System.out.println("TEST - Remote item inserted in DB!") }
+            }
+    }
+    //endregion
 }

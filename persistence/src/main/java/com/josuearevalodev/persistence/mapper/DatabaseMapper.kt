@@ -1,8 +1,11 @@
 package com.josuearevalodev.persistence.mapper
 
+import androidx.room.EmptyResultSetException
 import com.josuearevalodev.domain.entities.ArtistEntity
 import com.josuearevalodev.domain.entities.DatabaseArtistEntity
+import com.josuearevalodev.persistence.error.DatabaseError
 
+//region entities
 val DatabaseArtistEntity.mapToArtistEntity: ArtistEntity
     get() {
         return ArtistEntity(
@@ -24,3 +27,14 @@ val ArtistEntity.mapToDatabaseArtistEntity: DatabaseArtistEntity
             url = url
         )
     }
+//endregion
+
+//region error
+val Throwable.mapToDatabaseError : DatabaseError
+    get() {
+        return when (this) {
+            is EmptyResultSetException -> DatabaseError.NoResultsFound(this)
+            else -> DatabaseError.Unexpected(this)
+        }
+    }
+//endregion

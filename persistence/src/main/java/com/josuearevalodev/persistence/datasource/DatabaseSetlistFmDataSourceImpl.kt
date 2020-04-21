@@ -5,6 +5,7 @@ import com.josuearevalodev.domain.entities.ArtistEntity
 import com.josuearevalodev.domain.entities.ArtistSetlistsResponse
 import com.josuearevalodev.persistence.db.SetlistFmDao
 import com.josuearevalodev.persistence.db.SetlistFmDatabase
+import com.josuearevalodev.persistence.error.mapToDatabaseError
 import com.josuearevalodev.persistence.mapper.mapToArtistEntity
 import com.josuearevalodev.persistence.mapper.mapToDatabaseArtistEntity
 import io.reactivex.Completable
@@ -15,6 +16,9 @@ class DatabaseSetlistFmDataSourceImpl(private val dbDao: SetlistFmDao) : SetList
     override fun getArtist(artistName: String): Single<ArtistEntity> {
         return dbDao
             .getArtist(artistName)
+            .onErrorResumeNext {
+                Single.error(it.mapToDatabaseError)
+            }
             .map { it.mapToArtistEntity }
     }
 

@@ -1,12 +1,12 @@
 package com.josuearevalodev.remote.datasource
 
 import com.josuearevalodev.data.setlistfm.datasource.SetListFmDataSource
+import com.josuearevalodev.data.setlistfm.error.RemoteError
+import com.josuearevalodev.data.setlistfm.error.Unexpected
 import com.josuearevalodev.domain.entities.*
-import com.josuearevalodev.remote.error.*
 import com.josuearevalodev.remote.service.SetlistFmService
 import com.josuearevalodev.remote.httpclient.HttpClient
-import com.josuearevalodev.remote.mapper.mapToArtistEntity
-import com.josuearevalodev.remote.mapper.mapToArtistSetlistsResponse
+import com.josuearevalodev.remote.mapper.*
 import io.reactivex.Single
 import io.reactivex.SingleSource
 import retrofit2.HttpException
@@ -20,9 +20,11 @@ class RemoteSetlistFmDataSourceImpl(
         return httpClient.create(SetlistFmService::class.java, baseUrl)
             .getArtists(artistName)
             .onErrorResumeNext {
-                (it as? HttpException)?.let { httpException ->
-                    httpException.toRemoteDataError as SingleSource<RemoteSearchArtistsResponse>
-                } ?: Single.error(Unexpected(it))
+                if (it is HttpException) {
+                    Single.error(it.mapToRemoteError)
+                } else {
+                    Single.error(Unexpected(it))
+                }
             }
             .map { it.artist?.map { it.mapToArtistEntity } ?: listOf() }
             .map { it.firstOrNull() }
@@ -32,9 +34,11 @@ class RemoteSetlistFmDataSourceImpl(
         return httpClient.create(SetlistFmService::class.java, baseUrl)
             .getArtistSetlists(artistId, page)
             .onErrorResumeNext {
-                (it as? HttpException)?.let { httpException ->
-                    httpException.toRemoteDataError as SingleSource<RemoteArtistSetlistsResponse>
-                } ?: Single.error(Unexpected(it))
+                if (it is HttpException) {
+                    Single.error(it.mapToRemoteError)
+                } else {
+                    Single.error(Unexpected(it))
+                }
             }
             .map { it.mapToArtistSetlistsResponse }
     }
