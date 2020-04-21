@@ -48,7 +48,9 @@ class SetListFmRepositoryImpl(
         // For the moment, either NoResultsFound or other, I do a remote call
         return when (error) {
             is DatabaseError.NoResultsFound -> getArtistFromRemote(artistName)
+                .flatMap { getArtistFromDb(artistName) }
             else -> getArtistFromRemote(artistName)
+                .flatMap { getArtistFromDb(artistName) }
         }
     }
 
