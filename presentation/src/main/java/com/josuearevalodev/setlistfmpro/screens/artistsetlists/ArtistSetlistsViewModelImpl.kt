@@ -40,9 +40,9 @@ class ArtistSetlistsViewModelImpl(private val searchArtistByNamesUseCase: Search
         .subscribeOn(ioThread)
         .observeOn(mainThread)
         .subscribe(
-            { artistSetlistsResponse ->
-                Log.d("TEST", "TEST: Success! $artistSetlistsResponse")
-                viewState.postValue(ViewState.Content(artistSetlistsResponse))
+            { setlists ->
+                Log.d("TEST", "TEST: Success! $setlists")
+                viewState.postValue(ViewState.Content(setlists))
             },
             { error ->
                 Log.e("TEST", "TEST: Error! $error")

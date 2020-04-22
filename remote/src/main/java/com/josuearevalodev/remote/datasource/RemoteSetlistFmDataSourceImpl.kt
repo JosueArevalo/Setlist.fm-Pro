@@ -30,7 +30,7 @@ class RemoteSetlistFmDataSourceImpl(
             .map { it.firstOrNull() }
     }
 
-    override fun getArtistSetlists(artistId: String, page: Int): Single<ArtistSetlistsResponse> {
+    override fun getArtistSetlists(artistId: String, page: Int): Single<List<SetlistEntity>> {
         return httpClient.create(SetlistFmService::class.java, baseUrl)
             .getArtistSetlists(artistId, page)
             .onErrorResumeNext {
@@ -40,6 +40,10 @@ class RemoteSetlistFmDataSourceImpl(
                     Single.error(Unexpected(it))
                 }
             }
-            .map { it.mapToArtistSetlistsResponse }
+            .map { remoteArtistSetlistResponse ->
+                remoteArtistSetlistResponse.setlist?.map { remoteSetlistEntity ->
+                    remoteSetlistEntity.mapToSetlistEntity
+                }
+            }
     }
 }

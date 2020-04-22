@@ -5,6 +5,7 @@ import com.josuearevalodev.data.setlistfm.error.DatabaseError
 import com.josuearevalodev.domain.entities.ArtistEntity
 import com.josuearevalodev.domain.entities.ArtistSetlistsResponse
 import com.josuearevalodev.domain.entities.SearchArtistsResponse
+import com.josuearevalodev.domain.entities.SetlistEntity
 import com.josuearevalodev.domain.repository.SetListFmRepository
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -21,16 +22,16 @@ class SetListFmRepositoryImpl(
     override fun getArtistSetlists(
         artistId: String,
         page: Int
-    ): Single<ArtistSetlistsResponse> {
+    ): Single<List<SetlistEntity>> {
+        return handleGetArtistSetlists(artistId, page)
         //return Single.just(MockGenerator.artistSetlistsResponse)
-        return remoteDS.getArtistSetlists(artistId, page)
+        //return remoteDS.getArtistSetlists(artistId, page)
     }
 
-    fun insertArtistInDatabase(artist: ArtistEntity): Completable {
-        return databaseDS.insertArtist(artist)
-    }
+    //==============================================================================================
+    //region getArtist - private methods
+    //==============================================================================================
 
-    //region private methods
     private fun handleGetArtist(artistName: String): Single<ArtistEntity> {
         return getArtistFromDb(artistName)
             .onErrorResumeNext { error ->
@@ -62,5 +63,52 @@ class SetListFmRepositoryImpl(
                     .subscribe { System.out.println("TEST - Remote item inserted in DB!") }
             }
     }
+
+    private fun insertArtistInDatabase(artist: ArtistEntity): Completable {
+        return databaseDS.insertArtist(artist)
+    }
+
+    //endregion
+
+    //==============================================================================================
+    //region getArtistSetlists - private methods
+    //==============================================================================================
+
+    private fun handleGetArtistSetlists(artistId: String, page: Int): Single<List<SetlistEntity>> {
+        return getSetlistsFromDb(artistId, page)
+            .onErrorResumeNext { error ->
+                System.out.println("TEST - Error getting from DB: $error")
+                handleGetSetlistsDbError(error, artistId, page)
+            }
+    }
+
+    private fun getSetlistsFromDb(artistId: String, page: Int): Single<List<SetlistEntity>> {
+        return databaseDS
+            .getArtistSetlists(artistId, page)
+    }
+
+    private fun handleGetSetlistsDbError(error: Throwable, artistId: String, page: Int): Single<List<SetlistEntity>> {
+        // For the moment, either NoResultsFound or other, I do a remote call
+        return when (error) {
+            is DatabaseError.NoResultsFound -> getSetlistsFromRemote(artistId, page)
+                .flatMap { getSetlistsFromDb(artistId, page) }
+            else -> getSetlistsFromRemote(artistId, page)
+                .flatMap { getSetlistsFromDb(artistId, page) }
+        }
+    }
+
+    private fun getSetlistsFromRemote(artistId: String, page: Int): Single<List<SetlistEntity>> {
+        return remoteDS
+            .getArtistSetlists(artistId, page)
+            .doOnSuccess {
+                insertSetlistsInDatabase(it)
+                    .subscribe { System.out.println("TEST - Remote item inserted in DB!") }
+            }
+    }
+
+    private fun insertSetlistsInDatabase(setlists: List<SetlistEntity>): Completable {
+        return databaseDS.insertSetlists(setlists)
+    }
+
     //endregion
 }

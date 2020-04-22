@@ -1,13 +1,17 @@
 package com.josuearevalodev.domain.entities
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-@Entity
-data class DatabaseSetlistEntity(val id: String?,
-                                 val versionId: String?,
-                                 val eventDate: String?,
-                                 val lastUpdated: String?,
-                                 val artist: DatabaseArtistEntity?,
-                                 val venue: DatabaseVenueEntity?,
-                                 val sets: DatabaseSetsEntity?,
-                                 val url: String?)
+@Entity(tableName = "setlists")
+data class DatabaseSetlistEntity(
+    @PrimaryKey val id: String,
+    val versionId: String?,
+    val eventDate: String?,
+    val lastUpdated: String?,
+    //TODO!!val artist: DatabaseArtistEntity?,
+    val artistId: String,
+    //TODO!!val venue: DatabaseVenueEntity?,
+    //TODO!!!val sets: DatabaseSetsEntity?,
+    val url: String?
+)

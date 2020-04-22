@@ -10,6 +10,7 @@ import com.josuearevalodev.base.classes.ViewState
 import com.josuearevalodev.base_android.extensions.gone
 import com.josuearevalodev.base_android.extensions.visible
 import com.josuearevalodev.domain.entities.ArtistSetlistsResponse
+import com.josuearevalodev.domain.entities.SetlistEntity
 import com.josuearevalodev.setlistfmpro.R
 import com.josuearevalodev.setlistfmpro.screens.searchartists.ArtistSetlistsViewModel
 import com.josuearevalodev.setlistfmpro.screens.setlistdetail.SetlistDetailActivity
@@ -48,7 +49,7 @@ class ArtistSetlistsActivity : AppCompatActivity(R.layout.activity_artist_setlis
                     evError.gone()
                 }
                 is ViewState.Content<*> -> {
-                    adapter.addSetlists((viewState.value as ArtistSetlistsResponse).setlist)
+                    adapter.addSetlists(viewState.value as List<SetlistEntity>)
                     clContent.visible()
                     lvLoading.gone()
                     evError.gone()

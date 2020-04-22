@@ -1,8 +1,7 @@
 package com.josuearevalodev.persistence.mapper
 
 import androidx.room.EmptyResultSetException
-import com.josuearevalodev.domain.entities.ArtistEntity
-import com.josuearevalodev.domain.entities.DatabaseArtistEntity
+import com.josuearevalodev.domain.entities.*
 import com.josuearevalodev.persistence.error.DatabaseError
 
 //region entities
@@ -27,6 +26,42 @@ val ArtistEntity.mapToDatabaseArtistEntity: DatabaseArtistEntity
             url = url
         )
     }
+
+// TODOOOOOOO
+val DatabaseSetlistEntity.mapToSetlistEntity: SetlistEntity
+    get() = SetlistEntity(
+        id = id, versionId = versionId ?: "", eventDate = eventDate ?: "", lastUpdated = lastUpdated ?: "", artist = ArtistEntity(
+            mbid = this.id,
+            name = "",
+            sortName = "",
+            disambiguation = "",
+            url = ""
+        ), venue = VenueEntity(
+            id = "", name = "", city = CityEntity(
+                id = "",
+                name = "",
+                state = "",
+                stateCode = "",
+                coords = CoordinatesEntity(lat = 0.0f, long = 0.0f),
+                country = CountryEntity(code = "", name = "")
+            ), url = ""
+        ), sets = SetsEntity(set = listOf()), url = ""
+    )
+
+// TODOOOOOOOO
+val SetlistEntity.mapToDatabaseSetlistEntity: DatabaseSetlistEntity
+    get() = DatabaseSetlistEntity(
+        id = id,
+        versionId = versionId,
+        eventDate = eventDate,
+        lastUpdated = lastUpdated,
+        artistId = artist.mbid,
+        /*TODOvenue = null,
+        sets = null,*/
+        url = url
+    )
+
+
 //endregion
 
 //region error
