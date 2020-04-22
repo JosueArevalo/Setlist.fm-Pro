@@ -30,13 +30,18 @@ val ArtistEntity.mapToDatabaseArtistEntity: DatabaseArtistEntity
 // TODOOOOOOO
 val DatabaseSetlistEntity.mapToSetlistEntity: SetlistEntity
     get() = SetlistEntity(
-        id = id, versionId = versionId ?: "", eventDate = eventDate ?: "", lastUpdated = lastUpdated ?: "", artist = ArtistEntity(
+        id = id,
+        versionId = versionId ?: "",
+        eventDate = eventDate ?: "",
+        lastUpdated = lastUpdated ?: "",
+        artist = ArtistEntity(
             mbid = this.id,
             name = "",
             sortName = "",
             disambiguation = "",
             url = ""
-        ), venue = VenueEntity(
+        ),
+        venue = VenueEntity(
             id = "", name = "", city = CityEntity(
                 id = "",
                 name = "",
