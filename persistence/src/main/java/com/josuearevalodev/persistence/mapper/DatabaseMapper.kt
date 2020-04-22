@@ -56,9 +56,10 @@ val SetlistEntity.mapToDatabaseSetlistEntity: DatabaseSetlistEntity
         eventDate = eventDate,
         lastUpdated = lastUpdated,
         artistId = artist.mbid,
+        artist = artist.mapToDatabaseArtistEntity,
         venue = venue.mapToDatabaseVenueEntity,
         //venueJSON = null,
-        //sets = null,*/
+        sets = sets.mapToDatabaseSetsEntity,
         url = url
     )
 
@@ -89,6 +90,21 @@ val CoordinatesEntity.mapToDatabaseCoordinatesEntity: DatabaseCoordinatesEntity
 val CountryEntity.mapToDatabaseCountryEntity: DatabaseCountryEntity
     get() = DatabaseCountryEntity(
         code = code,
+        name = name
+    )
+
+val SetsEntity.mapToDatabaseSetsEntity: DatabaseSetsEntity
+    get() = DatabaseSetsEntity(
+        set = set.map { it.mapToDatabaseSetEntity }
+    )
+
+val SetEntity.mapToDatabaseSetEntity: DatabaseSetEntity
+    get() = DatabaseSetEntity(
+        song = song.map { it.mapToDatabaseSongEntity }
+    )
+
+val SongEntity.mapToDatabaseSongEntity: DatabaseSongEntity
+    get() = DatabaseSongEntity(
         name = name
     )
 

@@ -9,10 +9,9 @@ data class DatabaseSetlistEntity(
     val versionId: String?,
     val eventDate: String?,
     val lastUpdated: String?,
-    //TODO!!val artist: DatabaseArtistEntity?,
+    val artist: DatabaseArtistEntity?,
     val artistId: String,
     val venue: DatabaseVenueEntity?,
-    //val venueJSON: String?,
-    //TODO!!!val sets: DatabaseSetsEntity?,
+    val sets: DatabaseSetsEntity?,
     val url: String?
 )
