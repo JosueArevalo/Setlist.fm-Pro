@@ -11,7 +11,8 @@ data class DatabaseSetlistEntity(
     val lastUpdated: String?,
     //TODO!!val artist: DatabaseArtistEntity?,
     val artistId: String,
-    //TODO!!val venue: DatabaseVenueEntity?,
+    val venue: DatabaseVenueEntity?,
+    //val venueJSON: String?,
     //TODO!!!val sets: DatabaseSetsEntity?,
     val url: String?
 )

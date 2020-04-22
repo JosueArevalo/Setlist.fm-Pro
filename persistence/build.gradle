@@ -45,6 +45,9 @@ dependencies {
     // RxJava support for Room
     implementation "androidx.room:room-rxjava2:2.2.5"
 
+    // Gson (For Room's TypeConverters)
+    implementation 'com.google.code.gson:gson:2.8.6'
+
     // Koin (Core)
     implementation "org.koin:koin-core:2.1.5" // Koin for Kotlin
     implementation "org.koin:koin-core-ext:2.1.5" // Koin extended & experimental features
