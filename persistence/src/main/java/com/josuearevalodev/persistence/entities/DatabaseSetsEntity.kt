@@ -1,6 +1,8 @@
-package com.josuearevalodev.domain.entities
+package com.josuearevalodev.persistence.entities
 
 import androidx.room.Entity
 
 @Entity
-data class DatabaseSetsEntity(val set: List<DatabaseSetEntity>)
+data class DatabaseSetsEntity(
+    val set: List<DatabaseSetEntity>?
+)

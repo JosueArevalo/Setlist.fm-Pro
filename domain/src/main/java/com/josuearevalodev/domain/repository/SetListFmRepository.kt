@@ -2,11 +2,12 @@ package com.josuearevalodev.domain.repository
 
 import com.josuearevalodev.domain.entities.ArtistEntity
 import com.josuearevalodev.domain.entities.ArtistSetlistsResponse
+import com.josuearevalodev.domain.entities.SetlistEntity
 import io.reactivex.Single
 
 interface SetListFmRepository {
 
-    fun getArtists(artistName: String): Single<List<ArtistEntity>>
+    fun getArtist(artistName: String): Single<ArtistEntity>
 
-    fun getArtistSetlists(artistId: String, page: Int): Single<ArtistSetlistsResponse>
+    fun getArtistSetlists(artistId: String, page: Int): Single<List<SetlistEntity>>
 }

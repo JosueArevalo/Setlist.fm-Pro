@@ -3,7 +3,7 @@ package com.josuearevalodev.usecases.setlists.searchartistsbyname
 import com.josuearevalodev.domain.entities.ArtistEntity
 import io.reactivex.Single
 
-interface SearchArtistsByName {
+interface SearchArtistByName {
 
-    operator fun invoke(artistName: String): Single<List<ArtistEntity>>
+    operator fun invoke(artistName: String): Single<ArtistEntity>
 }

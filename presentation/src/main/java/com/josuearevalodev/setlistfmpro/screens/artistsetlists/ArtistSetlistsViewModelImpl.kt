@@ -7,10 +7,10 @@ import com.josuearevalodev.base.classes.ViewState
 import com.josuearevalodev.base_android.rxdisposablemanager.RxDisposableManager
 import com.josuearevalodev.base_android.rxdisposablemanager.RxDisposableManagerImpl
 import com.josuearevalodev.usecases.setlists.getartistsetlists.GetArtistSetlists
-import com.josuearevalodev.usecases.setlists.searchartistsbyname.SearchArtistsByName
+import com.josuearevalodev.usecases.setlists.searchartistsbyname.SearchArtistByName
 import io.reactivex.rxkotlin.addTo
 
-class ArtistSetlistsViewModelImpl(private val searchArtistsByNamesUseCase: SearchArtistsByName,
+class ArtistSetlistsViewModelImpl(private val searchArtistByNamesUseCase: SearchArtistByName,
                                   private val getArtistSetlistsUseCase: GetArtistSetlists) : ViewModel(), ArtistSetlistsViewModel, RxDisposableManager by RxDisposableManagerImpl() {
 
     override var artistName: String = ""
@@ -19,15 +19,13 @@ class ArtistSetlistsViewModelImpl(private val searchArtistsByNamesUseCase: Searc
 
     override fun searchArtistByName(text: String) {
         viewState.postValue(ViewState.Loading)
-        searchArtistsByNamesUseCase(text)
+        searchArtistByNamesUseCase(text)
             .subscribeOn(ioThread)
             .observeOn(mainThread)
             .subscribe(
-                { artists ->
-                    Log.d("TEST", "TEST: Success! $artists")
-                    artists.firstOrNull()?.let { artist ->
-                        searchSetlists(artist.mbid, artistSetlistPage)
-                    }
+                { artist ->
+                    Log.d("TEST", "TEST: Success! $artist")
+                    searchSetlists(artist.mbid, artistSetlistPage)
                 },
                 { error ->
                     Log.e("TEST", "TEST: Error! $error")
@@ -42,9 +40,9 @@ class ArtistSetlistsViewModelImpl(private val searchArtistsByNamesUseCase: Searc
         .subscribeOn(ioThread)
         .observeOn(mainThread)
         .subscribe(
-            { artistSetlistsResponse ->
-                Log.d("TEST", "TEST: Success! $artistSetlistsResponse")
-                viewState.postValue(ViewState.Content(artistSetlistsResponse))
+            { setlists ->
+                Log.d("TEST", "TEST: Success! $setlists")
+                viewState.postValue(ViewState.Content(setlists))
             },
             { error ->
                 Log.e("TEST", "TEST: Error! $error")

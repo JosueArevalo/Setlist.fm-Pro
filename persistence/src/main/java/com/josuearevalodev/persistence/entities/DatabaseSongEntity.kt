@@ -1,6 +1,8 @@
-package com.josuearevalodev.domain.entities
+package com.josuearevalodev.persistence.entities
 
 import androidx.room.Entity
 
 @Entity
-data class DatabaseSongEntity(val name: String?)
+data class DatabaseSongEntity(
+    val name: String?
+)
