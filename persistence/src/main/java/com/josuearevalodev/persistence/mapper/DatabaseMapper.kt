@@ -2,6 +2,7 @@ package com.josuearevalodev.persistence.mapper
 
 import androidx.room.EmptyResultSetException
 import com.josuearevalodev.domain.entities.*
+import com.josuearevalodev.persistence.entities.*
 import com.josuearevalodev.persistence.error.DatabaseError
 
 //region entities - Database (Data) --> Domain: E.g. Convert to return data from Database

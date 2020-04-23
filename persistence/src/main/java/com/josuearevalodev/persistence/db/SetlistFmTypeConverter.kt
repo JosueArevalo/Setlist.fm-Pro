@@ -2,9 +2,9 @@ package com.josuearevalodev.persistence.db
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson
-import com.josuearevalodev.domain.entities.DatabaseArtistEntity
-import com.josuearevalodev.domain.entities.DatabaseSetsEntity
-import com.josuearevalodev.domain.entities.DatabaseVenueEntity
+import com.josuearevalodev.persistence.entities.DatabaseArtistEntity
+import com.josuearevalodev.persistence.entities.DatabaseSetsEntity
+import com.josuearevalodev.persistence.entities.DatabaseVenueEntity
 
 class SetlistFmTypeConverter {
 

@@ -1,4 +1,6 @@
-package com.josuearevalodev.domain.entities
+package com.josuearevalodev.persistence.entities
+
+import com.josuearevalodev.persistence.entities.DatabaseArtistEntity
 
 data class DatabaseSearchArtistsResponse(
     val type: String?,

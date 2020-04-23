@@ -1,7 +1,8 @@
-package com.josuearevalodev.domain.entities
+package com.josuearevalodev.persistence.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.josuearevalodev.persistence.entities.DatabaseArtistEntity
 
 @Entity(tableName = "setlists")
 data class DatabaseSetlistEntity(
