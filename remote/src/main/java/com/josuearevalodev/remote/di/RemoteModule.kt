@@ -1,19 +1,17 @@
 package com.josuearevalodev.remote.di
 
-import com.josuearevalodev.data.setlistfm.datasource.SetListFmDataSource
+import com.josuearevalodev.data.setlistfm.datasource.SetListFmRemoteDataSource
 import com.josuearevalodev.remote.datasource.RemoteSetlistFmDataSourceImpl
 import com.josuearevalodev.remote.httpclient.HttpClient
 import com.josuearevalodev.remote.httpclient.HttpClientImpl
-import org.koin.core.qualifier.named
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
 fun remoteModule(baseUrl: String) = module {
 
-    single<SetListFmDataSource>(named("remote")) {
+    single {
         RemoteSetlistFmDataSourceImpl(get(), baseUrl)
-    } bind SetListFmDataSource::class
-
+    } bind SetListFmRemoteDataSource::class
 
     single { HttpClientImpl() } bind HttpClient::class
 }

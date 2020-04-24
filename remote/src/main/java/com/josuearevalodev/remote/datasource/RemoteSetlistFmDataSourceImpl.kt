@@ -1,20 +1,18 @@
 package com.josuearevalodev.remote.datasource
 
-import com.josuearevalodev.data.setlistfm.datasource.SetListFmDataSource
-import com.josuearevalodev.data.setlistfm.error.RemoteError
+import com.josuearevalodev.data.setlistfm.datasource.SetListFmRemoteDataSource
 import com.josuearevalodev.data.setlistfm.error.Unexpected
 import com.josuearevalodev.domain.entities.*
 import com.josuearevalodev.remote.service.SetlistFmService
 import com.josuearevalodev.remote.httpclient.HttpClient
 import com.josuearevalodev.remote.mapper.*
 import io.reactivex.Single
-import io.reactivex.SingleSource
 import retrofit2.HttpException
 
 class RemoteSetlistFmDataSourceImpl(
     private val httpClient: HttpClient,
     private val baseUrl: String
-) : SetListFmDataSource {
+) : SetListFmRemoteDataSource {
 
     override fun getArtist(artistName: String): Single<ArtistEntity> {
         return httpClient.create(SetlistFmService::class.java, baseUrl)

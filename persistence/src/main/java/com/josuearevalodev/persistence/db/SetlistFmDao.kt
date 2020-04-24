@@ -17,6 +17,9 @@ interface SetlistFmDao {
     @Query("SELECT * FROM setlists WHERE artistId = :artistId")
     fun getArtistSetlists(artistId: String/*TODO:, page: Int*/): Single<List<DatabaseSetlistEntity>>
 
+    @Query("SELECT * FROM setlists WHERE id = :setlistId")
+    fun getSetlist(setlistId: String): Single<DatabaseSetlistEntity>
+
     @Insert(onConflict = IGNORE)
     fun insertArtist(artist: DatabaseArtistEntity): Completable
 
