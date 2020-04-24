@@ -14,6 +14,7 @@ import com.josuearevalodev.domain.entities.SetlistEntity
 import com.josuearevalodev.setlistfmpro.R
 import com.josuearevalodev.setlistfmpro.screens.searchartists.ArtistSetlistsViewModel
 import com.josuearevalodev.setlistfmpro.screens.setlistdetail.SetlistDetailActivity
+import com.josuearevalodev.setlistfmpro.screens.setlistdetail.navigateToSetlistDetail
 import kotlinx.android.synthetic.main.activity_artist_setlists.*
 import org.koin.android.ext.android.inject
 
@@ -67,7 +68,16 @@ class ArtistSetlistsActivity : AppCompatActivity(R.layout.activity_artist_setlis
     private fun initList() {
         with (rvList) {
             layoutManager = LinearLayoutManager(this@ArtistSetlistsActivity)
+            addClickListener()
             adapter = this@ArtistSetlistsActivity.adapter
+        }
+    }
+    
+    private fun addClickListener() {
+        this@ArtistSetlistsActivity.adapter.onSetlistClicked = { setlistEntity ->  
+            navigateToSetlistDetail(
+                artistId = setlistEntity.artist.mbid,
+                setlistId = setlistEntity.id)
         }
     }
 

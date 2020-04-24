@@ -1,6 +1,7 @@
 package com.josuearevalodev.setlistfmpro.screens.setlistdetail
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.josuearevalodev.setlistfmpro.R
 import com.josuearevalodev.setlistfmpro.screens.searchartists.SetlistDetailViewModel
@@ -14,5 +15,8 @@ class SetlistDetailActivity : AppCompatActivity(R.layout.activity_setlist_detail
         super.onCreate(savedInstanceState)
 
         viewModel.printHowAreYou()
+
+        Log.d("TEST", "TEST: $getArtistIdFromIntent")
+        Log.d("TEST", "TEST: $getSetlistIdFromIntent")
     }
 }
