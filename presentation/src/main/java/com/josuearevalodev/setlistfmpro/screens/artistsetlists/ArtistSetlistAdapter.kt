@@ -11,8 +11,10 @@ class ArtistSetlistAdapter() : RecyclerView.Adapter<SetlistViewHolder>() {
 
     private val setlists: MutableList<SetlistEntity> = mutableListOf()
 
+    var onSetlistClicked: ((SetlistEntity) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SetlistViewHolder {
-        return SetlistViewHolder(parent.inflate(R.layout.cell_setlist))
+        return SetlistViewHolder(parent.inflate(R.layout.cell_setlist), onSetlistClicked)
     }
 
     override fun onBindViewHolder(holder: SetlistViewHolder, position: Int) {
