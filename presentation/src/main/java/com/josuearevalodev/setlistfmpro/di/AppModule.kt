@@ -12,7 +12,7 @@ val appModule = module {
 
     viewModel { ArtistSetlistsViewModelImpl(get(), get()) } bind ArtistSetlistsViewModel::class
 
-    viewModel { SetlistDetailViewModelImpl() } bind SetlistDetailViewModel::class
+    viewModel { SetlistDetailViewModelImpl(get()) } bind SetlistDetailViewModel::class
 
     factory { ArtistSetlistAdapter() } bind ArtistSetlistAdapter::class
 }

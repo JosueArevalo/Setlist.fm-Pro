@@ -14,9 +14,9 @@ class SetlistDetailActivity : AppCompatActivity(R.layout.activity_setlist_detail
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel.printHowAreYou()
+        viewModel.artistId = getArtistIdFromIntent
+        viewModel.setlistId = getSetlistIdFromIntent
+        viewModel.getSetlistDetail()
 
-        Log.d("TEST", "TEST: $getArtistIdFromIntent")
-        Log.d("TEST", "TEST: $getSetlistIdFromIntent")
     }
 }

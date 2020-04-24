@@ -1,18 +1,17 @@
 package com.josuearevalodev.data.setlistfm.repository
 
-import com.josuearevalodev.data.setlistfm.datasource.SetListFmDataSource
+import com.josuearevalodev.data.setlistfm.datasource.SetListFmDatabaseDataSource
+import com.josuearevalodev.data.setlistfm.datasource.SetListFmRemoteDataSource
 import com.josuearevalodev.data.setlistfm.error.DatabaseError
 import com.josuearevalodev.domain.entities.ArtistEntity
-import com.josuearevalodev.domain.entities.ArtistSetlistsResponse
-import com.josuearevalodev.domain.entities.SearchArtistsResponse
 import com.josuearevalodev.domain.entities.SetlistEntity
 import com.josuearevalodev.domain.repository.SetListFmRepository
 import io.reactivex.Completable
 import io.reactivex.Single
 
 class SetListFmRepositoryImpl(
-    private val databaseDS: SetListFmDataSource,
-    private val remoteDS: SetListFmDataSource
+    private val databaseDS: SetListFmDatabaseDataSource,
+    private val remoteDS: SetListFmRemoteDataSource
 ) : SetListFmRepository {
 
     override fun getArtist(artistName: String): Single<ArtistEntity> {
@@ -24,8 +23,10 @@ class SetListFmRepositoryImpl(
         page: Int
     ): Single<List<SetlistEntity>> {
         return handleGetArtistSetlists(artistId, page)
-        //return Single.just(MockGenerator.artistSetlistsResponse)
-        //return remoteDS.getArtistSetlists(artistId, page)
+    }
+
+    override fun getSetlistDetail(setlistId: String): Single<SetlistEntity> {
+        return databaseDS.getSetlistDetail(setlistId)
     }
 
     //==============================================================================================

@@ -1,6 +1,6 @@
 package com.josuearevalodev.persistence.datasource
 
-import com.josuearevalodev.data.setlistfm.datasource.SetListFmDataSource
+import com.josuearevalodev.data.setlistfm.datasource.SetListFmDatabaseDataSource
 import com.josuearevalodev.domain.entities.ArtistEntity
 import com.josuearevalodev.domain.entities.SetlistEntity
 import com.josuearevalodev.persistence.db.SetlistFmDao
@@ -13,7 +13,8 @@ import com.josuearevalodev.persistence.mapper.mapToSetlistEntity
 import io.reactivex.Completable
 import io.reactivex.Single
 
-class DatabaseSetlistFmDataSourceImpl(private val dbDao: SetlistFmDao) : SetListFmDataSource {
+class DatabaseSetlistFmDataSourceImpl(private val dbDao: SetlistFmDao) :
+    SetListFmDatabaseDataSource {
 
     override fun getArtist(artistName: String): Single<ArtistEntity> {
         return dbDao
@@ -52,5 +53,15 @@ class DatabaseSetlistFmDataSourceImpl(private val dbDao: SetlistFmDao) : SetList
 
     override fun insertSetlists(setlists: List<SetlistEntity>): Completable {
         return dbDao.insertSetlists(setlists.map { it.mapToDatabaseSetlistEntity })
+    }
+
+    override fun getSetlistDetail(setlistId: String): Single<SetlistEntity> {
+        return dbDao.getSetlist(setlistId)
+            .onErrorResumeNext {
+                Single.error(it.mapToDatabaseError)
+            }
+            .map {
+                it.mapToSetlistEntity
+            }
     }
 }

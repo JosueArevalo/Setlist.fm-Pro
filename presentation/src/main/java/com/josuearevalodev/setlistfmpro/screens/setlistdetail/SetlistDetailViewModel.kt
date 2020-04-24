@@ -2,5 +2,9 @@ package com.josuearevalodev.setlistfmpro.screens.searchartists
 
 interface SetlistDetailViewModel {
 
-    fun printHowAreYou()
+    var artistId: String
+
+    var setlistId: String
+
+    fun getSetlistDetail()
 }
