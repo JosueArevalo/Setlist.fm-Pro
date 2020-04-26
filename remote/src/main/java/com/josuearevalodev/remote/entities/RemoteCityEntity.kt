@@ -1,4 +1,4 @@
-package com.josuearevalodev.domain.entities
+package com.josuearevalodev.domain.setlistfm.entities
 
 data class RemoteCityEntity(val id: String?,
                             val name: String?,

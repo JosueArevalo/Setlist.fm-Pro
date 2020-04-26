@@ -1,10 +1,9 @@
 package com.josuearevalodev.setlistfmpro.screens.artistsetlists
 
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.josuearevalodev.base_android.extensions.inflate
-import com.josuearevalodev.domain.entities.SetlistEntity
+import com.josuearevalodev.domain.setlistfm.entities.SetlistEntity
 import com.josuearevalodev.setlistfmpro.R
 
 class ArtistSetlistAdapter() : RecyclerView.Adapter<SetlistViewHolder>() {

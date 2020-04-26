@@ -1,7 +1,7 @@
 package com.josuearevalodev.persistence.mapper
 
 import androidx.room.EmptyResultSetException
-import com.josuearevalodev.domain.entities.*
+import com.josuearevalodev.domain.setlistfm.entities.*
 import com.josuearevalodev.persistence.entities.*
 import com.josuearevalodev.persistence.error.DatabaseError
 

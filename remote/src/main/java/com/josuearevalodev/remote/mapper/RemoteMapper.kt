@@ -1,7 +1,7 @@
 package com.josuearevalodev.remote.mapper
 
 import com.josuearevalodev.data.setlistfm.error.*
-import com.josuearevalodev.domain.entities.*
+import com.josuearevalodev.domain.setlistfm.entities.*
 import retrofit2.HttpException
 
 //region entities

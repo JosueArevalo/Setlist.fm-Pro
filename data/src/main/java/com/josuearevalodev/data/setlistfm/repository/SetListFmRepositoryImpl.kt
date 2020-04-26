@@ -3,9 +3,9 @@ package com.josuearevalodev.data.setlistfm.repository
 import com.josuearevalodev.data.setlistfm.datasource.SetListFmDatabaseDataSource
 import com.josuearevalodev.data.setlistfm.datasource.SetListFmRemoteDataSource
 import com.josuearevalodev.data.setlistfm.error.DatabaseError
-import com.josuearevalodev.domain.entities.ArtistEntity
-import com.josuearevalodev.domain.entities.SetlistEntity
-import com.josuearevalodev.domain.repository.SetListFmRepository
+import com.josuearevalodev.domain.setlistfm.entities.ArtistEntity
+import com.josuearevalodev.domain.setlistfm.entities.SetlistEntity
+import com.josuearevalodev.domain.setlistfm.repository.SetListFmRepository
 import io.reactivex.Completable
 import io.reactivex.Single
 

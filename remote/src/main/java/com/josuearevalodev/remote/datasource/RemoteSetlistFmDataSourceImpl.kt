@@ -2,7 +2,7 @@ package com.josuearevalodev.remote.datasource
 
 import com.josuearevalodev.data.setlistfm.datasource.SetListFmRemoteDataSource
 import com.josuearevalodev.data.setlistfm.error.Unexpected
-import com.josuearevalodev.domain.entities.*
+import com.josuearevalodev.domain.setlistfm.entities.*
 import com.josuearevalodev.remote.service.SetlistFmService
 import com.josuearevalodev.remote.httpclient.HttpClient
 import com.josuearevalodev.remote.mapper.*

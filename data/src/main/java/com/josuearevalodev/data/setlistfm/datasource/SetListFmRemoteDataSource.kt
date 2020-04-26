@@ -1,7 +1,7 @@
 package com.josuearevalodev.data.setlistfm.datasource
 
-import com.josuearevalodev.domain.entities.ArtistEntity
-import com.josuearevalodev.domain.entities.SetlistEntity
+import com.josuearevalodev.domain.setlistfm.entities.ArtistEntity
+import com.josuearevalodev.domain.setlistfm.entities.SetlistEntity
 import io.reactivex.Single
 
 interface SetListFmRemoteDataSource {

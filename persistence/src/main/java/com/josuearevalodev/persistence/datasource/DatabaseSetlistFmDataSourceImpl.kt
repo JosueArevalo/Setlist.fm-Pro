@@ -1,8 +1,8 @@
 package com.josuearevalodev.persistence.datasource
 
 import com.josuearevalodev.data.setlistfm.datasource.SetListFmDatabaseDataSource
-import com.josuearevalodev.domain.entities.ArtistEntity
-import com.josuearevalodev.domain.entities.SetlistEntity
+import com.josuearevalodev.domain.setlistfm.entities.ArtistEntity
+import com.josuearevalodev.domain.setlistfm.entities.SetlistEntity
 import com.josuearevalodev.persistence.db.SetlistFmDao
 import com.josuearevalodev.persistence.error.DatabaseError
 import com.josuearevalodev.persistence.error.mapToDatabaseError

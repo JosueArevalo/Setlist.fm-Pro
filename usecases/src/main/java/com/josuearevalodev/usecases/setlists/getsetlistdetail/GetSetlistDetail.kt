@@ -1,6 +1,6 @@
 package com.josuearevalodev.usecases.setlists.getsetlistdetail
 
-import com.josuearevalodev.domain.entities.SetlistEntity
+import com.josuearevalodev.domain.setlistfm.entities.SetlistEntity
 import io.reactivex.Single
 
 interface GetSetlistDetail {

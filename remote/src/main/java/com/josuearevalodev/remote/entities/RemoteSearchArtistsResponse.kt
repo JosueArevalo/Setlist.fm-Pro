@@ -1,4 +1,4 @@
-package com.josuearevalodev.domain.entities
+package com.josuearevalodev.domain.setlistfm.entities
 
 data class RemoteSearchArtistsResponse(val type: String?,
                                        val itemsPerPage: Int?,

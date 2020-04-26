@@ -1,8 +1,7 @@
 package com.josuearevalodev.data.di
 
 import com.josuearevalodev.data.setlistfm.repository.SetListFmRepositoryImpl
-import com.josuearevalodev.domain.repository.SetListFmRepository
-import org.koin.core.qualifier.named
+import com.josuearevalodev.domain.setlistfm.repository.SetListFmRepository
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
