@@ -2,6 +2,7 @@ package com.josuearevalodev.setlistfmpro.di
 
 import android.app.Application
 import com.josuearevalodev.data.di.dataModule
+import com.josuearevalodev.location.di.locationModule
 import com.josuearevalodev.persistence.di.persistenceModule
 import com.josuearevalodev.remote.di.remoteModule
 import com.josuearevalodev.remote.httpclient.HttpClient
@@ -26,7 +27,8 @@ class KoinManager(private val app: Application) {
                 userCaseModule,
                 dataModule,
                 remoteModule(baseUrl),
-                persistenceModule
+                persistenceModule,
+                locationModule
             )
         }
 

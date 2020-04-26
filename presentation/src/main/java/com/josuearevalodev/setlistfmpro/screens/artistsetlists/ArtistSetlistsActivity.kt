@@ -1,6 +1,5 @@
 package com.josuearevalodev.setlistfmpro.screens.artistsetlists
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -9,11 +8,9 @@ import com.google.android.material.snackbar.Snackbar
 import com.josuearevalodev.base.classes.ViewState
 import com.josuearevalodev.base_android.extensions.gone
 import com.josuearevalodev.base_android.extensions.visible
-import com.josuearevalodev.domain.entities.ArtistSetlistsResponse
-import com.josuearevalodev.domain.entities.SetlistEntity
+import com.josuearevalodev.domain.setlistfm.entities.SetlistEntity
 import com.josuearevalodev.setlistfmpro.R
 import com.josuearevalodev.setlistfmpro.screens.searchartists.ArtistSetlistsViewModel
-import com.josuearevalodev.setlistfmpro.screens.setlistdetail.SetlistDetailActivity
 import com.josuearevalodev.setlistfmpro.screens.setlistdetail.navigateToSetlistDetail
 import kotlinx.android.synthetic.main.activity_artist_setlists.*
 import org.koin.android.ext.android.inject

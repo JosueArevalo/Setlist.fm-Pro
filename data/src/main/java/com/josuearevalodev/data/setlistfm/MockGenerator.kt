@@ -1,8 +1,8 @@
 package com.josuearevalodev.data.setlistfm
 
 import com.google.gson.Gson
-import com.josuearevalodev.domain.entities.ArtistSetlistsResponse
-import com.josuearevalodev.domain.entities.SearchArtistsResponse
+import com.josuearevalodev.domain.setlistfm.entities.ArtistSetlistsResponse
+import com.josuearevalodev.domain.setlistfm.entities.SearchArtistsResponse
 
 object MockGenerator {
 
