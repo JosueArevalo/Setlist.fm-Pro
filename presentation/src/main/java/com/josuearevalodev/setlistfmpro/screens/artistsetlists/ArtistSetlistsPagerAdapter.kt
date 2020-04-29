@@ -3,7 +3,7 @@ package com.josuearevalodev.setlistfmpro.screens.artistsetlists
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.josuearevalodev.setlistfmpro.screens.artistsetlists.list.ArtistSetlistsListFragment
+import com.josuearevalodev.setlistfmpro.screens.artistsetlists.listsection.ArtistSetlistsListFragment
 import com.josuearevalodev.setlistfmpro.screens.artistsetlists.map.ArtistSetlistsMapFragment
 
 class ArtistSetlistsPagerAdapter(

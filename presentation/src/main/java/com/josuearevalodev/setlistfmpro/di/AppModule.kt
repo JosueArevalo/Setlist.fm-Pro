@@ -2,9 +2,9 @@ package com.josuearevalodev.setlistfmpro.di
 
 import com.josuearevalodev.setlistfmpro.screens.artistsetlists.ArtistSetlistsViewModel
 import com.josuearevalodev.setlistfmpro.screens.artistsetlists.ArtistSetlistsViewModelImpl
-import com.josuearevalodev.setlistfmpro.screens.artistsetlists.list.ArtistSetlistsListAdapter
-import com.josuearevalodev.setlistfmpro.screens.artistsetlists.list.ArtistSetlistsListViewModel
-import com.josuearevalodev.setlistfmpro.screens.artistsetlists.list.ArtistSetlistsListViewModelImpl
+import com.josuearevalodev.setlistfmpro.screens.artistsetlists.listsection.ArtistSetlistsListAdapter
+import com.josuearevalodev.setlistfmpro.screens.artistsetlists.listsection.ArtistSetlistsListViewModel
+import com.josuearevalodev.setlistfmpro.screens.artistsetlists.listsection.ArtistSetlistsListViewModelImpl
 import com.josuearevalodev.setlistfmpro.screens.searchartists.*
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.bind
