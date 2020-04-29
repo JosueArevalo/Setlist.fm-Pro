@@ -1,10 +1,12 @@
-package com.josuearevalodev.setlistfmpro.screens.artistsetlists
+package com.josuearevalodev.setlistfmpro.screens.artistsetlists.container
 
 import androidx.lifecycle.ViewModel
 import com.josuearevalodev.base_android.rxdisposablemanager.RxDisposableManager
 import com.josuearevalodev.base_android.rxdisposablemanager.RxDisposableManagerImpl
+import com.josuearevalodev.setlistfmpro.screens.artistsetlists.container.ArtistSetlistsViewModel
 
-class ArtistSetlistsViewModelImpl() : ViewModel(), ArtistSetlistsViewModel, RxDisposableManager by RxDisposableManagerImpl() {
+class ArtistSetlistsViewModelImpl() : ViewModel(),
+    ArtistSetlistsViewModel, RxDisposableManager by RxDisposableManagerImpl() {
 
     override var artistName: String = ""
 

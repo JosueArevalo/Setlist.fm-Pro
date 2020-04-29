@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".screens.artistsetlists.ArtistSetlistsActivity"/>
+        <activity android:name=".screens.artistsetlists.container.ArtistSetlistsActivity"/>
         <activity android:name=".screens.setlistdetail.SetlistDetailActivity"/>
 
         <!-- Google Maps SDK End-->

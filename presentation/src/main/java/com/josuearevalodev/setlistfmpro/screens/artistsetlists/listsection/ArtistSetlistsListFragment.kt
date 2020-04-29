@@ -1,6 +1,7 @@
 package com.josuearevalodev.setlistfmpro.screens.artistsetlists.listsection
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -11,16 +12,21 @@ import com.josuearevalodev.base_android.extensions.gone
 import com.josuearevalodev.base_android.extensions.visible
 import com.josuearevalodev.domain.setlistfm.entities.SetlistEntity
 import com.josuearevalodev.setlistfmpro.R
+import com.josuearevalodev.setlistfmpro.screens.artistsetlists.shared.ArtistSetlistsSharedViewModel
+import com.josuearevalodev.setlistfmpro.screens.artistsetlists.shared.ArtistSetlistsSharedViewModelImpl
 import com.josuearevalodev.setlistfmpro.screens.setlistdetail.navigateToSetlistDetail
 import kotlinx.android.synthetic.main.activity_artist_setlists.clContent
 import kotlinx.android.synthetic.main.activity_artist_setlists.evError
 import kotlinx.android.synthetic.main.activity_artist_setlists.lvLoading
 import kotlinx.android.synthetic.main.activity_artist_setlists_list.*
 import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class ArtistSetlistsListFragment : Fragment(R.layout.activity_artist_setlists_list) {
 
     val viewModel: ArtistSetlistsListViewModel by inject()
+    val sharedViewModel: ArtistSetlistsSharedViewModel by sharedViewModel<ArtistSetlistsSharedViewModelImpl>()
+
     val adapter: ArtistSetlistsListAdapter by inject()
 
     companion object {
@@ -53,6 +59,7 @@ class ArtistSetlistsListFragment : Fragment(R.layout.activity_artist_setlists_li
                 }
                 is ViewState.Content<*> -> {
                     adapter.addSetlists(viewState.value as List<SetlistEntity>)
+                    sharedViewModel.addSetlists(viewState.value as List<SetlistEntity>)
                     clContent.visible()
                     lvLoading.gone()
                     evError.gone()

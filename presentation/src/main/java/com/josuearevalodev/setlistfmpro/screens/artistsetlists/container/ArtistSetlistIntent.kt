@@ -1,4 +1,4 @@
-package com.josuearevalodev.setlistfmpro.screens.artistsetlists
+package com.josuearevalodev.setlistfmpro.screens.artistsetlists.container
 
 import android.content.Context
 import android.content.Intent
@@ -13,4 +13,6 @@ fun Context.navigateToArtistSetlists(artistName: String) {
     startActivity(intent)
 }
 
-fun ArtistSetlistsActivity.getArtistNameFromIntent() = intent.getStringExtra(EXTRA_ARTIST_NAME)
+fun ArtistSetlistsActivity.getArtistNameFromIntent() = intent.getStringExtra(
+    EXTRA_ARTIST_NAME
+)

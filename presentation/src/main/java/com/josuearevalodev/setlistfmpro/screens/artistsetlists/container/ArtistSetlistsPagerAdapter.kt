@@ -1,4 +1,4 @@
-package com.josuearevalodev.setlistfmpro.screens.artistsetlists
+package com.josuearevalodev.setlistfmpro.screens.artistsetlists.container
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
