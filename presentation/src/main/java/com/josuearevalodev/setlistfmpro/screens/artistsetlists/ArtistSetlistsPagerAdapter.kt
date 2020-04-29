@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.josuearevalodev.setlistfmpro.screens.artistsetlists.listsection.ArtistSetlistsListFragment
-import com.josuearevalodev.setlistfmpro.screens.artistsetlists.map.ArtistSetlistsMapFragment
+import com.josuearevalodev.setlistfmpro.screens.artistsetlists.mapsection.ArtistSetlistsMapFragment
 
 class ArtistSetlistsPagerAdapter(
     fm: FragmentManager,
