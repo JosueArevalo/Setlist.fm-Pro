@@ -44,9 +44,11 @@ dependencies {
     implementation project (':data')
     implementation project (':remote')
     implementation project (':persistence')
+    implementation project (':location')
     implementation project (':usecases')
     implementation project (':base')
     implementation project (':base_android')
+
 
     // RecyclerView
     implementation "androidx.recyclerview:recyclerview:1.1.0"
@@ -55,10 +57,6 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:2.1.16"
     implementation "io.reactivex.rxjava2:rxkotlin:2.4.0"
     implementation "io.reactivex.rxjava2:rxandroid:2.0.2"
-
-    // Room
-    //implementation 'android.arch.persistence.room:runtime:1.1.1'
-    //annotationProcessor 'android.arch.persistence.room:compiler:1.1.1'
 
     // Koin (Core)
     implementation "org.koin:koin-core:2.1.5" // Koin for Kotlin
@@ -77,11 +75,14 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
+    // Maps
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+
     // Default test libraries from initial project
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
+    
     // Doubts:
     // Support? "androidx.legacy:legacy-support-v4:$support_version"
     // Lifecycle? android.arch.lifecycle:extensions:$archLifecycle_Version //ViewModel and LiveData ???
