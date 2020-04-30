@@ -55,23 +55,22 @@ class ArtistSetlistsMapFragment : Fragment(R.layout.fragment_artist_setlists_map
     override fun onMapReady(map: GoogleMap?) {
         map?.let {
             googleMap = it
-            /*val dummyPosition = LatLng(41.5421104, 2.4445)
-            googleMap
-                .addMarker(
-                    MarkerOptions()
-                        .position(dummyPosition)
-                        .title("Dummy!")
-                        .icon(getMarkerIcon("#FF00FF"))
-                )
-
-            googleMap.moveCamera(CameraUpdateFactory.newLatLng(dummyPosition))*/
-
         }
     }
 
     fun addMarkers(markers: List<CustomMarker>) {
         markers.forEach { marker ->
             googleMap?.addMarker(marker)
+        }
+
+        markers.lastOrNull()?.let { marker ->
+            googleMap?.let {
+                val latLong = LatLng(
+                    marker.location.latitude.toDouble(),
+                    marker.location.longitude.toDouble()
+                    )
+                it.moveCamera(CameraUpdateFactory.newLatLng(latLong))
+            }
         }
     }
 
@@ -85,23 +84,7 @@ class ArtistSetlistsMapFragment : Fragment(R.layout.fragment_artist_setlists_map
             MarkerOptions()
                 .position(position)
                 .title(marker.title)
-                .icon(getMarkerIcon(marker.color))
+                .icon(marker.color.mapToBitmapDescriptor())
         )
-
-    }
-
-    val SetlistEntity.mapToSetlistMarker: CustomMarker.SetlistMarker
-        get() = CustomMarker.SetlistMarker(
-            title = "${venue.name} - ${venue.city.name}\n $eventDate",
-            location = MarkerLocation(
-                latitude = venue.city.coords.lat,
-                longitude = venue.city.coords.long
-            )
-        )
-
-    fun getMarkerIcon(color: String?): BitmapDescriptor? {
-        val hsv = FloatArray(3)
-        Color.colorToHSV(Color.parseColor(color), hsv)
-        return BitmapDescriptorFactory.defaultMarker(hsv[0])
     }
 }
