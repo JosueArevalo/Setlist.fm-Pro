@@ -10,6 +10,8 @@ class ArtistSetlistsViewModelImpl() : ViewModel(),
 
     override var artistName: String = ""
 
+    override var currentTab: Int = 0
+
     override fun onCleared() {
         super.onCleared()
         composite.clear()
