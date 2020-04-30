@@ -6,4 +6,6 @@ import io.reactivex.Single
 interface LocationRepository {
 
     fun getCurrentLocation(): Single<LocationEntity>
+
+    fun isLocationPermissionGranted(): Single<Boolean>
 }

@@ -12,4 +12,8 @@ class LocationRepositoryImpl(
     override fun getCurrentLocation(): Single<LocationEntity> {
         return locationDatasource.getCurrentLocation()
     }
+
+    override fun isLocationPermissionGranted(): Single<Boolean> {
+        return locationDatasource.isLocationPermissionGranted()
+    }
 }

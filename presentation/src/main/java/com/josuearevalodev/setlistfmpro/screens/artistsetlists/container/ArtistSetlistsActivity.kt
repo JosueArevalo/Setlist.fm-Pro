@@ -83,5 +83,6 @@ class ArtistSetlistsActivity : AppCompatActivity(R.layout.activity_artist_setlis
     }
 
     private fun onGpsClicked() {
+        viewModel.handleGetCurrentPosition()
     }
 }

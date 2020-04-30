@@ -2,6 +2,8 @@ package com.josuearevalodev.usecases.di
 
 import com.josuearevalodev.usecases.location.getcurrentlocation.GetCurrentLocation
 import com.josuearevalodev.usecases.location.getcurrentlocation.GetCurrentLocationImpl
+import com.josuearevalodev.usecases.location.islocationpermissiongranted.IsLocationPermissionGranted
+import com.josuearevalodev.usecases.location.islocationpermissiongranted.IsLocationPermissionGrantedImpl
 import com.josuearevalodev.usecases.setlists.getartistsetlists.GetArtistSetlists
 import com.josuearevalodev.usecases.setlists.getartistsetlists.GetArtistSetlistsImpl
 import com.josuearevalodev.usecases.setlists.getsetlistdetail.GetSetlistDetail
@@ -20,5 +22,8 @@ val userCaseModule = module {
     factory { GetSetlistDetailImpl(get()) } bind GetSetlistDetail::class
 
     factory { GetCurrentLocationImpl(get()) } bind GetCurrentLocation::class
+
+    factory { IsLocationPermissionGrantedImpl(get()) } bind IsLocationPermissionGranted::class
+
 
 }

@@ -8,6 +8,6 @@ import org.koin.dsl.module
 val locationModule = module {
 
     single {
-        LocationDataSourceImpl()
+        LocationDataSourceImpl(get())
     } bind LocationDataSource::class
 }

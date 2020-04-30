@@ -23,7 +23,7 @@ val appModule = module {
     viewModel { ArtistSetlistsSharedViewModelImpl() } bind ArtistSetlistsSharedViewModel::class
 
     // Artist Setlists List (Fragment)
-    viewModel { ArtistSetlistsViewModelImpl() } bind ArtistSetlistsViewModel::class
+    viewModel { ArtistSetlistsViewModelImpl(get(), get()) } bind ArtistSetlistsViewModel::class
 
     factory { ArtistSetlistsListAdapter() } bind ArtistSetlistsListAdapter::class
 

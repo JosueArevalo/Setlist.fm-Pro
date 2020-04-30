@@ -5,4 +5,6 @@ interface ArtistSetlistsViewModel {
     var artistName: String
 
     var currentTab: Int
+
+    fun handleGetCurrentPosition()
 }
