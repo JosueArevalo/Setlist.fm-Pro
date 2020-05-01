@@ -40,6 +40,9 @@ dependencies {
     // RXJava
     implementation "io.reactivex.rxjava2:rxjava:2.1.16"
 
+    // RxLocationManager
+    implementation 'com.github.zellius:rxlocationmanager-rxjava2:1.0.0'
+
     // Koin (Core)
     implementation "org.koin:koin-core:2.1.5" // Koin for Kotlin
     implementation "org.koin:koin-core-ext:2.1.5" // Koin extended & experimental features

@@ -1,20 +1,18 @@
 package com.josuearevalodev.location.location.datasource
 
-import android.Manifest
-import android.app.Application
-import android.content.pm.PackageManager
-import androidx.core.content.ContextCompat
+import android.location.LocationManager
 import com.josuearevalodev.data.location.datasource.LocationDataSource
 import com.josuearevalodev.domain.location.entities.LocationEntity
-import io.reactivex.Single
+import com.josuearevalodev.location.location.mapper.mapToLocationEntity
+import io.reactivex.Maybe
+import ru.solodovnikov.rx2locationmanager.RxLocationManager
 
-class LocationDataSourceImpl(private val application: Application) : LocationDataSource {
+class LocationDataSourceImpl(
+    private val rxLocationManager: RxLocationManager
+) : LocationDataSource {
 
-    override fun getCurrentLocation(): Single<LocationEntity> {
-        return Single.just(LocationEntity(40f, 2f)) // TODO
-    }
-
-    override fun isLocationPermissionGranted(): Single<Boolean> {
-        return Single.just(ContextCompat.checkSelfPermission(application, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+    override fun getCurrentLocation(): Maybe<LocationEntity> {
+        return rxLocationManager.getLastLocation(LocationManager.NETWORK_PROVIDER)
+            .map { it.mapToLocationEntity }
     }
 }

@@ -1,29 +1,36 @@
 package com.josuearevalodev.setlistfmpro.screens.artistsetlists.container
 
+import android.Manifest
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.viewpager.widget.ViewPager
 import com.josuearevalodev.setlistfmpro.R
+import com.josuearevalodev.setlistfmpro.commons.PermissionRequester
 import com.josuearevalodev.setlistfmpro.screens.artistsetlists.shared.ArtistSetlistsSharedViewModel
 import com.josuearevalodev.setlistfmpro.screens.artistsetlists.shared.ArtistSetlistsSharedViewModelImpl
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.*
+import com.karumi.dexter.listener.single.PermissionListener
 import kotlinx.android.synthetic.main.activity_artist_setlists.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class ArtistSetlistsActivity : AppCompatActivity(R.layout.activity_artist_setlists) {
+class ArtistSetlistsActivity : AppCompatActivity(R.layout.activity_artist_setlists),
+    PermissionListener, PermissionRequestErrorListener {
 
     val viewModel: ArtistSetlistsViewModel by inject()
     val sharedViewModel: ArtistSetlistsSharedViewModel by viewModel<ArtistSetlistsSharedViewModelImpl>()
 
     private lateinit var artistSetlistsPagerAdapter: ArtistSetlistsPagerAdapter
 
+    private val permissionRequester: PermissionRequester by inject()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         handleIntentData()
+        handleSharedVariables()
         prepareUi()
     }
 
@@ -49,6 +56,10 @@ class ArtistSetlistsActivity : AppCompatActivity(R.layout.activity_artist_setlis
         getArtistNameFromIntent()?.let {
             viewModel.artistName = it
         }
+    }
+
+    private fun handleSharedVariables() {
+        viewModel.userLocation = sharedViewModel.userLocation
     }
 
     private fun prepareUi() {
@@ -83,6 +94,24 @@ class ArtistSetlistsActivity : AppCompatActivity(R.layout.activity_artist_setlis
     }
 
     private fun onGpsClicked() {
-        viewModel.handleGetCurrentPosition()
+        permissionRequester.request(
+            permission =  Manifest.permission.ACCESS_COARSE_LOCATION,
+            permissionListener = this,
+            permissionRequestErrorListener = this
+        )
     }
+
+    //region Permissions
+    override fun onPermissionGranted(response: PermissionGrantedResponse?) {
+        viewModel.requestCurrentLocation()
+    }
+
+    override fun onPermissionDenied(response: PermissionDeniedResponse?) {}
+
+    override fun onPermissionRationaleShouldBeShown(request: PermissionRequest?, token: PermissionToken?) {
+        token?.continuePermissionRequest()
+    }
+
+    override fun onError(error: DexterError?) {}
+    //endregion
 }

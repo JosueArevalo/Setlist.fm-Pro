@@ -1,5 +1,6 @@
 package com.josuearevalodev.setlistfmpro.di
 
+import com.josuearevalodev.setlistfmpro.commons.PermissionRequester
 import com.josuearevalodev.setlistfmpro.screens.artistsetlists.container.ArtistSetlistsViewModel
 import com.josuearevalodev.setlistfmpro.screens.artistsetlists.container.ArtistSetlistsViewModelImpl
 import com.josuearevalodev.setlistfmpro.screens.artistsetlists.listsection.ArtistSetlistsListAdapter
@@ -23,7 +24,7 @@ val appModule = module {
     viewModel { ArtistSetlistsSharedViewModelImpl() } bind ArtistSetlistsSharedViewModel::class
 
     // Artist Setlists List (Fragment)
-    viewModel { ArtistSetlistsViewModelImpl(get(), get()) } bind ArtistSetlistsViewModel::class
+    viewModel { ArtistSetlistsViewModelImpl(get()) } bind ArtistSetlistsViewModel::class
 
     factory { ArtistSetlistsListAdapter() } bind ArtistSetlistsListAdapter::class
 
@@ -31,5 +32,7 @@ val appModule = module {
 
     // Artist Setlists Detail (Fragment)
     viewModel { SetlistDetailViewModelImpl(get()) } bind SetlistDetailViewModel::class
+
+    single { PermissionRequester(get()) }
 
 }
