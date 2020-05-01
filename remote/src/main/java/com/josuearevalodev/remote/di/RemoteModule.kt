@@ -1,9 +1,9 @@
 package com.josuearevalodev.remote.di
 
 import com.josuearevalodev.data.setlistfm.datasource.SetListFmRemoteDataSource
-import com.josuearevalodev.remote.setlistfm.datasource.RemoteSetlistFmDataSourceImpl
 import com.josuearevalodev.remote.httpclient.HttpClient
 import com.josuearevalodev.remote.httpclient.HttpClientImpl
+import com.josuearevalodev.remote.setlistfm.datasource.RemoteSetlistFmDataSourceImpl
 import org.koin.dsl.bind
 import org.koin.dsl.module
 

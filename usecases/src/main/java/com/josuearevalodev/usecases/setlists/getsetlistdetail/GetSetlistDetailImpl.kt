@@ -1,8 +1,8 @@
 package com.josuearevalodev.usecases.setlists.getsetlistdetail
 
 import com.josuearevalodev.domain.setlistfm.entities.SetlistEntity
-import io.reactivex.Single
 import com.josuearevalodev.domain.setlistfm.repository.SetListFmRepository
+import io.reactivex.Single
 
 class GetSetlistDetailImpl(private val setListFmRepository: SetListFmRepository) : GetSetlistDetail {
 

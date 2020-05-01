@@ -1,6 +1,5 @@
 package com.josuearevalodev.setlistfmpro.screens.artistsetlists.shared
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.josuearevalodev.domain.location.entities.LocationEntity

@@ -8,7 +8,10 @@ import com.josuearevalodev.setlistfmpro.screens.artistsetlists.listsection.Artis
 import com.josuearevalodev.setlistfmpro.screens.artistsetlists.listsection.ArtistSetlistsListViewModelImpl
 import com.josuearevalodev.setlistfmpro.screens.artistsetlists.shared.ArtistSetlistsSharedViewModel
 import com.josuearevalodev.setlistfmpro.screens.artistsetlists.shared.ArtistSetlistsSharedViewModelImpl
-import com.josuearevalodev.setlistfmpro.screens.searchartists.*
+import com.josuearevalodev.setlistfmpro.screens.searchartists.SearchArtistsViewModel
+import com.josuearevalodev.setlistfmpro.screens.searchartists.SearchArtistsViewModelImpl
+import com.josuearevalodev.setlistfmpro.screens.searchartists.SetlistDetailViewModel
+import com.josuearevalodev.setlistfmpro.screens.searchartists.SetlistDetailViewModelImpl
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.bind
 import org.koin.dsl.module
