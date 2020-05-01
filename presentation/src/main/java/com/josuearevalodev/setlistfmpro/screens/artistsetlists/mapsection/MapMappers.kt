@@ -3,6 +3,7 @@ package com.josuearevalodev.setlistfmpro.screens.artistsetlists.mapsection
 import android.graphics.Color
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.josuearevalodev.domain.location.entities.LocationEntity
 import com.josuearevalodev.domain.setlistfm.entities.SetlistEntity
 
 val SetlistEntity.mapToSetlistMarker: CustomMarker.SetlistMarker
@@ -11,6 +12,15 @@ val SetlistEntity.mapToSetlistMarker: CustomMarker.SetlistMarker
         location = MarkerLocation(
             latitude = venue.city.coords.lat,
             longitude = venue.city.coords.long
+        )
+    )
+
+val LocationEntity.mapToUserMarker: CustomMarker.UserMarker
+    get() = CustomMarker.UserMarker(
+        title = "Your position",
+        location = MarkerLocation(
+            latitude = latitude,
+            longitude = longitude
         )
     )
 

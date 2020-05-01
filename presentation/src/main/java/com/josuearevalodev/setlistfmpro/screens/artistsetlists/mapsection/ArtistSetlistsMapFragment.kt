@@ -1,7 +1,6 @@
 package com.josuearevalodev.setlistfmpro.screens.artistsetlists.mapsection
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -35,8 +34,7 @@ class ArtistSetlistsMapFragment : Fragment(R.layout.fragment_artist_setlists_map
     }
 
     private fun addObservers() {
-        sharedViewModel.setlists.observe(viewLifecycleOwner, Observer {setlists ->
-            Log.d("TEST", "TEST: Received ${setlists.size}")
+        sharedViewModel.setlists.observe(viewLifecycleOwner, Observer { setlists ->
 
             val setlistsMarkers = mutableListOf<CustomMarker>()
             setlists.forEach {
@@ -44,6 +42,10 @@ class ArtistSetlistsMapFragment : Fragment(R.layout.fragment_artist_setlists_map
             }
 
             addMarkers(setlistsMarkers)
+        })
+
+        sharedViewModel.userLocation.observe(viewLifecycleOwner, Observer { userLocation ->
+            googleMap?.addMarker(userLocation.mapToUserMarker)
         })
     }
 

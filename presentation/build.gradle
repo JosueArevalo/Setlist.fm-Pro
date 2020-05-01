@@ -78,6 +78,9 @@ dependencies {
     // Maps
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
 
+    // Dexter
+    implementation 'com.karumi:dexter:6.1.0'
+
     // Default test libraries from initial project
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

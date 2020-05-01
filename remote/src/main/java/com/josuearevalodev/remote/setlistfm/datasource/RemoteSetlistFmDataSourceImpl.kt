@@ -2,10 +2,13 @@ package com.josuearevalodev.remote.setlistfm.datasource
 
 import com.josuearevalodev.data.setlistfm.datasource.SetListFmRemoteDataSource
 import com.josuearevalodev.data.setlistfm.error.Unexpected
-import com.josuearevalodev.domain.setlistfm.entities.*
-import com.josuearevalodev.remote.setlistfm.service.SetlistFmService
+import com.josuearevalodev.domain.setlistfm.entities.ArtistEntity
+import com.josuearevalodev.domain.setlistfm.entities.SetlistEntity
 import com.josuearevalodev.remote.httpclient.HttpClient
-import com.josuearevalodev.remote.setlistfm.mapper.*
+import com.josuearevalodev.remote.setlistfm.mapper.mapToArtistEntity
+import com.josuearevalodev.remote.setlistfm.mapper.mapToRemoteError
+import com.josuearevalodev.remote.setlistfm.mapper.mapToSetlistEntity
+import com.josuearevalodev.remote.setlistfm.service.SetlistFmService
 import io.reactivex.Single
 import retrofit2.HttpException
 

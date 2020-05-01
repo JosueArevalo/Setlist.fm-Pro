@@ -1,9 +1,10 @@
 package com.josuearevalodev.domain.location.repository
 
 import com.josuearevalodev.domain.location.entities.LocationEntity
-import io.reactivex.Single
+import io.reactivex.Maybe
 
 interface LocationRepository {
 
-    fun getCurrentLocation(): Single<LocationEntity>
+    fun getCurrentLocation(): Maybe<LocationEntity>
+
 }
