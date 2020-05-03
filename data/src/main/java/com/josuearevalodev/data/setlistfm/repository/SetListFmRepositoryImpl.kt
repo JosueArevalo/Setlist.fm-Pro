@@ -22,7 +22,8 @@ class SetListFmRepositoryImpl(
         artistId: String,
         page: Int
     ): Single<List<SetlistEntity>> {
-        return handleGetArtistSetlists(artistId, page)
+        //return handleGetArtistSetlists(artistId, page) // Valid
+        return getSetlistsFromRemote(artistId, page) // For the moment, to ensure that data is OK for pagination
     }
 
     override fun getSetlistDetail(setlistId: String): Single<SetlistEntity> {
