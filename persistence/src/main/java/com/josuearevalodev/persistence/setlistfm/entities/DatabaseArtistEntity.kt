@@ -9,6 +9,9 @@ data class DatabaseArtistEntity(
     val name: String?,
     val sortName: String?,
     val disambiguation: String?,
-    val url: String?
+    val url: String?,
+    val itemsPerPage: Int,
+    val totalSetlists: Int
+
 )
 

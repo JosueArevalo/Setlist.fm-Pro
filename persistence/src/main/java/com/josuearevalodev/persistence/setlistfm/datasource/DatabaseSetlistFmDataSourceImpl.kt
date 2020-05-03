@@ -25,9 +25,18 @@ class DatabaseSetlistFmDataSourceImpl(private val dbDao: SetlistFmDao) :
             .map { it.mapToArtistEntity }
     }
 
-    override fun getArtistSetlists(artistId: String, page: Int): Single<List<SetlistEntity>> {
+    override fun getArtistWithId(artistId: String): Single<ArtistEntity> {
         return dbDao
-            .getArtistSetlists(artistId/*TODO, page*/)
+            .getArtistWithId(artistId)
+            .onErrorResumeNext {
+                Single.error(it.mapToDatabaseError)
+            }
+            .map { it.mapToArtistEntity }    }
+
+    override fun getArtistSetlists(artistId: String, page: Int, itemsPerPage: Int): Single<List<SetlistEntity>> {
+        val offset = (page - 1) * itemsPerPage
+        return dbDao
+            .getArtistSetlists(artistId = artistId, itemsPerPage = itemsPerPage, offset = offset)
             .onErrorResumeNext {
                 Single.error(it.mapToDatabaseError)
             }
@@ -63,5 +72,13 @@ class DatabaseSetlistFmDataSourceImpl(private val dbDao: SetlistFmDao) :
             .map {
                 it.mapToSetlistEntity
             }
+    }
+
+    override fun updateArtistWithSetlistsHeaderData(idArtist: String, itemsPerPage: Int, totalSetlists: Int): Completable {
+        return dbDao.updateArtistWithSetlistsHeaderData(
+            idArtist = idArtist,
+            itemsPerPage = itemsPerPage,
+            totalSetlists = totalSetlists
+        )
     }
 }

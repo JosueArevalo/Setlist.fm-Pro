@@ -16,7 +16,15 @@ class ArtistSetlistsListViewModelImpl(private val searchArtistByNamesUseCase: Se
 
     override var artistName: String = ""
     override val viewState: MutableLiveData<ViewState> by lazy { MutableLiveData<ViewState>().apply { postValue(ViewState.Loading) } }
-    private var artistSetlistPage = 1
+    override var currentPage = 1
+    override var itemsPerPage = 0
+    override val firstPage = 1
+    override var isLastPage = false
+    override var totalPages = 0
+    override var isLoading = false
+    override var itemCount = 0
+
+    private lateinit var artistId: String
 
     override fun searchArtistByName(text: String) {
         viewState.postValue(ViewState.Loading)
@@ -26,7 +34,8 @@ class ArtistSetlistsListViewModelImpl(private val searchArtistByNamesUseCase: Se
             .subscribe(
                 { artist ->
                     Log.d("TEST", "TEST: Success! $artist")
-                    searchSetlists(artist.mbid, artistSetlistPage)
+                    artistId = artist.mbid
+                    searchSetlists(artist.mbid, currentPage)
                 },
                 { error ->
                     Log.e("TEST", "TEST: Error! $error")
@@ -36,21 +45,32 @@ class ArtistSetlistsListViewModelImpl(private val searchArtistByNamesUseCase: Se
             .addTo(composite)
     }
 
-    override fun searchSetlists(idArtist: String, page: Int) {
-    getArtistSetlistsUseCase(artistId = idArtist, page = page)
-        .subscribeOn(ioThread)
-        .observeOn(mainThread)
-        .subscribe(
-            { setlists ->
-                Log.d("TEST", "TEST: Success! $setlists")
-                viewState.postValue(ViewState.Content(setlists))
-            },
-            { error ->
-                Log.e("TEST", "TEST: Error! $error")
-                viewState.postValue(ViewState.Error(Throwable()))
-            }
-        )
-        .addTo(composite)
+    override fun loadMoreItems() {
+        isLoading = true
+        currentPage++
+        searchSetlists(idArtist = artistId, page = currentPage, itemsPerPage = itemsPerPage)
+    }
+
+    private fun searchSetlists(idArtist: String, page: Int = 1, itemsPerPage: Int = 20) {
+        Log.d("TEST", "TEST: searchSetlists: Page: $page & itemsPerPage: $itemsPerPage")
+
+        getArtistSetlistsUseCase(artistId = idArtist, page = page, itemsPerPage = itemsPerPage)
+            .subscribeOn(ioThread)
+            .observeOn(mainThread)
+            .subscribe(
+                { artistSetlistsResponse ->
+                    Log.d("TEST", "TEST: Success! Setlists found: ${artistSetlistsResponse.setlist.size}")
+                    this.itemsPerPage = artistSetlistsResponse.itemsPerPage
+                    totalPages = Math.ceil(artistSetlistsResponse.total.toDouble() / artistSetlistsResponse.itemsPerPage).toInt()
+
+                    viewState.postValue(ViewState.Content(artistSetlistsResponse.setlist))
+                },
+                { error ->
+                    Log.e("TEST", "TEST: Error! $error")
+                    viewState.postValue(ViewState.Error(Throwable()))
+                }
+            )
+            .addTo(composite)
     }
 
     override fun onCleared() {

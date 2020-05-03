@@ -13,7 +13,9 @@ val DatabaseArtistEntity.mapToArtistEntity: ArtistEntity
             name = this.name ?: "",
             sortName = this.sortName ?: "",
             disambiguation = this.disambiguation ?: "",
-            url = this.url ?: ""
+            url = this.url ?: "",
+            itemsPerPage = this.itemsPerPage ?: 0,
+            totalSetlists = this.totalSetlists ?: 0
         )
     }
 
@@ -84,7 +86,9 @@ val ArtistEntity.mapToDatabaseArtistEntity: DatabaseArtistEntity
             name = name,
             sortName = sortName,
             disambiguation = disambiguation,
-            url = url
+            url = url,
+            itemsPerPage = itemsPerPage,
+            totalSetlists = totalSetlists
         )
     }
 

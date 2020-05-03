@@ -14,8 +14,11 @@ interface SetlistFmDao {
     @Query("SELECT * FROM artists WHERE name = :artistName")
     fun getArtist(artistName: String): Single<DatabaseArtistEntity>
 
-    @Query("SELECT * FROM setlists WHERE artistId = :artistId")
-    fun getArtistSetlists(artistId: String/*TODO:, page: Int*/): Single<List<DatabaseSetlistEntity>>
+    @Query("SELECT * FROM artists WHERE mbid = :artistId")
+    fun getArtistWithId(artistId: String): Single<DatabaseArtistEntity>
+
+    @Query("SELECT * FROM setlists WHERE artistId = :artistId LIMIT :itemsPerPage OFFSET :offset")
+    fun getArtistSetlists(artistId: String, itemsPerPage: Int, offset: Int): Single<List<DatabaseSetlistEntity>>
 
     @Query("SELECT * FROM setlists WHERE id = :setlistId")
     fun getSetlist(setlistId: String): Single<DatabaseSetlistEntity>
@@ -25,4 +28,7 @@ interface SetlistFmDao {
 
     @Insert(onConflict = IGNORE)
     fun insertSetlists(setlists: List<DatabaseSetlistEntity>): Completable
+
+    @Query("UPDATE artists SET itemsPerPage = :itemsPerPage, totalSetlists = :totalSetlists WHERE mbid = :idArtist")
+    fun updateArtistWithSetlistsHeaderData(idArtist: String, itemsPerPage: Int, totalSetlists: Int): Completable
 }

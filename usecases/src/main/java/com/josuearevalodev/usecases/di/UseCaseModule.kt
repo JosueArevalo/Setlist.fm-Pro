@@ -20,5 +20,4 @@ val userCaseModule = module {
     factory { GetSetlistDetailImpl(get()) } bind GetSetlistDetail::class
 
     factory { GetCurrentLocationImpl(get()) } bind GetCurrentLocation::class
-
 }
