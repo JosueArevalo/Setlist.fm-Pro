@@ -8,10 +8,12 @@ import com.josuearevalodev.base_android.rxdisposablemanager.RxDisposableManager
 import com.josuearevalodev.base_android.rxdisposablemanager.RxDisposableManagerImpl
 import com.josuearevalodev.usecases.setlists.getartistsetlists.GetArtistSetlists
 import com.josuearevalodev.usecases.setlists.searchartistsbyname.SearchArtistByName
+import com.josuearevalodev.usecases.setlists.searchartistsbyname.UpdateArtistWithSetlistsHeaderData
 import io.reactivex.rxkotlin.addTo
 
 class ArtistSetlistsListViewModelImpl(private val searchArtistByNamesUseCase: SearchArtistByName,
-                                      private val getArtistSetlistsUseCase: GetArtistSetlists) : ViewModel(),
+                                      private val getArtistSetlistsUseCase: GetArtistSetlists,
+                                      private val updateArtistWithSetlistsHeaderData: UpdateArtistWithSetlistsHeaderData) : ViewModel(),
     ArtistSetlistsListViewModel, RxDisposableManager by RxDisposableManagerImpl() {
 
     override var artistName: String = ""
@@ -60,6 +62,15 @@ class ArtistSetlistsListViewModelImpl(private val searchArtistByNamesUseCase: Se
                     Log.d("TEST", "TEST: Success! $artistSetlistsResponse")
                     itemsPerPage = artistSetlistsResponse.itemsPerPage
                     totalPages = Math.ceil(artistSetlistsResponse.total.toDouble() / artistSetlistsResponse.itemsPerPage).toInt()
+                    updateArtistWithSetlistsHeaderData(
+                        idArtist = idArtist,
+                        itemsPerPage = itemsPerPage,
+                        totalSetlists = artistSetlistsResponse.total
+                    )
+                        .subscribeOn(ioThread)
+                        .observeOn(mainThread)
+                        .subscribe()
+
                     viewState.postValue(ViewState.Content(artistSetlistsResponse.setlist))
                 },
                 { error ->
