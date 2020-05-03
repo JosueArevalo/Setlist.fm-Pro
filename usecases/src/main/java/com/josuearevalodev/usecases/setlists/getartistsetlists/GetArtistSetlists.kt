@@ -6,5 +6,9 @@ import io.reactivex.Single
 
 interface GetArtistSetlists {
 
-    operator fun invoke(artistId: String, page: Int): Single<ArtistSetlistsResponse>
+    operator fun invoke(
+        artistId: String,
+        page: Int = 1,
+        itemsPerPage: Int = 20
+    ): Single<ArtistSetlistsResponse>
 }

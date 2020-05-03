@@ -9,7 +9,7 @@ interface SetListFmDatabaseDataSource {
 
     fun getArtist(artistName: String): Single<ArtistEntity>
 
-    fun getArtistSetlists(artistId: String, page: Int): Single<List<SetlistEntity>>
+    fun getArtistSetlists(artistId: String, page: Int, itemsPerPage: Int): Single<List<SetlistEntity>>
 
     fun getSetlistDetail(setlistId: String): Single<SetlistEntity>
 

@@ -9,8 +9,9 @@ class GetArtistSetlistsImpl(private val setListFmRepository: SetListFmRepository
 
     override fun invoke(
         artistId: String,
-        page: Int
+        page: Int,
+        itemsPerPage: Int
     ): Single<ArtistSetlistsResponse> {
-        return setListFmRepository.getArtistSetlists(artistId, page)
+        return setListFmRepository.getArtistSetlists(artistId, page, itemsPerPage)
     }
 }

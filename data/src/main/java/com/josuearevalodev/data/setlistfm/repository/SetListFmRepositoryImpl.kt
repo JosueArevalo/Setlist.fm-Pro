@@ -21,10 +21,11 @@ class SetListFmRepositoryImpl(
 
     override fun getArtistSetlists(
         artistId: String,
-        page: Int
+        page: Int,
+        itemsPerPage: Int
     ): Single<ArtistSetlistsResponse> {
-        //return handleGetArtistSetlists(artistId, page) // Valid
-        return getSetlistsFromRemote(artistId, page) // For the moment, to ensure that data is OK for pagination
+        return handleGetArtistSetlists(artistId, page, itemsPerPage) // Valid
+        //return getSetlistsFromRemote(artistId, page) // For the moment, to ensure that data is OK for pagination
     }
 
     override fun getSetlistDetail(setlistId: String): Single<SetlistEntity> {
@@ -85,26 +86,36 @@ class SetListFmRepositoryImpl(
     //region getArtistSetlists - private methods
     //==============================================================================================
 
-    private fun handleGetArtistSetlists(artistId: String, page: Int): Single<List<SetlistEntity>> {
-        return getSetlistsFromDb(artistId, page)
+    private fun handleGetArtistSetlists(artistId: String, page: Int, itemsPerPage: Int): Single<ArtistSetlistsResponse> {
+        return getSetlistsFromDb(artistId, page, itemsPerPage)
             .onErrorResumeNext { error ->
                 System.out.println("TEST - Error getting from DB: $error")
-                handleGetSetlistsDbError(error, artistId, page)
+                handleGetSetlistsDbError(error, artistId, page, itemsPerPage)
+            }.flatMap { setlists ->
+                Single.just(ArtistSetlistsResponse(
+                    type = "-",
+                    itemsPerPage = 20,
+                    page = page,
+                    total = 109,
+                    setlist = setlists
+                ))
             }
+
+        //return Single.just(ArtistSetlistsResponse())
     }
 
-    private fun getSetlistsFromDb(artistId: String, page: Int): Single<List<SetlistEntity>> {
+    private fun getSetlistsFromDb(artistId: String, page: Int, itemsPerPage: Int): Single<List<SetlistEntity>> {
         return databaseDS
-            .getArtistSetlists(artistId, page)
+            .getArtistSetlists(artistId, page, itemsPerPage)
     }
 
-    private fun handleGetSetlistsDbError(error: Throwable, artistId: String, page: Int): Single<List<SetlistEntity>> {
+    private fun handleGetSetlistsDbError(error: Throwable, artistId: String, page: Int, itemsPerPage: Int): Single<List<SetlistEntity>> {
         // For the moment, either NoResultsFound or other, I do a remote call
         return when (error) {
             is DatabaseError.NoResultsFound -> getSetlistsFromRemote(artistId, page)
-                .flatMap { getSetlistsFromDb(artistId, page) }
+                .flatMap { getSetlistsFromDb(artistId, page, itemsPerPage) }
             else -> getSetlistsFromRemote(artistId, page)
-                .flatMap { getSetlistsFromDb(artistId, page) }
+                .flatMap { getSetlistsFromDb(artistId, page, itemsPerPage) }
         }
     }
 

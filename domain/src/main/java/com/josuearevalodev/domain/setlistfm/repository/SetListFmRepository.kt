@@ -10,7 +10,7 @@ interface SetListFmRepository {
 
     fun getArtist(artistName: String): Single<ArtistEntity>
 
-    fun getArtistSetlists(artistId: String, page: Int): Single<ArtistSetlistsResponse>
+    fun getArtistSetlists(artistId: String, page: Int, itemsPerPage: Int): Single<ArtistSetlistsResponse>
 
     fun getSetlistDetail(setlistId: String): Single<SetlistEntity>
 

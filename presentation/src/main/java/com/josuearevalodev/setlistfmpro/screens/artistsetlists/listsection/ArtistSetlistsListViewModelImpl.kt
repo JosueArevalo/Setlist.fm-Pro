@@ -50,17 +50,19 @@ class ArtistSetlistsListViewModelImpl(private val searchArtistByNamesUseCase: Se
     override fun loadMoreItems() {
         isLoading = true
         currentPage++
-        searchSetlists(idArtist = artistId, page = currentPage)
+        searchSetlists(idArtist = artistId, page = currentPage, itemsPerPage = itemsPerPage)
     }
 
-    private fun searchSetlists(idArtist: String, page: Int) {
-        getArtistSetlistsUseCase(artistId = idArtist, page = page)
+    private fun searchSetlists(idArtist: String, page: Int = 1, itemsPerPage: Int = 20) {
+        Log.d("TEST", "TEST: searchSetlists: Page: $page & itemsPerPage: $itemsPerPage")
+
+        getArtistSetlistsUseCase(artistId = idArtist, page = page, itemsPerPage = itemsPerPage)
             .subscribeOn(ioThread)
             .observeOn(mainThread)
             .subscribe(
                 { artistSetlistsResponse ->
-                    Log.d("TEST", "TEST: Success! $artistSetlistsResponse")
-                    itemsPerPage = artistSetlistsResponse.itemsPerPage
+                    Log.d("TEST", "TEST: Success! Setlists found: ${artistSetlistsResponse.setlist.size}")
+                    this.itemsPerPage = artistSetlistsResponse.itemsPerPage
                     totalPages = Math.ceil(artistSetlistsResponse.total.toDouble() / artistSetlistsResponse.itemsPerPage).toInt()
                     updateArtistWithSetlistsHeaderData(
                         idArtist = idArtist,

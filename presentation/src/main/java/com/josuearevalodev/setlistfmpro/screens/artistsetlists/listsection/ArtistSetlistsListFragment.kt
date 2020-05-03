@@ -108,7 +108,6 @@ class ArtistSetlistsListFragment : Fragment(R.layout.activity_artist_setlists_li
                     get() = viewModel.isLastPage
 
                 override fun loadMoreItems() {
-                    Log.d("TEST", "TEST: loadMoreItems")
                     viewModel.loadMoreItems()
                 }
             })
