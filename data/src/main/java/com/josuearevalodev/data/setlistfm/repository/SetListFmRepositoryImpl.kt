@@ -4,6 +4,7 @@ import com.josuearevalodev.data.setlistfm.datasource.SetListFmDatabaseDataSource
 import com.josuearevalodev.data.setlistfm.datasource.SetListFmRemoteDataSource
 import com.josuearevalodev.data.setlistfm.error.DatabaseError
 import com.josuearevalodev.domain.setlistfm.entities.ArtistEntity
+import com.josuearevalodev.domain.setlistfm.entities.ArtistSetlistsResponse
 import com.josuearevalodev.domain.setlistfm.entities.SetlistEntity
 import com.josuearevalodev.domain.setlistfm.repository.SetListFmRepository
 import io.reactivex.Completable
@@ -21,7 +22,7 @@ class SetListFmRepositoryImpl(
     override fun getArtistSetlists(
         artistId: String,
         page: Int
-    ): Single<List<SetlistEntity>> {
+    ): Single<ArtistSetlistsResponse> {
         //return handleGetArtistSetlists(artistId, page) // Valid
         return getSetlistsFromRemote(artistId, page) // For the moment, to ensure that data is OK for pagination
     }
@@ -99,11 +100,11 @@ class SetListFmRepositoryImpl(
         }
     }
 
-    private fun getSetlistsFromRemote(artistId: String, page: Int): Single<List<SetlistEntity>> {
+    private fun getSetlistsFromRemote(artistId: String, page: Int): Single<ArtistSetlistsResponse> {
         return remoteDS
             .getArtistSetlists(artistId, page)
-            .doOnSuccess {
-                insertSetlistsInDatabase(it)
+            .doOnSuccess { artistSetlistsResponse ->
+                insertSetlistsInDatabase(artistSetlistsResponse.setlist)
                     .subscribe { System.out.println("TEST - Remote item inserted in DB!") }
             }
     }

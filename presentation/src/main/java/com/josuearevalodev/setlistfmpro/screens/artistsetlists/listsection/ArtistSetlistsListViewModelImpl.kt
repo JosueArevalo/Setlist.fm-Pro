@@ -17,8 +17,10 @@ class ArtistSetlistsListViewModelImpl(private val searchArtistByNamesUseCase: Se
     override var artistName: String = ""
     override val viewState: MutableLiveData<ViewState> by lazy { MutableLiveData<ViewState>().apply { postValue(ViewState.Loading) } }
     override var currentPage = 1
+    override var itemsPerPage = 0
+    override val firstPage = 1
     override var isLastPage = false
-    override val totalPage = 10
+    override var totalPages = 0
     override var isLoading = false
     override var itemCount = 0
 
@@ -54,9 +56,11 @@ class ArtistSetlistsListViewModelImpl(private val searchArtistByNamesUseCase: Se
             .subscribeOn(ioThread)
             .observeOn(mainThread)
             .subscribe(
-                { setlists ->
-                    Log.d("TEST", "TEST: Success! $setlists")
-                    viewState.postValue(ViewState.Content(setlists))
+                { artistSetlistsResponse ->
+                    Log.d("TEST", "TEST: Success! $artistSetlistsResponse")
+                    itemsPerPage = artistSetlistsResponse.itemsPerPage
+                    totalPages = Math.ceil(artistSetlistsResponse.total.toDouble() / artistSetlistsResponse.itemsPerPage).toInt()
+                    viewState.postValue(ViewState.Content(artistSetlistsResponse.setlist))
                 },
                 { error ->
                     Log.e("TEST", "TEST: Error! $error")

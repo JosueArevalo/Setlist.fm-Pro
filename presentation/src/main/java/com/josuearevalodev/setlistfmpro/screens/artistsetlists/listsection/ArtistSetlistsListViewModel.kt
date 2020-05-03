@@ -9,17 +9,27 @@ interface ArtistSetlistsListViewModel {
 
     val viewState: LiveData<ViewState>
 
+    // Pagination
+
     var currentPage: Int
+
+    var itemsPerPage: Int
+
+    val firstPage: Int
 
     var isLastPage: Boolean
 
-    val totalPage: Int
+    val totalPages: Int
 
     var isLoading: Boolean
 
     var itemCount: Int
 
+    //region functions
+
     fun searchArtistByName(text: String)
 
     fun loadMoreItems()
+
+    //endregion
 }

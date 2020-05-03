@@ -60,24 +60,18 @@ class ArtistSetlistsListFragment : Fragment(R.layout.activity_artist_setlists_li
                 }
                 is ViewState.Content<*> -> {
 
-                    // if (currentPage != PAGE_START) adapter.removeLoading();
                     adapter.removeLoading()
 
                     adapter.addSetlists(viewState.value as List<SetlistEntity>)
                     sharedViewModel.addSetlists(viewState.value as List<SetlistEntity>)
 
-                    /*
-                    if (currentPage < totalPage) {
-                          adapter.addLoading();
-                        } else {
-                          isLastPage = true;
-                        }
-                        isLoading = false;
-                     */
+                    if (viewModel.currentPage < viewModel.totalPages) {
+                        adapter.addLoading()
+                    } else {
+                        viewModel.isLastPage = true
+                    }
 
-                    adapter.addLoading()
                     viewModel.isLoading = false
-
 
                     clContent.visible()
                     lvLoading.gone()
@@ -101,11 +95,11 @@ class ArtistSetlistsListFragment : Fragment(R.layout.activity_artist_setlists_li
 
             addOnScrollListener(object: PaginationListener(layoutManager as LinearLayoutManager) {
 
-                override val PAGE_SIZE: Int
-                    get() = 20
+                override val itemsPerPage: Int
+                    get() = viewModel.itemsPerPage
 
-                override val PAGE_START: Int
-                    get() = 1
+                override val firstPage: Int
+                    get() = viewModel.firstPage
 
                 override val isLoading: Boolean
                     get() = viewModel.isLoading
