@@ -24,8 +24,7 @@ class SetListFmRepositoryImpl(
         page: Int,
         itemsPerPage: Int
     ): Single<ArtistSetlistsResponse> {
-        return handleGetArtistSetlists(artistId, page, itemsPerPage) // Valid
-        //return getSetlistsFromRemote(artistId, page) // For the moment, to ensure that data is OK for pagination
+        return handleGetArtistSetlists(artistId, page, itemsPerPage)
     }
 
     override fun getSetlistDetail(setlistId: String): Single<SetlistEntity> {
@@ -92,16 +91,17 @@ class SetListFmRepositoryImpl(
                 System.out.println("TEST - Error getting from DB: $error")
                 handleGetSetlistsDbError(error, artistId, page, itemsPerPage)
             }.flatMap { setlists ->
-                Single.just(ArtistSetlistsResponse(
-                    type = "-",
-                    itemsPerPage = 20,
-                    page = page,
-                    total = 109,
-                    setlist = setlists
-                ))
+                databaseDS.getArtistWithId(artistId = artistId)
+                    .map { artist ->
+                        ArtistSetlistsResponse(
+                            type = "",
+                            itemsPerPage = artist.itemsPerPage,
+                            page = page,
+                            total = artist.totalSetlists,
+                            setlist = setlists
+                        )
+                    }
             }
-
-        //return Single.just(ArtistSetlistsResponse())
     }
 
     private fun getSetlistsFromDb(artistId: String, page: Int, itemsPerPage: Int): Single<List<SetlistEntity>> {
@@ -123,8 +123,16 @@ class SetListFmRepositoryImpl(
         return remoteDS
             .getArtistSetlists(artistId, page)
             .doOnSuccess { artistSetlistsResponse ->
+                // Setlists inserted in DB (setlists table)
                 insertSetlistsInDatabase(artistSetlistsResponse.setlist)
                     .subscribe { System.out.println("TEST - Remote item inserted in DB!") }
+
+                // Header data updated in DB (artists table)
+                updateArtistWithSetlistsHeaderData(
+                    idArtist = artistId,
+                    itemsPerPage = artistSetlistsResponse.itemsPerPage,
+                    totalSetlists = artistSetlistsResponse.total)
+                    .subscribe { System.out.println("TEST - Header values updated in DB!") }
             }
     }
 

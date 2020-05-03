@@ -25,6 +25,14 @@ class DatabaseSetlistFmDataSourceImpl(private val dbDao: SetlistFmDao) :
             .map { it.mapToArtistEntity }
     }
 
+    override fun getArtistWithId(artistId: String): Single<ArtistEntity> {
+        return dbDao
+            .getArtistWithId(artistId)
+            .onErrorResumeNext {
+                Single.error(it.mapToDatabaseError)
+            }
+            .map { it.mapToArtistEntity }    }
+
     override fun getArtistSetlists(artistId: String, page: Int, itemsPerPage: Int): Single<List<SetlistEntity>> {
         val offset = (page - 1) * itemsPerPage
         return dbDao

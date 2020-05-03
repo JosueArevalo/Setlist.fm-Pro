@@ -64,14 +64,6 @@ class ArtistSetlistsListViewModelImpl(private val searchArtistByNamesUseCase: Se
                     Log.d("TEST", "TEST: Success! Setlists found: ${artistSetlistsResponse.setlist.size}")
                     this.itemsPerPage = artistSetlistsResponse.itemsPerPage
                     totalPages = Math.ceil(artistSetlistsResponse.total.toDouble() / artistSetlistsResponse.itemsPerPage).toInt()
-                    updateArtistWithSetlistsHeaderData(
-                        idArtist = idArtist,
-                        itemsPerPage = itemsPerPage,
-                        totalSetlists = artistSetlistsResponse.total
-                    )
-                        .subscribeOn(ioThread)
-                        .observeOn(mainThread)
-                        .subscribe()
 
                     viewState.postValue(ViewState.Content(artistSetlistsResponse.setlist))
                 },

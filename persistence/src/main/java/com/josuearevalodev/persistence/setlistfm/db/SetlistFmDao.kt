@@ -14,6 +14,9 @@ interface SetlistFmDao {
     @Query("SELECT * FROM artists WHERE name = :artistName")
     fun getArtist(artistName: String): Single<DatabaseArtistEntity>
 
+    @Query("SELECT * FROM artists WHERE mbid = :artistId")
+    fun getArtistWithId(artistId: String): Single<DatabaseArtistEntity>
+
     @Query("SELECT * FROM setlists WHERE artistId = :artistId LIMIT :itemsPerPage OFFSET :offset")
     fun getArtistSetlists(artistId: String, itemsPerPage: Int, offset: Int): Single<List<DatabaseSetlistEntity>>
 
