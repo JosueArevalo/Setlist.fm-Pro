@@ -8,12 +8,10 @@ import com.josuearevalodev.base_android.rxdisposablemanager.RxDisposableManager
 import com.josuearevalodev.base_android.rxdisposablemanager.RxDisposableManagerImpl
 import com.josuearevalodev.usecases.setlists.getartistsetlists.GetArtistSetlists
 import com.josuearevalodev.usecases.setlists.searchartistsbyname.SearchArtistByName
-import com.josuearevalodev.usecases.setlists.searchartistsbyname.UpdateArtistWithSetlistsHeaderData
 import io.reactivex.rxkotlin.addTo
 
 class ArtistSetlistsListViewModelImpl(private val searchArtistByNamesUseCase: SearchArtistByName,
-                                      private val getArtistSetlistsUseCase: GetArtistSetlists,
-                                      private val updateArtistWithSetlistsHeaderData: UpdateArtistWithSetlistsHeaderData) : ViewModel(),
+                                      private val getArtistSetlistsUseCase: GetArtistSetlists) : ViewModel(),
     ArtistSetlistsListViewModel, RxDisposableManager by RxDisposableManagerImpl() {
 
     override var artistName: String = ""

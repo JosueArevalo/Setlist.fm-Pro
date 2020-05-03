@@ -8,8 +8,6 @@ import com.josuearevalodev.usecases.setlists.getsetlistdetail.GetSetlistDetail
 import com.josuearevalodev.usecases.setlists.getsetlistdetail.GetSetlistDetailImpl
 import com.josuearevalodev.usecases.setlists.searchartistsbyname.SearchArtistByName
 import com.josuearevalodev.usecases.setlists.searchartistsbyname.SearchArtistByNameImpl
-import com.josuearevalodev.usecases.setlists.searchartistsbyname.UpdateArtistWithSetlistsHeaderData
-import com.josuearevalodev.usecases.setlists.searchartistsbyname.UpdateArtistWithSetlistsHeaderDataImpl
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
@@ -22,7 +20,4 @@ val userCaseModule = module {
     factory { GetSetlistDetailImpl(get()) } bind GetSetlistDetail::class
 
     factory { GetCurrentLocationImpl(get()) } bind GetCurrentLocation::class
-
-    factory { UpdateArtistWithSetlistsHeaderDataImpl(get()) } bind UpdateArtistWithSetlistsHeaderData::class
-
 }

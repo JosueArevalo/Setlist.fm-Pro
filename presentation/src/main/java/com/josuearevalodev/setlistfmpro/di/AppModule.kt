@@ -22,7 +22,7 @@ val appModule = module {
     viewModel { SearchArtistsViewModelImpl() } bind SearchArtistsViewModel::class
 
     // Artist Setlists (Activity)
-    viewModel { ArtistSetlistsListViewModelImpl(get(), get(), get()) } bind ArtistSetlistsListViewModel::class
+    viewModel { ArtistSetlistsListViewModelImpl(get(), get()) } bind ArtistSetlistsListViewModel::class
 
     viewModel { ArtistSetlistsSharedViewModelImpl() } bind ArtistSetlistsSharedViewModel::class
 
