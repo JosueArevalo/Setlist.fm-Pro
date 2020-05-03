@@ -1,6 +1,7 @@
 package com.josuearevalodev.setlistfmpro.screens.artistsetlists.listsection
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -9,6 +10,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.josuearevalodev.base.classes.ViewState
 import com.josuearevalodev.base_android.extensions.gone
 import com.josuearevalodev.base_android.extensions.visible
+import com.josuearevalodev.base_android.recyclerview.PaginationListener
 import com.josuearevalodev.domain.setlistfm.entities.SetlistEntity
 import com.josuearevalodev.setlistfmpro.R
 import com.josuearevalodev.setlistfmpro.screens.artistsetlists.shared.ArtistSetlistsSharedViewModel
@@ -57,8 +59,26 @@ class ArtistSetlistsListFragment : Fragment(R.layout.activity_artist_setlists_li
                     evError.gone()
                 }
                 is ViewState.Content<*> -> {
+
+                    // if (currentPage != PAGE_START) adapter.removeLoading();
+                    adapter.removeLoading()
+
                     adapter.addSetlists(viewState.value as List<SetlistEntity>)
                     sharedViewModel.addSetlists(viewState.value as List<SetlistEntity>)
+
+                    /*
+                    if (currentPage < totalPage) {
+                          adapter.addLoading();
+                        } else {
+                          isLastPage = true;
+                        }
+                        isLoading = false;
+                     */
+
+                    adapter.addLoading()
+                    viewModel.isLoading = false
+
+
                     clContent.visible()
                     lvLoading.gone()
                     evError.gone()
@@ -78,6 +98,26 @@ class ArtistSetlistsListFragment : Fragment(R.layout.activity_artist_setlists_li
             layoutManager = LinearLayoutManager(context)
             addClickListener()
             adapter = this@ArtistSetlistsListFragment.adapter
+
+            addOnScrollListener(object: PaginationListener(layoutManager as LinearLayoutManager) {
+
+                override val PAGE_SIZE: Int
+                    get() = 20
+
+                override val PAGE_START: Int
+                    get() = 1
+
+                override val isLoading: Boolean
+                    get() = viewModel.isLoading
+
+                override val isLastPage: Boolean
+                    get() = viewModel.isLastPage
+
+                override fun loadMoreItems() {
+                    Log.d("TEST", "TEST: loadMoreItems")
+                    viewModel.loadMoreItems()
+                }
+            })
         }
     }
     

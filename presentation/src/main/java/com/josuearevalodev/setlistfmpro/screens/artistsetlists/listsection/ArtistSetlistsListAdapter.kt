@@ -36,7 +36,7 @@ class ArtistSetlistsListAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder
 
     override fun getItemViewType(position: Int): Int {
         return when (isLoadingVisible) {
-            true -> VIEWHOLDER_LOADING_TYPE
+            true -> { if (position == setlists.size - 1) VIEWHOLDER_LOADING_TYPE else VIEWHOLDER_SETLIST_TYPE}
             false -> VIEWHOLDER_SETLIST_TYPE
         }
     }
@@ -45,4 +45,22 @@ class ArtistSetlistsListAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder
         this.setlists.addAll(setlists)
         notifyDataSetChanged()
     }
+
+    fun addLoading() {
+        isLoadingVisible = true;
+        setlists.add(SetlistEntity());
+        notifyItemInserted(setlists.size - 1);
+    }
+
+    fun removeLoading() {
+        isLoadingVisible = false;
+        val position = setlists.size - 1;
+        if (position > -1) {
+            setlists[position]?.let { loading ->
+                setlists.removeAt(position)
+                notifyItemRemoved(position)
+            }
+        }
+    }
+
 }
