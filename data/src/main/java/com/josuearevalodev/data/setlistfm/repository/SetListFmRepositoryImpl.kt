@@ -31,6 +31,14 @@ class SetListFmRepositoryImpl(
         return databaseDS.getSetlistDetail(setlistId)
     }
 
+    override fun updateArtistWithSetlistsHeaderData(idArtist: String, itemsPerPage: Int, totalSetlists: Int): Completable {
+        return databaseDS.updateArtistWithSetlistsHeaderData(
+            idArtist = idArtist,
+            itemsPerPage = itemsPerPage,
+            totalSetlists = totalSetlists
+        )
+    }
+
     //==============================================================================================
     //region getArtist - private methods
     //==============================================================================================

@@ -25,4 +25,7 @@ interface SetlistFmDao {
 
     @Insert(onConflict = IGNORE)
     fun insertSetlists(setlists: List<DatabaseSetlistEntity>): Completable
+
+    @Query("UPDATE artists SET itemsPerPage = :itemsPerPage, totalSetlists = :totalSetlists WHERE mbid = :idArtist")
+    fun updateArtistWithSetlistsHeaderData(idArtist: String, itemsPerPage: Int, totalSetlists: Int): Completable
 }

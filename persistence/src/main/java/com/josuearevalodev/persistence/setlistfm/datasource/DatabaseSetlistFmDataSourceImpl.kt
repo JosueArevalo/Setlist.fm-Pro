@@ -64,4 +64,12 @@ class DatabaseSetlistFmDataSourceImpl(private val dbDao: SetlistFmDao) :
                 it.mapToSetlistEntity
             }
     }
+
+    override fun updateArtistWithSetlistsHeaderData(idArtist: String, itemsPerPage: Int, totalSetlists: Int): Completable {
+        return dbDao.updateArtistWithSetlistsHeaderData(
+            idArtist = idArtist,
+            itemsPerPage = itemsPerPage,
+            totalSetlists = totalSetlists
+        )
+    }
 }

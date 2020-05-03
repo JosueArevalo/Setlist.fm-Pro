@@ -84,7 +84,9 @@ val ArtistEntity.mapToDatabaseArtistEntity: DatabaseArtistEntity
             name = name,
             sortName = sortName,
             disambiguation = disambiguation,
-            url = url
+            url = url,
+            itemsPerPage = itemsPerPage,
+            totalSetlists = totalSetlists
         )
     }
 
