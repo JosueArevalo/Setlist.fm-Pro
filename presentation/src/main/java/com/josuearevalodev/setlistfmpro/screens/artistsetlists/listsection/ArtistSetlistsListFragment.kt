@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.josuearevalodev.base.classes.ViewState
@@ -90,6 +91,7 @@ class ArtistSetlistsListFragment : Fragment(R.layout.activity_artist_setlists_li
     private fun initList() {
         with (rvList) {
             layoutManager = LinearLayoutManager(context)
+            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
             addClickListener()
             adapter = this@ArtistSetlistsListFragment.adapter
 
