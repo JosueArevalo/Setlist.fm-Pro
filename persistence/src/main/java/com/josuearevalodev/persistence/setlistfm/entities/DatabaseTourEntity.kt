@@ -4,5 +4,5 @@ import androidx.room.Entity
 
 @Entity
 data class DatabaseTourEntity(
-    private val name: String?
+    val name: String?
 )
