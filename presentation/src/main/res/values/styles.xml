@@ -11,6 +11,12 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="Setlists.Text.List.SongsSummary" parent="Setlists.Text">
+        <item name="android:textColor">@color/colorSongsSummary</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:maxLines">2</item>
+    </style>
+
     <style name="Setlists.Text.List.Month" parent="Setlists.Text">
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:textSize">12sp</item>

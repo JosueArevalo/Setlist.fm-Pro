@@ -6,4 +6,5 @@
 
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorDate">#005DCC</color>
+    <color name="colorSongsSummary">#6E6E6E</color>
 </resources>
