@@ -9,4 +9,20 @@
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textSize">16sp</item>
     </style>
+
+    <style name="Setlists.Text.List.Month" parent="Setlists.Text">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="Setlists.Text.List.Day" parent="Setlists.Text">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="Setlists.Text.List.Year" parent="Setlists.Text">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
 </resources>

@@ -20,9 +20,7 @@
             android:id="@+id/tvMonth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
-            android:text="JUN"
-            android:textSize="10sp"
+            style="@style/Setlists.Text.List.Month"
             android:layout_gravity="center"
             tools:text="JUN"/>
 
@@ -30,9 +28,7 @@
             android:id="@+id/tvDay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
-            android:text="30"
-            android:textSize="18sp"
+            style="@style/Setlists.Text.List.Day"
             android:layout_gravity="center"
             tools:text="30"/>
 
@@ -40,13 +36,9 @@
             android:id="@+id/tvYear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
-            android:text="2019"
-            android:textSize="12sp"
+            style="@style/Setlists.Text.List.Year"
             android:layout_gravity="center"
             tools:text="2019"/>
-
-
     </LinearLayout>
 
     <com.google.android.material.textview.MaterialTextView
