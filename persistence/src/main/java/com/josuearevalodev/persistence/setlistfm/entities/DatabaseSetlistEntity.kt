@@ -12,6 +12,7 @@ data class DatabaseSetlistEntity(
     val artist: DatabaseArtistEntity?,
     val artistId: String,
     val venue: DatabaseVenueEntity?,
+    val tour: DatabaseTourEntity?,
     val sets: DatabaseSetsEntity?,
     val url: String?
 )
