@@ -2,14 +2,14 @@ package com.josuearevalodev.data.setlistfm
 
 import com.google.gson.Gson
 import com.josuearevalodev.domain.setlistfm.entities.ArtistSetlistsResponseEntity
-import com.josuearevalodev.domain.setlistfm.entities.SearchArtistsResponse
+import com.josuearevalodev.domain.setlistfm.entities.SearchArtistsResponseEntity
 
 object MockGenerator {
 
-    val searchArtistsResponse: SearchArtistsResponse
+    val searchArtistsResponseEntity: SearchArtistsResponseEntity
         get() {
             val gson = Gson()
-            return gson.fromJson<SearchArtistsResponse>(jsonResponseSearchArtists, SearchArtistsResponse::class.java)
+            return gson.fromJson<SearchArtistsResponseEntity>(jsonResponseSearchArtists, SearchArtistsResponseEntity::class.java)
         }
 
     val artistSetlistsResponseEntity: ArtistSetlistsResponseEntity
