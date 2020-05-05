@@ -3,26 +3,71 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="100dp"
     android:padding="@dimen/spacing_normal">
+
+    <LinearLayout
+        android:id="@+id/llDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/colorDate"
+        android:padding="@dimen/spacing_small"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/tvMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:text="JUN"
+            android:textSize="10sp"
+            android:layout_gravity="center"
+            tools:text="JUN"/>
+
+        <TextView
+            android:id="@+id/tvDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:text="30"
+            android:textSize="18sp"
+            android:layout_gravity="center"
+            tools:text="30"/>
+
+        <TextView
+            android:id="@+id/tvYear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:text="2019"
+            android:textSize="12sp"
+            android:layout_gravity="center"
+            tools:text="2019"/>
+
+
+    </LinearLayout>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvVenueTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/Setlists.Text.List.Title"
         android:layout_marginStart="@dimen/spacing_normal"
-        android:textColor="#000000"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/llDate"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="This is my Id" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvVenueDate"
+        android:id="@+id/tvSongsSummary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_normal"
         android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:maxLines="2"
+        android:layout_marginTop="@dimen/spacing_normal"
+        app:layout_constraintTop_toBottomOf="@+id/tvVenueTitle"
+        app:layout_constraintStart_toEndOf="@+id/llDate"
         tools:text="This is my Id" />
 </androidx.constraintlayout.widget.ConstraintLayout>

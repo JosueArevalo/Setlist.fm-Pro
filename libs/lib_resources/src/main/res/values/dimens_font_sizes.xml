@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<dimen name="font_size_xsmall">11sp</dimen>
+    <dimen name="font_size_small">12sp</dimen>
+    <dimen name="font_size_super_small">12.5sp</dimen>
+    <dimen name="font_size_tertiary">13sp</dimen>
+    <dimen name="font_size_secondary">14sp</dimen>
+    <dimen name="font_size_primary">15sp</dimen>
+    <dimen name="font_size_body">16sp</dimen>
+    <dimen name="font_size_super_body">17sp</dimen>
+    <dimen name="font_size_hero">18sp</dimen>
+    <dimen name="font_size_subtitle">18sp</dimen>
+    <dimen name="font_size_title_three">16sp</dimen>
+    <dimen name="font_size_title_two">20sp</dimen>
+    <dimen name="font_size_title_one">26sp</dimen>
+    <dimen name="font_size_title_zero">28sp</dimen>-->
+
+    <!--<dimen name="font_size_page_title">20sp</dimen>
+    <dimen name="font_size_paragraph_text">14sp</dimen>
+    <dimen name="font_size_list_title">14sp</dimen>
+    <dimen name="font_size_list_item_title">16sp</dimen>
+    <dimen name="font_size_important_text_snippet">16sp</dimen>
+    <dimen name="font_size_secondary_text">14sp</dimen>
+    <dimen name="font_size_button">14sp</dimen>
+    <dimen name="font_size_tab">14sp</dimen>
+    <dimen name="font_size_text_input">16sp</dimen>-->
+
+    <!--<dimen name="font_size_">sp</dimen>
+    <dimen name="font_size_">sp</dimen>
+    <dimen name="font_size_">sp</dimen>-->
+
+    <!-- Source: https://gist.github.com/AeroEchelon/f6c205e04b241b43c80b -->
+    <!-- Font sizes, https://material.io/guidelines/style/typography.html#typography-typeface -->
+    <!--<dimen name="text_size_micro">12sp</dimen>
+    <dimen name="text_size_small">14sp</dimen>
+    <dimen name="text_size_medium">16sp</dimen>
+    <dimen name="text_size_large">20sp</dimen>
+    <dimen name="text_size_xlarge">34sp</dimen>
+    <dimen name="text_size_xxlarge">45sp</dimen>
+    <dimen name="text_size_xxxlarge">56sp</dimen>-->
+
+
+</resources>

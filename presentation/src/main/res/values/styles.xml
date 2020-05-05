@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Setlists"/>
+
+    <style name="Setlists.Text" parent="Setlists"/>
+
+    <style name="Setlists.Text.List.Title" parent="Setlists.Text">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+</resources>
