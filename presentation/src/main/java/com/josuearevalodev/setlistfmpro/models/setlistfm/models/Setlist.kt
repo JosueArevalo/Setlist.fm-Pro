@@ -53,7 +53,7 @@ data class Setlist(val id: String = "",
             val newDateFormat = SimpleDateFormat("dd-MMM-yyyy")
             val newFormat = newDateFormat.format(date)
             val elements = newFormat.split("-")
-            return elements[position]
+            return elements[position].toUpperCase()
 
 
         } catch (e: ParseException) {
