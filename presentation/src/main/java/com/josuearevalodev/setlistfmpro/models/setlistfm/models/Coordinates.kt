@@ -1,4 +1,6 @@
-package com.josuearevalodev.domain.setlistfm.entities
+package com.josuearevalodev.setlistfmpro.models.setlistfm.models
 
-data class Coordinates(val lat: Float = 0f,
-                       val long: Float = 0f)
+data class Coordinates(
+    val lat: Float = 0f,
+    val long: Float = 0f
+)

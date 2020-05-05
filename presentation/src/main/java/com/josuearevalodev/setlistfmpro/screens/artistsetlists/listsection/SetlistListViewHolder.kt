@@ -3,7 +3,7 @@ package com.josuearevalodev.setlistfmpro.screens.artistsetlists.listsection
 import android.graphics.Paint
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.josuearevalodev.domain.setlistfm.entities.Setlist
+import com.josuearevalodev.setlistfmpro.models.setlistfm.models.Setlist
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.cell_setlist.view.*
 

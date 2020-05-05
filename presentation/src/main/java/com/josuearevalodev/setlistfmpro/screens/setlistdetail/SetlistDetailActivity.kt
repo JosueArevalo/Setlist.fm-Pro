@@ -7,9 +7,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.josuearevalodev.base.classes.ViewState
 import com.josuearevalodev.base_android.extensions.gone
 import com.josuearevalodev.base_android.extensions.visible
-import com.josuearevalodev.domain.setlistfm.entities.Setlist
+import com.josuearevalodev.setlistfmpro.models.setlistfm.models.Setlist
 import com.josuearevalodev.setlistfmpro.R
-import com.josuearevalodev.setlistfmpro.screens.setlistdetail.SetlistDetailViewModel
 import kotlinx.android.synthetic.main.activity_setlist_detail.*
 import org.koin.android.ext.android.inject
 

@@ -1,7 +1,8 @@
 package com.josuearevalodev.setlistfmpro.models.setlistfm
 
 import com.josuearevalodev.domain.setlistfm.entities.*
-import com.josuearevalodev.domain.setlistfm.entities.Set
+import com.josuearevalodev.setlistfmpro.models.setlistfm.models.Set
+import com.josuearevalodev.setlistfmpro.models.setlistfm.models.*
 
 val ArtistSetlistsResponseEntity.mapToArtistSetlistsResponse: ArtistSetlistsResponse
     get() = ArtistSetlistsResponse(

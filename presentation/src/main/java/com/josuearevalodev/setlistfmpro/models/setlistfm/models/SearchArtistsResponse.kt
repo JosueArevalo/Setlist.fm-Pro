@@ -1,4 +1,4 @@
-package com.josuearevalodev.domain.setlistfm.entities
+package com.josuearevalodev.setlistfmpro.models.setlistfm.models
 
 data class SearchArtistsResponse(
     val type: String,

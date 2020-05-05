@@ -4,7 +4,7 @@ import android.graphics.Color
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.josuearevalodev.domain.location.entities.LocationEntity
-import com.josuearevalodev.domain.setlistfm.entities.Setlist
+import com.josuearevalodev.setlistfmpro.models.setlistfm.models.Setlist
 
 val Setlist.mapToSetlistMarker: CustomMarker.SetlistMarker
     get() = CustomMarker.SetlistMarker(

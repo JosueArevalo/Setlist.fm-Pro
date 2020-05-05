@@ -1,3 +1,5 @@
-package com.josuearevalodev.domain.setlistfm.entities
+package com.josuearevalodev.setlistfmpro.models.setlistfm.models
 
-data class Song(val name: String = "")
+data class Song(
+    val name: String = ""
+)
