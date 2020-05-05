@@ -11,6 +11,7 @@ data class Setlist(
     val lastUpdated: String = "",
     val artist: Artist = Artist(),
     val venue: Venue = Venue(),
+    val tour: Tour = Tour(),
     val sets: Sets = Sets(),
     val url: String = ""
 ) {
