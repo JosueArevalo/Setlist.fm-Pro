@@ -7,6 +7,7 @@ data class SetlistEntity(
     val lastUpdated: String = "",
     val artist: ArtistEntity = ArtistEntity(),
     val venue: VenueEntity = VenueEntity(),
+    val tour: TourEntity = TourEntity(),
     val sets: SetsEntity = SetsEntity(),
     val url: String = ""
 )
