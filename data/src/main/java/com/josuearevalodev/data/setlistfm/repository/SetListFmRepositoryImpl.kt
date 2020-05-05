@@ -4,7 +4,7 @@ import com.josuearevalodev.data.setlistfm.datasource.SetListFmDatabaseDataSource
 import com.josuearevalodev.data.setlistfm.datasource.SetListFmRemoteDataSource
 import com.josuearevalodev.data.setlistfm.error.DatabaseError
 import com.josuearevalodev.domain.setlistfm.entities.ArtistEntity
-import com.josuearevalodev.domain.setlistfm.entities.ArtistSetlistsResponse
+import com.josuearevalodev.domain.setlistfm.entities.ArtistSetlistsResponseEntity
 import com.josuearevalodev.domain.setlistfm.entities.SetlistEntity
 import com.josuearevalodev.domain.setlistfm.repository.SetListFmRepository
 import io.reactivex.Completable
@@ -23,7 +23,7 @@ class SetListFmRepositoryImpl(
         artistId: String,
         page: Int,
         itemsPerPage: Int
-    ): Single<ArtistSetlistsResponse> {
+    ): Single<ArtistSetlistsResponseEntity> {
         return handleGetArtistSetlists(artistId, page, itemsPerPage)
     }
 
@@ -85,7 +85,7 @@ class SetListFmRepositoryImpl(
     //region getArtistSetlists - private methods
     //==============================================================================================
 
-    private fun handleGetArtistSetlists(artistId: String, page: Int, itemsPerPage: Int): Single<ArtistSetlistsResponse> {
+    private fun handleGetArtistSetlists(artistId: String, page: Int, itemsPerPage: Int): Single<ArtistSetlistsResponseEntity> {
         return getSetlistsFromDb(artistId, page, itemsPerPage)
             .onErrorResumeNext { error ->
                 System.out.println("TEST - Error getting from DB: $error")
@@ -93,7 +93,7 @@ class SetListFmRepositoryImpl(
             }.flatMap { setlists ->
                 databaseDS.getArtistWithId(artistId = artistId)
                     .map { artist ->
-                        ArtistSetlistsResponse(
+                        ArtistSetlistsResponseEntity(
                             type = "",
                             itemsPerPage = artist.itemsPerPage,
                             page = page,
@@ -119,7 +119,7 @@ class SetListFmRepositoryImpl(
         }
     }
 
-    private fun getSetlistsFromRemote(artistId: String, page: Int): Single<ArtistSetlistsResponse> {
+    private fun getSetlistsFromRemote(artistId: String, page: Int): Single<ArtistSetlistsResponseEntity> {
         return remoteDS
             .getArtistSetlists(artistId, page)
             .doOnSuccess { artistSetlistsResponse ->

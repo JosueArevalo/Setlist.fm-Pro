@@ -27,9 +27,9 @@ val RemoteArtistEntity.mapToArtistEntity: ArtistEntity
         )
     }
 
-val RemoteArtistSetlistsResponse.mapToArtistSetlistsResponse: ArtistSetlistsResponse
+val RemoteArtistSetlistsResponse.mapToArtistSetlistsResponseEntity: ArtistSetlistsResponseEntity
     get() {
-        return ArtistSetlistsResponse(
+        return ArtistSetlistsResponseEntity(
             type = this.type ?: "",
             itemsPerPage = this.itemsPerPage ?: 0,
             page = this.page ?: 0,

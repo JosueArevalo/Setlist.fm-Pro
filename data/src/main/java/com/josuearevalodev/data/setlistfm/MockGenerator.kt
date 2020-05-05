@@ -1,7 +1,7 @@
 package com.josuearevalodev.data.setlistfm
 
 import com.google.gson.Gson
-import com.josuearevalodev.domain.setlistfm.entities.ArtistSetlistsResponse
+import com.josuearevalodev.domain.setlistfm.entities.ArtistSetlistsResponseEntity
 import com.josuearevalodev.domain.setlistfm.entities.SearchArtistsResponse
 
 object MockGenerator {
@@ -12,10 +12,10 @@ object MockGenerator {
             return gson.fromJson<SearchArtistsResponse>(jsonResponseSearchArtists, SearchArtistsResponse::class.java)
         }
 
-    val artistSetlistsResponse: ArtistSetlistsResponse
+    val artistSetlistsResponseEntity: ArtistSetlistsResponseEntity
         get() {
             val gson = Gson()
-            return gson.fromJson<ArtistSetlistsResponse>(jsonResponseArtistSetlists, ArtistSetlistsResponse::class.java)
+            return gson.fromJson<ArtistSetlistsResponseEntity>(jsonResponseArtistSetlists, ArtistSetlistsResponseEntity::class.java)
         }
 
     val jsonResponseSearchArtists = "{\n" +
