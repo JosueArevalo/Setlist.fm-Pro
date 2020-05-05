@@ -1,4 +1,6 @@
-package com.josuearevalodev.domain.setlistfm.entities
+package com.josuearevalodev.remote.setlistfm.entities
 
-data class RemoteCountryEntity(val code: String?,
-                               val name: String?)
+data class RemoteCountryEntity(
+    val code: String?,
+    val name: String?
+)

@@ -1,7 +1,7 @@
 package com.josuearevalodev.remote.setlistfm.service
 
-import com.josuearevalodev.domain.setlistfm.entities.RemoteArtistSetlistsResponse
-import com.josuearevalodev.domain.setlistfm.entities.RemoteSearchArtistsResponse
+import com.josuearevalodev.remote.setlistfm.entities.RemoteArtistSetlistsResponse
+import com.josuearevalodev.remote.setlistfm.entities.RemoteSearchArtistsResponse
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
