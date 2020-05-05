@@ -7,9 +7,9 @@ import com.google.android.material.snackbar.Snackbar
 import com.josuearevalodev.base.classes.ViewState
 import com.josuearevalodev.base_android.extensions.gone
 import com.josuearevalodev.base_android.extensions.visible
-import com.josuearevalodev.domain.setlistfm.entities.SetlistEntity
+import com.josuearevalodev.domain.setlistfm.entities.Setlist
 import com.josuearevalodev.setlistfmpro.R
-import com.josuearevalodev.setlistfmpro.screens.searchartists.SetlistDetailViewModel
+import com.josuearevalodev.setlistfmpro.screens.setlistdetail.SetlistDetailViewModel
 import kotlinx.android.synthetic.main.activity_setlist_detail.*
 import org.koin.android.ext.android.inject
 
@@ -38,7 +38,7 @@ class SetlistDetailActivity : AppCompatActivity(R.layout.activity_setlist_detail
                     evError.gone()
                 }
                 is ViewState.Content<*> -> {
-                    (viewState.value as SetlistEntity).prepareUi()
+                    (viewState.value as Setlist).prepareUi()
                     clContent.visible()
                     lvLoading.gone()
                     evError.gone()
@@ -57,7 +57,7 @@ class SetlistDetailActivity : AppCompatActivity(R.layout.activity_setlist_detail
         viewModel.getSetlistDetail()
     }
 
-    private fun SetlistEntity.prepareUi() {
+    private fun Setlist.prepareUi() {
         tvVenue.text = "${this.venue.name} , ${this.venue.city.name} , ${this.venue.city.country.name}"
 
         var songsText = "Setlist:\n"

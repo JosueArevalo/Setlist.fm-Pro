@@ -3,16 +3,16 @@ package com.josuearevalodev.setlistfmpro.screens.artistsetlists.shared
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.josuearevalodev.domain.location.entities.LocationEntity
-import com.josuearevalodev.domain.setlistfm.entities.SetlistEntity
+import com.josuearevalodev.domain.setlistfm.entities.Setlist
 
 class ArtistSetlistsSharedViewModelImpl: ArtistSetlistsSharedViewModel, ViewModel() {
 
-    override val setlists by lazy { MutableLiveData<MutableList<SetlistEntity>>().apply { mutableListOf<SetlistEntity>() } }
+    override val setlists by lazy { MutableLiveData<MutableList<Setlist>>().apply { mutableListOf<Setlist>() } }
 
     override val userLocation by lazy { MutableLiveData<LocationEntity>() }
 
-    override fun addSetlists(setlistsList: List<SetlistEntity>) {
-        val mutableList = mutableListOf<SetlistEntity>()
+    override fun addSetlists(setlistsList: List<Setlist>) {
+        val mutableList = mutableListOf<Setlist>()
 
         // 1 - Current values
         setlists.value?.let {

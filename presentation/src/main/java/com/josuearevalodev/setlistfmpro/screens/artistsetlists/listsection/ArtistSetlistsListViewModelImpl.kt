@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.josuearevalodev.base.classes.ViewState
 import com.josuearevalodev.base_android.rxdisposablemanager.RxDisposableManager
 import com.josuearevalodev.base_android.rxdisposablemanager.RxDisposableManagerImpl
+import com.josuearevalodev.setlistfmpro.models.setlistfm.mapToArtistSetlistsResponse
 import com.josuearevalodev.usecases.setlists.getartistsetlists.GetArtistSetlists
 import com.josuearevalodev.usecases.setlists.searchartistsbyname.SearchArtistByName
 import io.reactivex.rxkotlin.addTo
@@ -57,6 +58,9 @@ class ArtistSetlistsListViewModelImpl(private val searchArtistByNamesUseCase: Se
         getArtistSetlistsUseCase(artistId = idArtist, page = page, itemsPerPage = itemsPerPage)
             .subscribeOn(ioThread)
             .observeOn(mainThread)
+            .map { artistSetlistResponseEntity ->
+                artistSetlistResponseEntity.mapToArtistSetlistsResponse
+            }
             .subscribe(
                 { artistSetlistsResponse ->
                     Log.d("TEST", "TEST: Success! Setlists found: ${artistSetlistsResponse.setlist.size}")
