@@ -5,9 +5,9 @@ import com.josuearevalodev.domain.setlistfm.entities.*
 import retrofit2.HttpException
 
 //region entities
-val RemoteSearchArtistsResponse.mapToSearchArtistsResponse: SearchArtistsResponse
+val RemoteSearchArtistsResponse.mapToSearchArtistsResponseEntity: SearchArtistsResponseEntity
     get() {
-        return SearchArtistsResponse(
+        return SearchArtistsResponseEntity(
             type = this.type ?: "",
             itemsPerPage = this.itemsPerPage ?: 0,
             page = this.page ?: 0,
@@ -27,9 +27,9 @@ val RemoteArtistEntity.mapToArtistEntity: ArtistEntity
         )
     }
 
-val RemoteArtistSetlistsResponse.mapToArtistSetlistsResponse: ArtistSetlistsResponse
+val RemoteArtistSetlistsResponse.mapToArtistSetlistsResponseEntity: ArtistSetlistsResponseEntity
     get() {
-        return ArtistSetlistsResponse(
+        return ArtistSetlistsResponseEntity(
             type = this.type ?: "",
             itemsPerPage = this.itemsPerPage ?: 0,
             page = this.page ?: 0,

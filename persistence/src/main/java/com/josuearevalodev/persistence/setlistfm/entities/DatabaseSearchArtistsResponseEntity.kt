@@ -1,6 +1,6 @@
 package com.josuearevalodev.persistence.setlistfm.entities
 
-data class DatabaseSearchArtistsResponse(
+data class DatabaseSearchArtistsResponseEntity(
     val type: String?,
     val itemsPerPage: Int?,
     val page: Int?,

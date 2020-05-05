@@ -3,10 +3,10 @@ package com.josuearevalodev.remote.setlistfm.datasource
 import com.josuearevalodev.data.setlistfm.datasource.SetListFmRemoteDataSource
 import com.josuearevalodev.data.setlistfm.error.Unexpected
 import com.josuearevalodev.domain.setlistfm.entities.ArtistEntity
-import com.josuearevalodev.domain.setlistfm.entities.ArtistSetlistsResponse
+import com.josuearevalodev.domain.setlistfm.entities.ArtistSetlistsResponseEntity
 import com.josuearevalodev.remote.httpclient.HttpClient
 import com.josuearevalodev.remote.setlistfm.mapper.mapToArtistEntity
-import com.josuearevalodev.remote.setlistfm.mapper.mapToArtistSetlistsResponse
+import com.josuearevalodev.remote.setlistfm.mapper.mapToArtistSetlistsResponseEntity
 import com.josuearevalodev.remote.setlistfm.mapper.mapToRemoteError
 import com.josuearevalodev.remote.setlistfm.service.SetlistFmService
 import io.reactivex.Single
@@ -31,7 +31,7 @@ class RemoteSetlistFmDataSourceImpl(
             .map { it.firstOrNull() }
     }
 
-    override fun getArtistSetlists(artistId: String, page: Int): Single<ArtistSetlistsResponse> {
+    override fun getArtistSetlists(artistId: String, page: Int): Single<ArtistSetlistsResponseEntity> {
         return httpClient.create(SetlistFmService::class.java, baseUrl)
             .getArtistSetlists(artistId, page)
             .onErrorResumeNext {
@@ -42,7 +42,7 @@ class RemoteSetlistFmDataSourceImpl(
                 }
             }
             .map { remoteArtistSetlistResponse ->
-                remoteArtistSetlistResponse.mapToArtistSetlistsResponse
+                remoteArtistSetlistResponse.mapToArtistSetlistsResponseEntity
             }
     }
 }

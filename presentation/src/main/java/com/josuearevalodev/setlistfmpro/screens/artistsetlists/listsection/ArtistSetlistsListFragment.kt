@@ -1,17 +1,17 @@
 package com.josuearevalodev.setlistfmpro.screens.artistsetlists.listsection
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.josuearevalodev.base.classes.ViewState
 import com.josuearevalodev.base_android.extensions.gone
 import com.josuearevalodev.base_android.extensions.visible
 import com.josuearevalodev.base_android.recyclerview.PaginationListener
-import com.josuearevalodev.domain.setlistfm.entities.SetlistEntity
+import com.josuearevalodev.domain.setlistfm.entities.Setlist
 import com.josuearevalodev.setlistfmpro.R
 import com.josuearevalodev.setlistfmpro.screens.artistsetlists.shared.ArtistSetlistsSharedViewModel
 import com.josuearevalodev.setlistfmpro.screens.artistsetlists.shared.ArtistSetlistsSharedViewModelImpl
@@ -62,8 +62,8 @@ class ArtistSetlistsListFragment : Fragment(R.layout.activity_artist_setlists_li
 
                     adapter.removeLoading()
 
-                    adapter.addSetlists(viewState.value as List<SetlistEntity>)
-                    sharedViewModel.addSetlists(viewState.value as List<SetlistEntity>)
+                    adapter.addSetlists(viewState.value as List<Setlist>)
+                    sharedViewModel.addSetlists(viewState.value as List<Setlist>)
 
                     if (viewModel.currentPage < viewModel.totalPages) {
                         adapter.addLoading()
@@ -90,6 +90,7 @@ class ArtistSetlistsListFragment : Fragment(R.layout.activity_artist_setlists_li
     private fun initList() {
         with (rvList) {
             layoutManager = LinearLayoutManager(context)
+            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
             addClickListener()
             adapter = this@ArtistSetlistsListFragment.adapter
 

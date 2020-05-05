@@ -1,4 +1,4 @@
-package com.josuearevalodev.setlistfmpro.screens.searchartists
+package com.josuearevalodev.setlistfmpro.screens.setlistdetail
 
 import androidx.lifecycle.LiveData
 import com.josuearevalodev.base.classes.ViewState

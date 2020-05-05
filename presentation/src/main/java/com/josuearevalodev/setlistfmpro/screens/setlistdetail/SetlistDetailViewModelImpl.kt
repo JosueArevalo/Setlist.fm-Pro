@@ -1,4 +1,4 @@
-package com.josuearevalodev.setlistfmpro.screens.searchartists
+package com.josuearevalodev.setlistfmpro.screens.setlistdetail
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.josuearevalodev.base.classes.ViewState
 import com.josuearevalodev.base_android.rxdisposablemanager.RxDisposableManager
 import com.josuearevalodev.base_android.rxdisposablemanager.RxDisposableManagerImpl
+import com.josuearevalodev.setlistfmpro.models.setlistfm.mapToSetlist
 import com.josuearevalodev.usecases.setlists.getsetlistdetail.GetSetlistDetail
 import io.reactivex.rxkotlin.addTo
 
@@ -24,6 +25,7 @@ class SetlistDetailViewModelImpl(
         getSetlistDetailUC(setlistId = setlistId)
             .subscribeOn(ioThread)
             .observeOn(mainThread)
+            .map { it.mapToSetlist }
             .subscribe({ setlist ->
                 Log.d("TEST", "TEST: Success! $setlist")
                 viewState.postValue(ViewState.Content(setlist))

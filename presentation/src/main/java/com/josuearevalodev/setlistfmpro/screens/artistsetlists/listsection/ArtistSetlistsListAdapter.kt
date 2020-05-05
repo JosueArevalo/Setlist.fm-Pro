@@ -3,7 +3,7 @@ package com.josuearevalodev.setlistfmpro.screens.artistsetlists.listsection
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.josuearevalodev.base_android.extensions.inflate
-import com.josuearevalodev.domain.setlistfm.entities.SetlistEntity
+import com.josuearevalodev.domain.setlistfm.entities.Setlist
 import com.josuearevalodev.setlistfmpro.R
 
 class ArtistSetlistsListAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -13,9 +13,9 @@ class ArtistSetlistsListAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder
 
     private var isLoadingVisible: Boolean = false
 
-    private val setlists: MutableList<SetlistEntity> = mutableListOf()
+    private val setlists: MutableList<Setlist> = mutableListOf()
 
-    var onSetlistClicked: ((SetlistEntity) -> Unit)? = null
+    var onSetlistClicked: ((Setlist) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
@@ -41,14 +41,14 @@ class ArtistSetlistsListAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
-    fun addSetlists(setlists: List<SetlistEntity>) {
+    fun addSetlists(setlists: List<Setlist>) {
         this.setlists.addAll(setlists)
         notifyDataSetChanged()
     }
 
     fun addLoading() {
         isLoadingVisible = true;
-        setlists.add(SetlistEntity());
+        setlists.add(Setlist());
         notifyItemInserted(setlists.size - 1);
     }
 

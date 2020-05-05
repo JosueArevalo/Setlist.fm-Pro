@@ -48,7 +48,7 @@ dependencies {
     implementation project (':usecases')
     implementation project (':base')
     implementation project (':base_android')
-
+    implementation project (':libs:lib_resources')
 
     // RecyclerView
     implementation "androidx.recyclerview:recyclerview:1.1.0"

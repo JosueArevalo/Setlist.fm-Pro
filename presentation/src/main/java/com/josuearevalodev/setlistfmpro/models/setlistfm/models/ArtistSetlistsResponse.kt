@@ -5,5 +5,5 @@ data class ArtistSetlistsResponse(
     val itemsPerPage: Int = 0,
     val page: Int = 0,
     val total: Int = 0,
-    val setlist: List<SetlistEntity> = listOf()
+    val setlist: List<Setlist> = listOf()
 )
