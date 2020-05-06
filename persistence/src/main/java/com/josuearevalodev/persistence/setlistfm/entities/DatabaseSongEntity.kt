@@ -6,5 +6,5 @@ import androidx.room.Entity
 data class DatabaseSongEntity(
     val name: String?,
     val info: String?,
-    val tape: String?
+    val tape: Boolean?
 )

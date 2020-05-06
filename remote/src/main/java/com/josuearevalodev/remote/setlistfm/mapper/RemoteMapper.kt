@@ -92,7 +92,7 @@ val RemoteSongEntity.mapToSongEntity: SongEntity
         return SongEntity(
             name = name ?: "",
             info = info ?: "",
-            tape = tape ?: ""
+            tape = tape ?: false
         )
     }
 

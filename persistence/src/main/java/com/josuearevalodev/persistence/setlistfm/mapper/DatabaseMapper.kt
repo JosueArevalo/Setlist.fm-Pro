@@ -81,7 +81,9 @@ val DatabaseSetEntity.mapToSetEntity: SetEntity
 
 val DatabaseSongEntity.mapToSongEntity: SongEntity
     get() = SongEntity(
-        name = name ?: ""
+        name = name ?: "",
+        info = info ?: "",
+        tape = tape ?: false
     )
 
 //endregion
