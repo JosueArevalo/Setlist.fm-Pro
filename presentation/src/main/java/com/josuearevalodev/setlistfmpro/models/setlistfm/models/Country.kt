@@ -1,4 +1,6 @@
-package com.josuearevalodev.domain.setlistfm.entities
+package com.josuearevalodev.setlistfmpro.models.setlistfm.models
 
-data class Country(val code: String = "",
-                   val name: String = "")
+data class Country(
+    val code: String = "",
+    val name: String = ""
+)

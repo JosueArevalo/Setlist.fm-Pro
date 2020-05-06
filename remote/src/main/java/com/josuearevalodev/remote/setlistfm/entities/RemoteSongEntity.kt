@@ -1,3 +1,7 @@
-package com.josuearevalodev.domain.setlistfm.entities
+package com.josuearevalodev.remote.setlistfm.entities
 
-data class RemoteSongEntity(val name: String?)
+data class RemoteSongEntity(
+    val name: String?,
+    val info: String?,
+    val tape: Boolean?
+)

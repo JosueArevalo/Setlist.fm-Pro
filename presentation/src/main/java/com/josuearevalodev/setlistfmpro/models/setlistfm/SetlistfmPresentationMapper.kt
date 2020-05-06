@@ -1,7 +1,8 @@
 package com.josuearevalodev.setlistfmpro.models.setlistfm
 
 import com.josuearevalodev.domain.setlistfm.entities.*
-import com.josuearevalodev.domain.setlistfm.entities.Set
+import com.josuearevalodev.setlistfmpro.models.setlistfm.models.Set
+import com.josuearevalodev.setlistfmpro.models.setlistfm.models.*
 
 val ArtistSetlistsResponseEntity.mapToArtistSetlistsResponse: ArtistSetlistsResponse
     get() = ArtistSetlistsResponse(
@@ -20,8 +21,14 @@ val SetlistEntity.mapToSetlist: Setlist
         lastUpdated = lastUpdated,
         artist = artist.mapToArtist,
         venue = venue.mapToVenue,
+        tour = tour.mapToTour,
         sets = sets.mapToSets,
         url = url
+    )
+
+val TourEntity.mapToTour: Tour
+    get() = Tour(
+        name = name
     )
 
 val VenueEntity.mapToVenue: Venue
@@ -61,12 +68,16 @@ val SetsEntity.mapToSets: Sets
 
 val SetEntity.mapToSet: Set
     get() = Set(
+        name = name,
+        encore = encore,
         song = song.map { it.mapToSong }
     )
 
 val SongEntity.mapToSong: Song
     get() = Song(
-        name = name
+        name = name,
+        info = info,
+        tape = tape
     )
 
 val ArtistEntity.mapToArtist: Artist

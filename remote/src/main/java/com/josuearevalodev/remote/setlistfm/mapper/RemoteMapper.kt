@@ -2,6 +2,7 @@ package com.josuearevalodev.remote.setlistfm.mapper
 
 import com.josuearevalodev.data.setlistfm.error.*
 import com.josuearevalodev.domain.setlistfm.entities.*
+import com.josuearevalodev.remote.setlistfm.entities.*
 import retrofit2.HttpException
 
 //region entities
@@ -47,8 +48,16 @@ val RemoteSetlistEntity.mapToSetlistEntity: SetlistEntity
             lastUpdated = this.lastUpdated ?: "",
             artist = this.artist?.mapToArtistEntity ?: ArtistEntity(),
             venue = this.venue?.mapToVenueEntity ?: VenueEntity(),
+            tour = this.tour?.mapToTourEntity ?: TourEntity(),
             sets = this.sets?.mapToSetsEntity ?: SetsEntity(),
             url = this.url ?: ""
+        )
+    }
+
+val RemoteTourEntity.mapToTourEntity: TourEntity
+    get() {
+        return TourEntity(
+            name = this.name ?: ""
         )
     }
 
@@ -72,6 +81,8 @@ val RemoteSetsEntity.mapToSetsEntity: SetsEntity
 val RemoteSetEntity.mapToSetEntity: SetEntity
     get() {
         return SetEntity(
+            name = name ?: "",
+            encore = encore ?: -1,
             song = this.song?.map { it.mapToSongEntity } ?: listOf()
         )
     }
@@ -79,7 +90,9 @@ val RemoteSetEntity.mapToSetEntity: SetEntity
 val RemoteSongEntity.mapToSongEntity: SongEntity
     get() {
         return SongEntity(
-            name = this.name ?: ""
+            name = name ?: "",
+            info = info ?: "",
+            tape = tape ?: false
         )
     }
 

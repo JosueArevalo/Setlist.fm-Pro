@@ -4,6 +4,7 @@ import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.josuearevalodev.persistence.setlistfm.entities.DatabaseArtistEntity
 import com.josuearevalodev.persistence.setlistfm.entities.DatabaseSetsEntity
+import com.josuearevalodev.persistence.setlistfm.entities.DatabaseTourEntity
 import com.josuearevalodev.persistence.setlistfm.entities.DatabaseVenueEntity
 
 class SetlistFmTypeConverter {
@@ -20,6 +21,24 @@ class SetlistFmTypeConverter {
     fun stringToDatabaseVenueEntity(input: String?): DatabaseVenueEntity? {
         return input?.let {
             Gson().fromJson(input, DatabaseVenueEntity::class.java)
+        }
+    }
+
+    //endregion
+
+    //region DatabaseTourEntity
+
+    @TypeConverter
+    fun databaseTourEntityToString(input: DatabaseTourEntity?): String? {
+        return input?.let {
+            Gson().toJson(input)
+        }
+    }
+
+    @TypeConverter
+    fun stringToDatabaseTourEntity(input: String?): DatabaseTourEntity? {
+        return input?.let {
+            Gson().fromJson(input, DatabaseTourEntity::class.java)
         }
     }
 

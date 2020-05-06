@@ -1,4 +1,8 @@
-package com.josuearevalodev.domain.setlistfm.entities
+package com.josuearevalodev.setlistfmpro.models.setlistfm.models
 
-data class Set(val song: List<Song>)
+data class Set(
+    val name: String = "",
+    val encore: Int = 0,
+    val song: List<Song> = listOf()
+)
 

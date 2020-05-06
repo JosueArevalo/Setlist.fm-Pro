@@ -1,5 +1,5 @@
 package com.josuearevalodev.setlistfmpro.models.setlistfm.models
 
-data class Sets(
-    val set: List<Set> = listOf()
+data class Tour(
+    private val name: String? = ""
 )

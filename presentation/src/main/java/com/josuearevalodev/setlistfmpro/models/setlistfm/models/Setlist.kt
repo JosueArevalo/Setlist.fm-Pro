@@ -1,17 +1,20 @@
-package com.josuearevalodev.domain.setlistfm.entities
+package com.josuearevalodev.setlistfmpro.models.setlistfm.models
 
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
-data class Setlist(val id: String = "",
-                   val versionId: String = "",
-                   val eventDate: String = "",
-                   val lastUpdated: String = "",
-                   val artist: Artist = Artist(),
-                   val venue: Venue = Venue(),
-                   val sets: Sets = Sets(),
-                   val url: String = "") {
+data class Setlist(
+    val id: String = "",
+    val versionId: String = "",
+    val eventDate: String = "",
+    val lastUpdated: String = "",
+    val artist: Artist = Artist(),
+    val venue: Venue = Venue(),
+    val tour: Tour = Tour(),
+    val sets: Sets = Sets(),
+    val url: String = ""
+) {
 
     val eventDateFormat = "dd-MM-yyyy"
 

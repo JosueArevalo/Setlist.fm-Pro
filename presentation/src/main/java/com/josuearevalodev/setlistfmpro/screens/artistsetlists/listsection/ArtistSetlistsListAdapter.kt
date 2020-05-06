@@ -3,7 +3,7 @@ package com.josuearevalodev.setlistfmpro.screens.artistsetlists.listsection
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.josuearevalodev.base_android.extensions.inflate
-import com.josuearevalodev.domain.setlistfm.entities.Setlist
+import com.josuearevalodev.setlistfmpro.models.setlistfm.models.Setlist
 import com.josuearevalodev.setlistfmpro.R
 
 class ArtistSetlistsListAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

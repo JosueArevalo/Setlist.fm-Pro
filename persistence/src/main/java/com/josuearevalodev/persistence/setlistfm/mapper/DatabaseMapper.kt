@@ -27,6 +27,7 @@ val DatabaseSetlistEntity.mapToSetlistEntity: SetlistEntity
         lastUpdated = lastUpdated ?: "",
         artist = artist?.mapToArtistEntity ?: ArtistEntity(),
         venue = venue?.mapToVenueEntity ?: VenueEntity(),
+        tour = tour?.mapToTourEntity ?: TourEntity(),
         sets = sets?.mapToSetsEntity ?: SetsEntity(),
         url = url ?: ""
     )
@@ -37,6 +38,11 @@ val DatabaseVenueEntity.mapToVenueEntity: VenueEntity
         name = name ?: "",
         city = city?.mapToCityEntity ?: CityEntity(),
         url = url ?: ""
+    )
+
+val DatabaseTourEntity.mapToTourEntity: TourEntity
+    get() = TourEntity(
+        name = name ?: ""
     )
 
 val DatabaseCityEntity.mapToCityEntity: CityEntity
@@ -68,12 +74,16 @@ val DatabaseCoordinatesEntity.mapToCoordinatesEntity: CoordinatesEntity
 
 val DatabaseSetEntity.mapToSetEntity: SetEntity
     get() = SetEntity(
+        name = name ?: "",
+        encore = encore ?: -1,
         song = song?.map { it.mapToSongEntity } ?: listOf()
     )
 
 val DatabaseSongEntity.mapToSongEntity: SongEntity
     get() = SongEntity(
-        name = name ?: ""
+        name = name ?: "",
+        info = info ?: "",
+        tape = tape ?: false
     )
 
 //endregion
@@ -103,8 +113,14 @@ val SetlistEntity.mapToDatabaseSetlistEntity: DatabaseSetlistEntity
         artistId = artist.mbid,
         artist = artist.mapToDatabaseArtistEntity,
         venue = venue.mapToDatabaseVenueEntity,
+        tour = tour.mapToDatabaseTourEntity,
         sets = sets.mapToDatabaseSetsEntity,
         url = url
+    )
+
+val TourEntity.mapToDatabaseTourEntity: DatabaseTourEntity
+    get() = DatabaseTourEntity(
+        name = name
     )
 
 val VenueEntity.mapToDatabaseVenueEntity: DatabaseVenueEntity
@@ -144,12 +160,16 @@ val SetsEntity.mapToDatabaseSetsEntity: DatabaseSetsEntity
 
 val SetEntity.mapToDatabaseSetEntity: DatabaseSetEntity
     get() = DatabaseSetEntity(
+        name = name,
+        encore = encore,
         song = song.map { it.mapToDatabaseSongEntity }
     )
 
 val SongEntity.mapToDatabaseSongEntity: DatabaseSongEntity
     get() = DatabaseSongEntity(
-        name = name
+        name = name,
+        info = info,
+        tape = tape
     )
 //endregion
 

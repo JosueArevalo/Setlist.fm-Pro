@@ -1,6 +1,5 @@
 package com.josuearevalodev.remote.setlistfm.entities
 
-data class RemoteCountryEntity(
-    val code: String?,
+data class RemoteTourEntity(
     val name: String?
 )
