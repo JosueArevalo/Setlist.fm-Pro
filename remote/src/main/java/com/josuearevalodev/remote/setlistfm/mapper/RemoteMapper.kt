@@ -82,7 +82,7 @@ val RemoteSetEntity.mapToSetEntity: SetEntity
     get() {
         return SetEntity(
             name = name ?: "",
-            encore = encore ?: 0,
+            encore = encore ?: -1,
             song = this.song?.map { it.mapToSongEntity } ?: listOf()
         )
     }

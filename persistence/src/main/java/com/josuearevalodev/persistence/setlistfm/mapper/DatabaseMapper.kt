@@ -27,6 +27,7 @@ val DatabaseSetlistEntity.mapToSetlistEntity: SetlistEntity
         lastUpdated = lastUpdated ?: "",
         artist = artist?.mapToArtistEntity ?: ArtistEntity(),
         venue = venue?.mapToVenueEntity ?: VenueEntity(),
+        tour = tour?.mapToTourEntity ?: TourEntity(),
         sets = sets?.mapToSetsEntity ?: SetsEntity(),
         url = url ?: ""
     )
@@ -37,6 +38,11 @@ val DatabaseVenueEntity.mapToVenueEntity: VenueEntity
         name = name ?: "",
         city = city?.mapToCityEntity ?: CityEntity(),
         url = url ?: ""
+    )
+
+val DatabaseTourEntity.mapToTourEntity: TourEntity
+    get() = TourEntity(
+        name = name ?: ""
     )
 
 val DatabaseCityEntity.mapToCityEntity: CityEntity
@@ -69,7 +75,7 @@ val DatabaseCoordinatesEntity.mapToCoordinatesEntity: CoordinatesEntity
 val DatabaseSetEntity.mapToSetEntity: SetEntity
     get() = SetEntity(
         name = name ?: "",
-        encore = encore ?: 0,
+        encore = encore ?: -1,
         song = song?.map { it.mapToSongEntity } ?: listOf()
     )
 
