@@ -84,8 +84,25 @@ class SetlistDetailActivity : AppCompatActivity(R.layout.activity_setlist_detail
 
     private fun Setlist.prepareSonglist() {
         var cell: View? = null
-        
+
         this.sets.set.forEachIndexed { setIndex, setEntity ->
+
+            when {
+                setEntity.name.isNotEmpty() -> {
+                    cell = layoutInflater.inflate(R.layout.cell_songlist_encore, llSongList, false)
+                    llSongList.addView(cell)
+
+                    (cell?.findViewById<MaterialTextView>(R.id.tvEncoreSet))?.text = "${setEntity.name}:"
+                }
+
+                setEntity.encore > 0 -> {
+                    cell = layoutInflater.inflate(R.layout.cell_songlist_encore, llSongList, false)
+                    llSongList.addView(cell)
+
+                    (cell?.findViewById<MaterialTextView>(R.id.tvEncoreSet))?.text = "Encore:"
+                }
+            }
+
             setEntity.song.forEachIndexed { songIndex, song ->
                 when {
                     song.tape -> {
