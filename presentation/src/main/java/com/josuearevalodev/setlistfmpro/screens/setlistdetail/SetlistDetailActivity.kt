@@ -84,9 +84,7 @@ class SetlistDetailActivity : AppCompatActivity(R.layout.activity_setlist_detail
 
     private fun Setlist.prepareSonglist() {
         var cell: View? = null
-
-        this.sets.set.forEachIndexed { index, set ->  }
-
+        
         this.sets.set.forEachIndexed { setIndex, setEntity ->
             setEntity.song.forEachIndexed { songIndex, song ->
                 when {
