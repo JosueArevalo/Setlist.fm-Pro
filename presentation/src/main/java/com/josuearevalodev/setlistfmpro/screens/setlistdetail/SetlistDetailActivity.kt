@@ -32,21 +32,21 @@ class SetlistDetailActivity : AppCompatActivity(R.layout.activity_setlist_detail
         viewModel.viewState.observe(this, Observer { viewState ->
             when (viewState) {
                 is ViewState.Loading -> {
-                    clContent.gone()
+                    svContent.gone()
                     lvLoading.visible()
                     evError.gone()
                 }
                 is ViewState.Content<*> -> {
                     (viewState.value as Setlist).prepareUi()
-                    clContent.visible()
+                    svContent.visible()
                     lvLoading.gone()
                     evError.gone()
                 }
                 is ViewState.Error<*> -> {
-                    clContent.gone()
+                    svContent.gone()
                     lvLoading.gone()
                     evError.visible()
-                    Snackbar.make(clContent, "Error: ${viewState.error.cause}", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(svContent, "Error: ${viewState.error.cause}", Snackbar.LENGTH_LONG).show()
                 }
             }
         })
