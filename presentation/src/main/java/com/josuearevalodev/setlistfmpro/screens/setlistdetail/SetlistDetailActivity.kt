@@ -13,6 +13,8 @@ import com.josuearevalodev.setlistfmpro.models.setlistfm.models.Setlist
 import com.josuearevalodev.setlistfmpro.R
 import kotlinx.android.synthetic.main.activity_setlist_detail.*
 import kotlinx.android.synthetic.main.inc_setlist_detail_card.*
+import kotlinx.android.synthetic.main.inc_setlist_detail_header.*
+import kotlinx.android.synthetic.main.view_date.*
 import org.koin.android.ext.android.inject
 
 class SetlistDetailActivity : AppCompatActivity(R.layout.activity_setlist_detail) {
@@ -60,6 +62,27 @@ class SetlistDetailActivity : AppCompatActivity(R.layout.activity_setlist_detail
     }
 
     private fun Setlist.prepareUi() {
+        prepareHeader()
+        prepareSonglist()
+    }
+
+    private fun Setlist.prepareHeader() {
+        tvMonth.text = month
+        tvDay.text = day
+        tvYear.text = year
+
+        tvTitle.text = "${artist.name} Setlist"
+        tvLocation.text = "at ${venue.name}, ${venue.city.name}, ${venue.city.country.name}"
+
+        with(tour.name) {
+            when (isEmpty()) {
+                true -> tvTour.gone()
+                false -> tvTour.text = this
+            }
+        }
+    }
+
+    private fun Setlist.prepareSonglist() {
         var cell: View? = null
         this.sets.set.forEach { setEntity ->
             setEntity.song.forEach {song ->
