@@ -13,6 +13,45 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent">
 
+        <include layout="@layout/view_date"
+            android:id="@+id/dvDate"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Avalanch Setlist"
+            android:textSize="16sp"
+            android:layout_marginStart="@dimen/spacing_normal"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/dvDate"
+            tools:text="Avalanch Setlist"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="at Sala M100, Cordova, Spain"
+            android:textSize="14sp"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginStart="@dimen/spacing_normal"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+            app:layout_constraintLeft_toRightOf="@id/dvDate"
+            tools:text="at Sala M100, Cordova, Spain"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvTour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tour: El Secreto Tour 2019"
+            android:textSize="14sp"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginStart="@dimen/spacing_normal"
+            app:layout_constraintTop_toBottomOf="@+id/tvLocation"
+            app:layout_constraintLeft_toRightOf="@id/dvDate"
+            tools:text="Tour: El Secreto Tour 2019"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
