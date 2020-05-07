@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#86B247</color>
-    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorPrimaryDark">#7CBA23</color>
     <color name="colorAccent">#03DAC5</color>
 
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBackground">#F5F5F5</color>
     <color name="colorDate">#005DCC</color>
     <color name="colorSongsSummary">#6E6E6E</color>
+    <color name="colorCardViewBorder">#BCBCBC</color>
+
 </resources>
