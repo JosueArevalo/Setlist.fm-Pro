@@ -18,14 +18,7 @@
             android:background="@color/colorBackground"
             android:padding="@dimen/spacing_large">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/clHeader"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="#00FFFF"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"/>
-
+            <include layout="@layout/inc_setlist_detail_header"/>
             <include layout="@layout/inc_setlist_detail_card"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
