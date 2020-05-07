@@ -84,12 +84,26 @@ class SetlistDetailActivity : AppCompatActivity(R.layout.activity_setlist_detail
 
     private fun Setlist.prepareSonglist() {
         var cell: View? = null
-        this.sets.set.forEach { setEntity ->
-            setEntity.song.forEach {song ->
-                cell = layoutInflater.inflate(R.layout.cell_songlist_song, llSongList, false)
-                llSongList.addView(cell)
 
-                (cell?.findViewById<MaterialTextView>(R.id.tvSongName))?.text = song.name
+        this.sets.set.forEachIndexed { index, set ->  }
+
+        this.sets.set.forEachIndexed { setIndex, setEntity ->
+            setEntity.song.forEachIndexed { songIndex, song ->
+                when {
+                    song.tape -> {
+                        cell = layoutInflater.inflate(R.layout.cell_songlist_tape, llSongList, false)
+                        llSongList.addView(cell)
+
+                        (cell?.findViewById<MaterialTextView>(R.id.tvTapeName))?.text = if (songIndex == 0) "Intro" else "Outro"
+                    }
+
+                    !song.tape -> {
+                        cell = layoutInflater.inflate(R.layout.cell_songlist_song, llSongList, false)
+                        llSongList.addView(cell)
+
+                        (cell?.findViewById<MaterialTextView>(R.id.tvSongName))?.text = song.name
+                    }
+                }
             }
         }
     }
