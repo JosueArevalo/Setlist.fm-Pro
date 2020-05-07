@@ -9,8 +9,11 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clHeader"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="#00FFFF"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        app:layout_constraintLeft_toLeftOf="parent">
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </merge>

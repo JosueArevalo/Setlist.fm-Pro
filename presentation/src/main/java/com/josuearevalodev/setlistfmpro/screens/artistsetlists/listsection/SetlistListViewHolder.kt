@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.josuearevalodev.setlistfmpro.models.setlistfm.models.Setlist
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.cell_setlist.view.*
+import kotlinx.android.synthetic.main.view_date.view.*
 
 
 class SetlistListViewHolder(override val containerView: View, private val onSetlistClicked: ((Setlist) -> Unit)? = null) : RecyclerView.ViewHolder(containerView), LayoutContainer {

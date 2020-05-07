@@ -6,40 +6,9 @@
     android:layout_height="wrap_content"
     android:padding="@dimen/spacing_normal">
 
-    <LinearLayout
-        android:id="@+id/llDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/shape_setlists_date"
-        android:padding="@dimen/spacing_normal"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvMonth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/Setlists.Text.List.Month"
-            android:layout_gravity="center"
-            tools:text="JUN"/>
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvDay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/Setlists.Text.List.Day"
-            android:layout_gravity="center"
-            tools:text="30"/>
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvYear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/Setlists.Text.List.Year"
-            android:layout_gravity="center"
-            tools:text="2019"/>
-    </LinearLayout>
+    <include layout="@layout/view_date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvVenueTitle"
