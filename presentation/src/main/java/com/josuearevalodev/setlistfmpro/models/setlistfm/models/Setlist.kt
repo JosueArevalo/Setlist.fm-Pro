@@ -71,7 +71,7 @@ data class Setlist(
         get() {
             var out = ""
             sets.set.forEach { setlist ->
-                setlist.song.forEach { song ->
+                setlist.song.filter { song -> !song.tape }.forEach { song ->
                     out += "${song.name}, "
                 }
             }
