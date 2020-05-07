@@ -1,9 +1,11 @@
 package com.josuearevalodev.setlistfmpro.screens.setlistdetail
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textview.MaterialTextView
 import com.josuearevalodev.base.classes.ViewState
 import com.josuearevalodev.base_android.extensions.gone
 import com.josuearevalodev.base_android.extensions.visible
@@ -58,16 +60,14 @@ class SetlistDetailActivity : AppCompatActivity(R.layout.activity_setlist_detail
     }
 
     private fun Setlist.prepareUi() {
-        tvVenue.text = "${this.venue.name} , ${this.venue.city.name} , ${this.venue.city.country.name}"
-
-        var songsText = "Setlist:\n"
+        var cell: View? = null
         this.sets.set.forEach { setEntity ->
-            setEntity.song.forEach {
-                songsText = songsText.plus("${it.name}\n")
+            setEntity.song.forEach {song ->
+                cell = layoutInflater.inflate(R.layout.cell_songlist_song, llSongList, false)
+                llSongList.addView(cell)
+
+                (cell?.findViewById<MaterialTextView>(R.id.tvSongName))?.text = song.name
             }
         }
-
-        tvSongs.text = songsText
-
     }
 }
