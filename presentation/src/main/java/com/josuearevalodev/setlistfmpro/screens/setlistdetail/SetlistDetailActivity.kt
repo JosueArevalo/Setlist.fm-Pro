@@ -85,6 +85,7 @@ class SetlistDetailActivity : AppCompatActivity(R.layout.activity_setlist_detail
     private fun Setlist.prepareSonglist() {
         var cell: View? = null
 
+        var songCount = 1
         this.sets.set.forEachIndexed { setIndex, setEntity ->
 
             when {
@@ -112,11 +113,23 @@ class SetlistDetailActivity : AppCompatActivity(R.layout.activity_setlist_detail
                         (cell?.findViewById<MaterialTextView>(R.id.tvTapeName))?.text = if (songIndex == 0) "Intro" else "Outro"
                     }
 
-                    !song.tape -> {
+                    !song.tape && song.info.isEmpty() -> {
                         cell = layoutInflater.inflate(R.layout.cell_songlist_song, llSongList, false)
                         llSongList.addView(cell)
 
                         (cell?.findViewById<MaterialTextView>(R.id.tvSongName))?.text = song.name
+                        (cell?.findViewById<MaterialTextView>(R.id.tvSongNumber))?.text = songCount.toString()
+                        songCount++
+                    }
+
+                    !song.tape && song.info.isNotEmpty() -> {
+                        cell = layoutInflater.inflate(R.layout.cell_songlist_song_with_info, llSongList, false)
+                        llSongList.addView(cell)
+
+                        (cell?.findViewById<MaterialTextView>(R.id.tvSongName))?.text = song.name
+                        (cell?.findViewById<MaterialTextView>(R.id.tvSongInfo))?.text = "(${song.info})"
+                        (cell?.findViewById<MaterialTextView>(R.id.tvSongNumber))?.text = songCount.toString()
+                        songCount++
                     }
                 }
             }
