@@ -10,6 +10,7 @@ import com.josuearevalodev.base_android.extensions.visible
 import com.josuearevalodev.setlistfmpro.models.setlistfm.models.Setlist
 import com.josuearevalodev.setlistfmpro.R
 import kotlinx.android.synthetic.main.activity_setlist_detail.*
+import kotlinx.android.synthetic.main.inc_setlist_detail_card.*
 import org.koin.android.ext.android.inject
 
 class SetlistDetailActivity : AppCompatActivity(R.layout.activity_setlist_detail) {
