@@ -11,8 +11,10 @@
     <color name="colorSongsSummary">#6E6E6E</color>
     <color name="colorCardViewBorder">#BCBCBC</color>
     <color name="colorTapeIcon">#8D8D8D</color>
+    <color name="colorSetlistDetailTitle">#333333</color>
+    <color name="colorSetlistDetailHeader">#333333</color>
     <color name="colorSongName">#333333</color>
     <color name="colorEncoreTitle">#777777</color>
-
+    <color name="colorHyperlink">#005CCC</color>
 
 </resources>

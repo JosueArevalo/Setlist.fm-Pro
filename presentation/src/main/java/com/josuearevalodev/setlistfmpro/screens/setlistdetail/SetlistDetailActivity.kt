@@ -1,7 +1,10 @@
 package com.josuearevalodev.setlistfmpro.screens.setlistdetail
 
+import android.os.Build
 import android.os.Bundle
+import android.text.Html
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
@@ -72,13 +75,26 @@ class SetlistDetailActivity : AppCompatActivity(R.layout.activity_setlist_detail
         tvYear.text = year
 
         tvTitle.text = "${artist.name} Setlist"
-        tvLocation.text = "at ${venue.name}, ${venue.city.name}, ${venue.city.country.name}"
+
+        val locationHtmlText = "at <a href=\"\">${venue.name}, ${venue.city.name}, ${venue.city.country.name}</a>"
+        tvLocation.setHtmlText(locationHtmlText)
 
         with(tour.name) {
             when (isEmpty()) {
                 true -> tvTour.gone()
-                false -> tvTour.text = this
+                false -> {
+                    val tourHtmlText = "Tour: <a href=\"\">$this</a>"
+                    tvTour.setHtmlText(tourHtmlText)
+                }
             }
+        }
+    }
+
+    private fun TextView.setHtmlText(htmlText: String) {
+        text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Html.fromHtml(htmlText, Html.FROM_HTML_MODE_LEGACY)
+        } else {
+            Html.fromHtml(htmlText)
         }
     }
 
