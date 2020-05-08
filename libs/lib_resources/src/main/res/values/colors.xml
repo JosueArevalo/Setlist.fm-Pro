@@ -9,5 +9,6 @@
     <color name="colorDate">#005DCC</color>
     <color name="colorSongsSummary">#6E6E6E</color>
     <color name="colorCardViewBorder">#BCBCBC</color>
+    <color name="colorTapeIcon">#8D8D8D</color>
 
 </resources>
