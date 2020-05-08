@@ -17,6 +17,7 @@
             android:id="@+id/tvSongNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/Setlists.Text.Detail.SongName"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tvDot"
             tools:text="10"/>
@@ -25,16 +26,18 @@
             android:id="@+id/tvDot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/Setlists.Text.Detail.SongName"
             android:text="."
             android:layout_marginStart="@dimen/spacing_very_huge"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvSongName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/spacing_normal"
+            style="@style/Setlists.Text.Detail.SongName"
+            android:layout_marginStart="@dimen/spacing_normal"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvDot"
             tools:text="Intro"/>
@@ -43,6 +46,7 @@
             android:id="@+id/tvSongInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/Setlists.Text.Detail.SongInfo"
             app:layout_constraintTop_toBottomOf="@id/tvSongName"
             app:layout_constraintStart_toStartOf="@id/tvSongName"
             tools:text="(Subtitle)"/>

@@ -5,10 +5,13 @@
     <color name="colorAccent">#03DAC5</color>
 
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlack">#000000</color>
     <color name="colorBackground">#F5F5F5</color>
     <color name="colorDate">#005DCC</color>
     <color name="colorSongsSummary">#6E6E6E</color>
     <color name="colorCardViewBorder">#BCBCBC</color>
     <color name="colorTapeIcon">#8D8D8D</color>
+    <color name="colorSongName">#333333</color>
+
 
 </resources>

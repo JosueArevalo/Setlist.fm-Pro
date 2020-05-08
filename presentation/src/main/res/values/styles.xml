@@ -32,4 +32,21 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <style name="Setlists.Text.Detail.SongName" parent="Setlists.Text">
+        <item name="android:textColor">@color/colorSongName</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="Setlists.Text.Detail.SongInfo" parent="Setlists.Text">
+        <item name="android:textColor">@color/colorSongName</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="Setlists.Text.Detail.TapeName" parent="Setlists.Text">
+        <item name="android:textColor">@color/colorTapeIcon</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
 </resources>
