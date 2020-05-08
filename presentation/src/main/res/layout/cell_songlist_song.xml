@@ -11,8 +11,8 @@
         android:layout_height="wrap_content"
         style="@style/Setlists.Text.Detail.SongName"
         android:layout_marginStart="@dimen/spacing_normal"
-        android:layout_marginTop="@dimen/spacing_normal"
-        android:layout_marginBottom="@dimen/spacing_normal"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:layout_marginBottom="@dimen/spacing_small"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tvDot"
@@ -25,8 +25,8 @@
         style="@style/Setlists.Text.Detail.SongName"
         android:text="."
         android:layout_marginStart="@dimen/spacing_very_huge"
-        android:layout_marginTop="@dimen/spacing_normal"
-        android:layout_marginBottom="@dimen/spacing_normal"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:layout_marginBottom="@dimen/spacing_small"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
