@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+        <include layout="@layout/view_date"
+            android:id="@+id/dvDate"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Setlists.Text.Detail.SetlistTitle"
+            android:layout_marginStart="@dimen/spacing_normal"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/dvDate"
+            tools:text="Avalanch Setlist"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Setlists.Text.Detail.SetlistDetailHeader"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginStart="@dimen/spacing_normal"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+            app:layout_constraintLeft_toRightOf="@id/dvDate"
+            tools:text="at Sala M100, Cordova, Spain"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvTour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Setlists.Text.Detail.SetlistDetailHeader"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginStart="@dimen/spacing_normal"
+            app:layout_constraintTop_toBottomOf="@+id/tvLocation"
+            app:layout_constraintLeft_toRightOf="@id/dvDate"
+            tools:text="Tour: El Secreto Tour 2019"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</merge>

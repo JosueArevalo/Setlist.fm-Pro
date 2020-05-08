@@ -1,15 +1,23 @@
 package com.josuearevalodev.setlistfmpro.screens.setlistdetail
 
+import android.os.Build
 import android.os.Bundle
+import android.text.Html
+import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textview.MaterialTextView
 import com.josuearevalodev.base.classes.ViewState
 import com.josuearevalodev.base_android.extensions.gone
 import com.josuearevalodev.base_android.extensions.visible
 import com.josuearevalodev.setlistfmpro.models.setlistfm.models.Setlist
 import com.josuearevalodev.setlistfmpro.R
 import kotlinx.android.synthetic.main.activity_setlist_detail.*
+import kotlinx.android.synthetic.main.inc_setlist_detail_card.*
+import kotlinx.android.synthetic.main.inc_setlist_detail_header.*
+import kotlinx.android.synthetic.main.view_date.*
 import org.koin.android.ext.android.inject
 
 class SetlistDetailActivity : AppCompatActivity(R.layout.activity_setlist_detail) {
@@ -32,21 +40,21 @@ class SetlistDetailActivity : AppCompatActivity(R.layout.activity_setlist_detail
         viewModel.viewState.observe(this, Observer { viewState ->
             when (viewState) {
                 is ViewState.Loading -> {
-                    clContent.gone()
+                    svContent.gone()
                     lvLoading.visible()
                     evError.gone()
                 }
                 is ViewState.Content<*> -> {
                     (viewState.value as Setlist).prepareUi()
-                    clContent.visible()
+                    svContent.visible()
                     lvLoading.gone()
                     evError.gone()
                 }
                 is ViewState.Error<*> -> {
-                    clContent.gone()
+                    svContent.gone()
                     lvLoading.gone()
                     evError.visible()
-                    Snackbar.make(clContent, "Error: ${viewState.error.cause}", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(svContent, "Error: ${viewState.error.cause}", Snackbar.LENGTH_LONG).show()
                 }
             }
         })
@@ -57,16 +65,90 @@ class SetlistDetailActivity : AppCompatActivity(R.layout.activity_setlist_detail
     }
 
     private fun Setlist.prepareUi() {
-        tvVenue.text = "${this.venue.name} , ${this.venue.city.name} , ${this.venue.city.country.name}"
+        prepareHeader()
+        prepareSonglist()
+    }
 
-        var songsText = "Setlist:\n"
-        this.sets.set.forEach { setEntity ->
-            setEntity.song.forEach {
-                songsText = songsText.plus("${it.name}\n")
+    private fun Setlist.prepareHeader() {
+        tvMonth.text = month
+        tvDay.text = day
+        tvYear.text = year
+
+        tvTitle.text = "${artist.name} Setlist"
+
+        val locationHtmlText = "at <a href=\"\">${venue.name}, ${venue.city.name}, ${venue.city.country.name}</a>"
+        tvLocation.setHtmlText(locationHtmlText)
+
+        with(tour.name) {
+            when (isEmpty()) {
+                true -> tvTour.gone()
+                false -> {
+                    val tourHtmlText = "Tour: <a href=\"\">$this</a>"
+                    tvTour.setHtmlText(tourHtmlText)
+                }
             }
         }
+    }
 
-        tvSongs.text = songsText
+    private fun TextView.setHtmlText(htmlText: String) {
+        text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Html.fromHtml(htmlText, Html.FROM_HTML_MODE_LEGACY)
+        } else {
+            Html.fromHtml(htmlText)
+        }
+    }
 
+    private fun Setlist.prepareSonglist() {
+        var cell: View? = null
+
+        var songCount = 1
+        this.sets.set.forEachIndexed { setIndex, setEntity ->
+
+            when {
+                setEntity.name.isNotEmpty() -> {
+                    cell = layoutInflater.inflate(R.layout.cell_songlist_encore, llSongList, false)
+                    llSongList.addView(cell)
+
+                    (cell?.findViewById<MaterialTextView>(R.id.tvEncoreSet))?.text = "${setEntity.name}:"
+                }
+
+                setEntity.encore > 0 -> {
+                    cell = layoutInflater.inflate(R.layout.cell_songlist_encore, llSongList, false)
+                    llSongList.addView(cell)
+
+                    (cell?.findViewById<MaterialTextView>(R.id.tvEncoreSet))?.text = "Encore:"
+                }
+            }
+
+            setEntity.song.forEachIndexed { songIndex, song ->
+                when {
+                    song.tape -> {
+                        cell = layoutInflater.inflate(R.layout.cell_songlist_tape, llSongList, false)
+                        llSongList.addView(cell)
+
+                        (cell?.findViewById<MaterialTextView>(R.id.tvTapeName))?.text = if (songIndex == 0) "Intro" else "Outro"
+                    }
+
+                    !song.tape && song.info.isEmpty() -> {
+                        cell = layoutInflater.inflate(R.layout.cell_songlist_song, llSongList, false)
+                        llSongList.addView(cell)
+
+                        (cell?.findViewById<MaterialTextView>(R.id.tvSongName))?.text = song.name
+                        (cell?.findViewById<MaterialTextView>(R.id.tvSongNumber))?.text = songCount.toString()
+                        songCount++
+                    }
+
+                    !song.tape && song.info.isNotEmpty() -> {
+                        cell = layoutInflater.inflate(R.layout.cell_songlist_song_with_info, llSongList, false)
+                        llSongList.addView(cell)
+
+                        (cell?.findViewById<MaterialTextView>(R.id.tvSongName))?.text = song.name
+                        (cell?.findViewById<MaterialTextView>(R.id.tvSongInfo))?.text = "(${song.info})"
+                        (cell?.findViewById<MaterialTextView>(R.id.tvSongNumber))?.text = songCount.toString()
+                        songCount++
+                    }
+                }
+            }
+        }
     }
 }
