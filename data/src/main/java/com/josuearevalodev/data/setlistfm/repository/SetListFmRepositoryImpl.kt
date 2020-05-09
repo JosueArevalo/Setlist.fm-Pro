@@ -44,25 +44,32 @@ class SetListFmRepositoryImpl(
     //==============================================================================================
 
     private fun handleGetArtist(artistName: String): Single<ArtistEntity> {
-        return getArtistFromDb(artistName)
+        return getArtistFromDbWithName(artistName)
             .onErrorResumeNext { error ->
                 System.out.println("TEST - Error getting from DB: $error")
                 handleGetArtistDbError(error, artistName)
             }
     }
 
-    private fun getArtistFromDb(artistName: String): Single<ArtistEntity> {
+    private fun getArtistFromDbWithName(artistName: String): Single<ArtistEntity> {
         return databaseDS
             .getArtist(artistName)
+    }
+
+    private fun getArtistFromDbWithId(artistId: String): Single<ArtistEntity> {
+        return databaseDS
+            .getArtistWithId(artistId = artistId)
     }
 
     private fun handleGetArtistDbError(error: Throwable, artistName: String): Single<ArtistEntity> {
         // For the moment, either NoResultsFound or other, I do a remote call
         return when (error) {
             is DatabaseError.NoResultsFound -> getArtistFromRemote(artistName)
-                .flatMap { getArtistFromDb(artistName) }
+                .flatMap { getArtistFromDbWithName(artistName) }
             else -> getArtistFromRemote(artistName)
-                .flatMap { getArtistFromDb(artistName) }
+                .flatMap { artistEntity ->
+                    getArtistFromDbWithId(artistEntity.mbid)
+                }
         }
     }
 
