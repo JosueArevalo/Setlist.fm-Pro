@@ -17,6 +17,9 @@ class ArtistSetlistsListAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder
 
     var onSetlistClicked: ((Setlist) -> Unit)? = null
 
+    val setlistsSize: Int
+        get() = setlists.size
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             VIEWHOLDER_SETLIST_TYPE -> SetlistListViewHolder(parent.inflate(R.layout.cell_setlist), onSetlistClicked)
@@ -62,5 +65,4 @@ class ArtistSetlistsListAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder
             }
         }
     }
-
 }

@@ -20,6 +20,7 @@ import kotlinx.android.synthetic.main.activity_artist_setlists.clContent
 import kotlinx.android.synthetic.main.activity_artist_setlists.evError
 import kotlinx.android.synthetic.main.activity_artist_setlists.lvLoading
 import kotlinx.android.synthetic.main.activity_artist_setlists_list.*
+import kotlinx.android.synthetic.main.view_error.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
@@ -48,6 +49,18 @@ class ArtistSetlistsListFragment : Fragment(R.layout.activity_artist_setlists_li
 
     private fun prepareUi() {
         initList()
+        addListeners()
+    }
+
+    private fun addListeners() {
+        bRetry.setOnClickListener {
+            if (adapter.setlistsSize == 0) {
+                viewModel.searchArtistByName(viewModel.artistName)
+            } else {
+                viewModel.loadMoreItems()
+
+            }
+        }
     }
 
     private fun addObservers() {
@@ -78,13 +91,22 @@ class ArtistSetlistsListFragment : Fragment(R.layout.activity_artist_setlists_li
                     evError.gone()
                 }
                 is ViewState.Error<*> -> {
-                    clContent.gone()
-                    lvLoading.gone()
-                    evError.visible()
-                    Snackbar.make(clContent, "Error: ${viewState.error.cause}", Snackbar.LENGTH_LONG).show()
+                    viewState.handleViewStateError()
                 }
             }
         })
+    }
+
+    private fun ViewState.Error<*>.handleViewStateError() {
+        if (adapter.setlistsSize == 0) {
+            clContent.gone()
+            lvLoading.gone()
+            evError.visible()
+        } else {
+            Snackbar.make(
+                clContent,
+                getString(R.string.setlist_list_error_in_next_pages), Snackbar.LENGTH_LONG).show()
+        }
     }
 
     private fun initList() {

@@ -71,6 +71,10 @@ class ArtistSetlistsListViewModelImpl(private val searchArtistByNamesUseCase: Se
                 },
                 { error ->
                     Log.e("TEST", "TEST: Error! $error")
+                    // If is in first page (because Search Artist failed e.g. it hasn't do decrease currentPage
+                    if (currentPage > 1) {
+                        currentPage--
+                    }
                     viewState.postValue(ViewState.Error(Throwable()))
                 }
             )
