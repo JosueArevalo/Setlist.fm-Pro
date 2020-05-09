@@ -103,6 +103,7 @@ class ArtistSetlistsListFragment : Fragment(R.layout.activity_artist_setlists_li
             lvLoading.gone()
             evError.visible()
         } else {
+            adapter.removeLoading()
             Snackbar.make(
                 clContent,
                 getString(R.string.setlist_list_error_in_next_pages), Snackbar.LENGTH_LONG).show()
