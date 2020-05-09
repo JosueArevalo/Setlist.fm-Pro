@@ -49,6 +49,7 @@ class ArtistSetlistsListViewModelImpl(private val searchArtistByNamesUseCase: Se
     override fun loadMoreItems() {
         isLoading = true
         currentPage++
+        viewState.postValue(ViewState.Loading)
         searchSetlists(idArtist = artistId, page = currentPage, itemsPerPage = itemsPerPage)
     }
 

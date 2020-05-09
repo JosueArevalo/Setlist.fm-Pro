@@ -26,10 +26,13 @@ import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class ArtistSetlistsListFragment : Fragment(R.layout.activity_artist_setlists_list) {
 
-    val viewModel: ArtistSetlistsListViewModel by inject()
-    val sharedViewModel: ArtistSetlistsSharedViewModel by sharedViewModel<ArtistSetlistsSharedViewModelImpl>()
+    private val viewModel: ArtistSetlistsListViewModel by inject()
+    private val sharedViewModel: ArtistSetlistsSharedViewModel by sharedViewModel<ArtistSetlistsSharedViewModelImpl>()
+    private val adapter: ArtistSetlistsListAdapter by inject()
 
-    val adapter: ArtistSetlistsListAdapter by inject()
+    private val listHasItems: Boolean
+        get() = adapter.setlistsSize > 0
+
 
     companion object {
         fun createInstance(artistName: String): ArtistSetlistsListFragment {
@@ -54,12 +57,15 @@ class ArtistSetlistsListFragment : Fragment(R.layout.activity_artist_setlists_li
 
     private fun addListeners() {
         bRetry.setOnClickListener {
-            if (adapter.setlistsSize == 0) {
-                viewModel.searchArtistByName(viewModel.artistName)
-            } else {
-                viewModel.loadMoreItems()
+            handleRetry()
+        }
+    }
 
-            }
+    private fun handleRetry() {
+        if (!listHasItems) {
+            viewModel.searchArtistByName(viewModel.artistName)
+        } else {
+            viewModel.loadMoreItems()
         }
     }
 
@@ -67,9 +73,15 @@ class ArtistSetlistsListFragment : Fragment(R.layout.activity_artist_setlists_li
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             when (viewState) {
                 is ViewState.Loading -> {
-                    clContent.gone()
-                    lvLoading.visible()
-                    evError.gone()
+                    if (!listHasItems) {
+                        clContent.gone()
+                        lvLoading.visible()
+                        evError.gone()
+                    } else {
+                        clContent.visible()
+                        lvLoading.gone()
+                        evError.gone()
+                    }
                 }
                 is ViewState.Content<*> -> {
 
@@ -95,14 +107,26 @@ class ArtistSetlistsListFragment : Fragment(R.layout.activity_artist_setlists_li
                 }
             }
         })
+
+        sharedViewModel.refreshMenuClicked.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled {
+                sharedViewModel.showRefreshButton.postValue(false)
+                handleRetry()
+            }
+        })
     }
 
     private fun ViewState.Error<*>.handleViewStateError() {
-        if (adapter.setlistsSize == 0) {
+        if (!listHasItems) {
             clContent.gone()
             lvLoading.gone()
             evError.visible()
         } else {
+            clContent.visible()
+            lvLoading.gone()
+            evError.gone()
+
+            sharedViewModel.showRefreshButton.postValue(true)
             adapter.removeLoading()
             Snackbar.make(
                 clContent,

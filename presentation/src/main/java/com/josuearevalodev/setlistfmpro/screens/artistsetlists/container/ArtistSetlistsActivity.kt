@@ -5,9 +5,9 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.graphics.drawable.DrawableCompat
+import androidx.lifecycle.Observer
+import com.josuearevalodev.base.classes.Event
 import com.josuearevalodev.base_android.extensions.tintMenuItem
 import com.josuearevalodev.setlistfmpro.R
 import com.josuearevalodev.setlistfmpro.commons.PermissionRequester
@@ -39,9 +39,17 @@ class ArtistSetlistsActivity : AppCompatActivity(R.layout.activity_artist_setlis
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        if (viewModel.currentTab == 1) { // Show gps icon in tab 1. Nothing in tab 0
-            menuInflater.inflate(R.menu.menu, menu)
-            menu?.tintMenuItem(R.id.action_gps, Color.WHITE)
+
+        when {
+            (viewModel.currentTab == 0 && sharedViewModel.showRefreshButton.value == true) -> { // Show refresh icon in tab 0 when it's needed
+                menuInflater.inflate(R.menu.menu_setlists_list, menu)
+                menu?.tintMenuItem(R.id.action_refresh, Color.WHITE)
+            }
+
+            (viewModel.currentTab == 1) -> { // Show gps icon in tab 1.
+                menuInflater.inflate(R.menu.menu_setlists_map, menu)
+                menu?.tintMenuItem(R.id.action_gps, Color.WHITE)
+            }
         }
 
         return super.onCreateOptionsMenu(menu)
@@ -49,7 +57,13 @@ class ArtistSetlistsActivity : AppCompatActivity(R.layout.activity_artist_setlis
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_gps -> { onGpsClicked()
+            R.id.action_gps -> {
+                onGpsClicked()
+                return true
+            }
+
+            R.id.action_refresh -> {
+                sharedViewModel.refreshMenuClicked.postValue(Event(true))
                 return true
             }
         }
@@ -69,7 +83,14 @@ class ArtistSetlistsActivity : AppCompatActivity(R.layout.activity_artist_setlis
     }
 
     private fun prepareUi() {
+        addObservers()
         prepareViewPagerAndTabs()
+    }
+
+    private fun addObservers() {
+        sharedViewModel.showRefreshButton.observe(this, Observer {
+            invalidateOptionsMenu()
+        })
     }
 
     private fun prepareViewPagerAndTabs() {
