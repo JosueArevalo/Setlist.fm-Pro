@@ -20,15 +20,19 @@ import kotlinx.android.synthetic.main.activity_artist_setlists.clContent
 import kotlinx.android.synthetic.main.activity_artist_setlists.evError
 import kotlinx.android.synthetic.main.activity_artist_setlists.lvLoading
 import kotlinx.android.synthetic.main.activity_artist_setlists_list.*
+import kotlinx.android.synthetic.main.view_error.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class ArtistSetlistsListFragment : Fragment(R.layout.activity_artist_setlists_list) {
 
-    val viewModel: ArtistSetlistsListViewModel by inject()
-    val sharedViewModel: ArtistSetlistsSharedViewModel by sharedViewModel<ArtistSetlistsSharedViewModelImpl>()
+    private val viewModel: ArtistSetlistsListViewModel by inject()
+    private val sharedViewModel: ArtistSetlistsSharedViewModel by sharedViewModel<ArtistSetlistsSharedViewModelImpl>()
+    private val adapter: ArtistSetlistsListAdapter by inject()
 
-    val adapter: ArtistSetlistsListAdapter by inject()
+    private val listHasItems: Boolean
+        get() = adapter.setlistsSize > 0
+
 
     companion object {
         fun createInstance(artistName: String): ArtistSetlistsListFragment {
@@ -48,15 +52,36 @@ class ArtistSetlistsListFragment : Fragment(R.layout.activity_artist_setlists_li
 
     private fun prepareUi() {
         initList()
+        addListeners()
+    }
+
+    private fun addListeners() {
+        bRetry.setOnClickListener {
+            handleRetry()
+        }
+    }
+
+    private fun handleRetry() {
+        if (!listHasItems) {
+            viewModel.searchArtistByName(viewModel.artistName)
+        } else {
+            viewModel.loadMoreItems()
+        }
     }
 
     private fun addObservers() {
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             when (viewState) {
                 is ViewState.Loading -> {
-                    clContent.gone()
-                    lvLoading.visible()
-                    evError.gone()
+                    if (!listHasItems) {
+                        clContent.gone()
+                        lvLoading.visible()
+                        evError.gone()
+                    } else {
+                        clContent.visible()
+                        lvLoading.gone()
+                        evError.gone()
+                    }
                 }
                 is ViewState.Content<*> -> {
 
@@ -78,13 +103,35 @@ class ArtistSetlistsListFragment : Fragment(R.layout.activity_artist_setlists_li
                     evError.gone()
                 }
                 is ViewState.Error<*> -> {
-                    clContent.gone()
-                    lvLoading.gone()
-                    evError.visible()
-                    Snackbar.make(clContent, "Error: ${viewState.error.cause}", Snackbar.LENGTH_LONG).show()
+                    viewState.handleViewStateError()
                 }
             }
         })
+
+        sharedViewModel.refreshMenuClicked.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled {
+                sharedViewModel.showRefreshButton.postValue(false)
+                handleRetry()
+            }
+        })
+    }
+
+    private fun ViewState.Error<*>.handleViewStateError() {
+        if (!listHasItems) {
+            clContent.gone()
+            lvLoading.gone()
+            evError.visible()
+        } else {
+            clContent.visible()
+            lvLoading.gone()
+            evError.gone()
+
+            sharedViewModel.showRefreshButton.postValue(true)
+            adapter.removeLoading()
+            Snackbar.make(
+                clContent,
+                getString(R.string.setlist_list_error_in_next_pages), Snackbar.LENGTH_LONG).show()
+        }
     }
 
     private fun initList() {

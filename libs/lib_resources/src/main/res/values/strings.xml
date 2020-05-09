@@ -1,6 +1,7 @@
 <resources>
-    <string name="search_artist_hint">Introduce el artista</string>
+    <string name="search_artist_hint">Introduce the artist</string>
     <string name="error_button_try_again">Try again</string>
     <string name="tab_artist_setlist_lists_list">List</string>
     <string name="tab_artist_setlist_lists_map">Map</string>
+    <string name="setlist_list_error_in_next_pages">Error obtaining more results…</string>
 </resources>
