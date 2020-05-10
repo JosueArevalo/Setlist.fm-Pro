@@ -2,8 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/splash"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:background="@drawable/splash"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilSearch"
