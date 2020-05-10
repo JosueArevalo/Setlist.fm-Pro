@@ -35,12 +35,16 @@ class ArtistSetlistsListFragment : Fragment(R.layout.activity_artist_setlists_li
     private val listHasItems: Boolean
         get() = adapter.setlistsSize > 0
 
+    private val SAVED_ARTIST_NAME = "artistNameSaved"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (savedInstanceState == null)
+        if (savedInstanceState == null) {
             viewModel.artistName = arguments?.getString("artistName", "") ?: ""
+        } else {
+            viewModel.artistName = savedInstanceState.getString(SAVED_ARTIST_NAME, "")
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,6 +53,11 @@ class ArtistSetlistsListFragment : Fragment(R.layout.activity_artist_setlists_li
         prepareUi()
         addObservers()
         fetchSearchArtist()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putString(SAVED_ARTIST_NAME, viewModel.artistName)
+        super.onSaveInstanceState(outState)
     }
 
     private fun prepareUi() {
@@ -162,7 +171,7 @@ class ArtistSetlistsListFragment : Fragment(R.layout.activity_artist_setlists_li
             })
         }
     }
-    
+
     private fun addClickListener() {
         this@ArtistSetlistsListFragment.adapter.onSetlistClicked = { setlistEntity ->
             context?.navigateToSetlistDetail(
