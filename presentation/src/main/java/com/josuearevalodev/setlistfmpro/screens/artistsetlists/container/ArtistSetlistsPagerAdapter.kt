@@ -1,5 +1,6 @@
 package com.josuearevalodev.setlistfmpro.screens.artistsetlists.container
 
+import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -15,7 +16,13 @@ class ArtistSetlistsPagerAdapter(
 
     override fun getItem(i: Int): Fragment {
         return when (i) {
-            0 -> { ArtistSetlistsListFragment.createInstance(artistName) }
+            0 -> {
+                val artistSetlistsListFragment = ArtistSetlistsListFragment()
+                val bundle = Bundle()
+                bundle.putString("artistName", artistName)
+                artistSetlistsListFragment.arguments = bundle
+                return artistSetlistsListFragment
+            }
             else -> { ArtistSetlistsMapFragment() }
         }
     }

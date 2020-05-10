@@ -1,7 +1,6 @@
 package com.josuearevalodev.setlistfmpro.screens.artistsetlists.container
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.josuearevalodev.base_android.rxdisposablemanager.RxDisposableManager
 import com.josuearevalodev.base_android.rxdisposablemanager.RxDisposableManagerImpl
 import com.josuearevalodev.domain.location.entities.LocationEntity
@@ -10,8 +9,7 @@ import io.reactivex.rxkotlin.addTo
 
 class ArtistSetlistsViewModelImpl(
     private val getCurrentLocation: GetCurrentLocation
-) : ViewModel(),
-    ArtistSetlistsViewModel, RxDisposableManager by RxDisposableManagerImpl() {
+) : ArtistSetlistsViewModel(), RxDisposableManager by RxDisposableManagerImpl() {
 
     override var userLocation: MutableLiveData<LocationEntity>? = null
 
@@ -26,7 +24,7 @@ class ArtistSetlistsViewModelImpl(
     }
 
     override fun onCleared() {
-        super.onCleared()
         composite.clear()
+        super.onCleared()
     }
 }

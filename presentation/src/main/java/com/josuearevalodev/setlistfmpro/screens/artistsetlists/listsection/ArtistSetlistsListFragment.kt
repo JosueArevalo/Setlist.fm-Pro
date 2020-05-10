@@ -23,23 +23,24 @@ import kotlinx.android.synthetic.main.activity_artist_setlists_list.*
 import kotlinx.android.synthetic.main.view_error.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.sharedViewModel
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class ArtistSetlistsListFragment : Fragment(R.layout.activity_artist_setlists_list) {
 
-    private val viewModel: ArtistSetlistsListViewModel by inject()
+    private val viewModel: ArtistSetlistsListViewModel by viewModel()
     private val sharedViewModel: ArtistSetlistsSharedViewModel by sharedViewModel<ArtistSetlistsSharedViewModelImpl>()
+
     private val adapter: ArtistSetlistsListAdapter by inject()
 
     private val listHasItems: Boolean
         get() = adapter.setlistsSize > 0
 
 
-    companion object {
-        fun createInstance(artistName: String): ArtistSetlistsListFragment {
-            val instance = ArtistSetlistsListFragment()
-            instance.viewModel.artistName = artistName
-            return instance
-        }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        if (savedInstanceState == null)
+            viewModel.artistName = arguments?.getString("artistName", "") ?: ""
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

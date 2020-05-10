@@ -1,35 +1,36 @@
 package com.josuearevalodev.setlistfmpro.screens.artistsetlists.listsection
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import com.josuearevalodev.base.classes.ViewState
 
-interface ArtistSetlistsListViewModel {
+abstract class ArtistSetlistsListViewModel : ViewModel() {
 
-    var artistName: String
+    abstract var artistName: String
 
-    val viewState: LiveData<ViewState>
+    abstract val viewState: LiveData<ViewState>
 
     // Pagination
 
-    var currentPage: Int
+    abstract var currentPage: Int
 
-    var itemsPerPage: Int
+    abstract var itemsPerPage: Int
 
-    val firstPage: Int
+    abstract val firstPage: Int
 
-    var isLastPage: Boolean
+    abstract var isLastPage: Boolean
 
-    val totalPages: Int
+    abstract val totalPages: Int
 
-    var isLoading: Boolean
+    abstract var isLoading: Boolean
 
-    var itemCount: Int
+    abstract var itemCount: Int
 
     //region functions
 
-    fun searchArtistByName(text: String)
+    abstract fun searchArtistByName(text: String)
 
-    fun loadMoreItems()
+    abstract fun loadMoreItems()
 
     //endregion
 }

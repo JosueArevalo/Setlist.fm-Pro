@@ -2,7 +2,6 @@ package com.josuearevalodev.setlistfmpro.screens.artistsetlists.listsection
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.josuearevalodev.base.classes.ViewState
 import com.josuearevalodev.base_android.rxdisposablemanager.RxDisposableManager
 import com.josuearevalodev.base_android.rxdisposablemanager.RxDisposableManagerImpl
@@ -12,8 +11,8 @@ import com.josuearevalodev.usecases.setlists.searchartistsbyname.SearchArtistByN
 import io.reactivex.rxkotlin.addTo
 
 class ArtistSetlistsListViewModelImpl(private val searchArtistByNamesUseCase: SearchArtistByName,
-                                      private val getArtistSetlistsUseCase: GetArtistSetlists) : ViewModel(),
-    ArtistSetlistsListViewModel, RxDisposableManager by RxDisposableManagerImpl() {
+                                      private val getArtistSetlistsUseCase: GetArtistSetlists) :
+    ArtistSetlistsListViewModel(), RxDisposableManager by RxDisposableManagerImpl() {
 
     override var artistName: String = ""
     override val viewState: MutableLiveData<ViewState> by lazy { MutableLiveData<ViewState>().apply { postValue(ViewState.Loading) } }
