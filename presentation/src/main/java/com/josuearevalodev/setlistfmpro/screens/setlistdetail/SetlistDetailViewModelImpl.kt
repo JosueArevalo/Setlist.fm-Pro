@@ -39,7 +39,7 @@ class SetlistDetailViewModelImpl(
     }
 
     override fun onCleared() {
-        super.onCleared()
         composite.clear()
+        super.onCleared()
     }
 }

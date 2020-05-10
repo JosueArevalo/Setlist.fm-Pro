@@ -82,7 +82,7 @@ class ArtistSetlistsListViewModelImpl(private val searchArtistByNamesUseCase: Se
     }
 
     override fun onCleared() {
-        super.onCleared()
         composite.clear()
+        super.onCleared()
     }
 }
