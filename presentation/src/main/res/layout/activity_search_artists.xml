@@ -4,12 +4,17 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <ImageView
+        android:background="@drawable/splash"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/search_artist_hint"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:hint=" "
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         app:endIconDrawable="@android:drawable/ic_menu_search"
@@ -24,7 +29,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:maxLines="1" />
+            android:hint="@string/search_artist_hint"
+            android:maxLines="1"
+            android:background="@drawable/shape_artist_search" />
 
     </com.google.android.material.textfield.TextInputLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
