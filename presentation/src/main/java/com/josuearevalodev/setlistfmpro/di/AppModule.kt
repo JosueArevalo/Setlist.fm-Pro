@@ -8,8 +8,6 @@ import com.josuearevalodev.setlistfmpro.screens.artistsetlists.listsection.Artis
 import com.josuearevalodev.setlistfmpro.screens.artistsetlists.listsection.ArtistSetlistsListViewModelImpl
 import com.josuearevalodev.setlistfmpro.screens.artistsetlists.shared.ArtistSetlistsSharedViewModel
 import com.josuearevalodev.setlistfmpro.screens.artistsetlists.shared.ArtistSetlistsSharedViewModelImpl
-import com.josuearevalodev.setlistfmpro.screens.searchartists.SearchArtistsViewModel
-import com.josuearevalodev.setlistfmpro.screens.searchartists.SearchArtistsViewModelImpl
 import com.josuearevalodev.setlistfmpro.screens.setlistdetail.SetlistDetailViewModel
 import com.josuearevalodev.setlistfmpro.screens.setlistdetail.SetlistDetailViewModelImpl
 import org.koin.android.viewmodel.dsl.viewModel
@@ -18,20 +16,16 @@ import org.koin.dsl.module
 
 val appModule = module {
 
-    // SearchArtists (Activity)
-    viewModel { SearchArtistsViewModelImpl() } bind SearchArtistsViewModel::class
 
     // Artist Setlists (Activity)
-    viewModel { ArtistSetlistsListViewModelImpl(get(), get()) } bind ArtistSetlistsListViewModel::class
+    viewModel { ArtistSetlistsViewModelImpl(get()) } bind ArtistSetlistsViewModel::class
 
     viewModel { ArtistSetlistsSharedViewModelImpl() } bind ArtistSetlistsSharedViewModel::class
 
     // Artist Setlists List (Fragment)
-    viewModel { ArtistSetlistsViewModelImpl(get()) } bind ArtistSetlistsViewModel::class
+    viewModel { ArtistSetlistsListViewModelImpl(get(), get()) } bind ArtistSetlistsListViewModel::class
 
     factory { ArtistSetlistsListAdapter() } bind ArtistSetlistsListAdapter::class
-
-    // Artist Setlists Map (Fragment)
 
     // Artist Setlists Detail (Fragment)
     viewModel { SetlistDetailViewModelImpl(get()) } bind SetlistDetailViewModel::class

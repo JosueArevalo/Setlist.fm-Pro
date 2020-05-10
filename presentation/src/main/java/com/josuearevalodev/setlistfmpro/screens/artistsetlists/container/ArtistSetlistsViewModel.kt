@@ -1,15 +1,16 @@
 package com.josuearevalodev.setlistfmpro.screens.artistsetlists.container
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.josuearevalodev.domain.location.entities.LocationEntity
 
-interface ArtistSetlistsViewModel {
+abstract class ArtistSetlistsViewModel : ViewModel()  {
 
-    var userLocation: MutableLiveData<LocationEntity>?
+    abstract var userLocation: MutableLiveData<LocationEntity>?
 
-    var artistName: String
+    abstract var artistName: String
 
-    var currentTab: Int
+    abstract var currentTab: Int
 
-    fun requestCurrentLocation()
+    abstract fun requestCurrentLocation()
 }

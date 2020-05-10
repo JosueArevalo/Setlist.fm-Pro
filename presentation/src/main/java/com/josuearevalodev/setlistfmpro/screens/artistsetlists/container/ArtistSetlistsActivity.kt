@@ -23,7 +23,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class ArtistSetlistsActivity : AppCompatActivity(R.layout.activity_artist_setlists),
     PermissionListener, PermissionRequestErrorListener {
 
-    val viewModel: ArtistSetlistsViewModel by inject()
+    val viewModel: ArtistSetlistsViewModel by viewModel()
     val sharedViewModel: ArtistSetlistsSharedViewModel by viewModel<ArtistSetlistsSharedViewModelImpl>()
 
     private lateinit var artistSetlistsPagerAdapter: ArtistSetlistsPagerAdapter
