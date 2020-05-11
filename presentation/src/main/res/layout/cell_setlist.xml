@@ -6,7 +6,9 @@
     android:layout_height="wrap_content"
     android:padding="@dimen/spacing_normal">
 
-    <include layout="@layout/view_date"
+    <include
+        android:id="@+id/llDate"
+        layout="@layout/view_date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 

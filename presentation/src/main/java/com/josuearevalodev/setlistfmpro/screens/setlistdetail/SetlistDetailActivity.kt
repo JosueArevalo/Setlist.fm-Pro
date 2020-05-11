@@ -14,18 +14,20 @@ import com.josuearevalodev.base_android.extensions.gone
 import com.josuearevalodev.base_android.extensions.visible
 import com.josuearevalodev.setlistfmpro.models.setlistfm.models.Setlist
 import com.josuearevalodev.setlistfmpro.R
-import kotlinx.android.synthetic.main.activity_setlist_detail.*
-import kotlinx.android.synthetic.main.inc_setlist_detail_card.*
-import kotlinx.android.synthetic.main.inc_setlist_detail_header.*
-import kotlinx.android.synthetic.main.view_date.*
+import com.josuearevalodev.setlistfmpro.databinding.ActivitySetlistDetailBinding
 import org.koin.android.ext.android.inject
 
-class SetlistDetailActivity : AppCompatActivity(R.layout.activity_setlist_detail) {
+class SetlistDetailActivity : AppCompatActivity() {
 
-    val viewModel: SetlistDetailViewModel by inject()
+    private lateinit var binding: ActivitySetlistDetailBinding
+    private val viewModel: SetlistDetailViewModel by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        binding = ActivitySetlistDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         handleIntentData()
         addObservers()
         fetchSetlistDetail()
@@ -40,21 +42,21 @@ class SetlistDetailActivity : AppCompatActivity(R.layout.activity_setlist_detail
         viewModel.viewState.observe(this, Observer { viewState ->
             when (viewState) {
                 is ViewState.Loading -> {
-                    svContent.gone()
-                    lvLoading.visible()
-                    evError.gone()
+                    binding.svContent.gone()
+                    binding.lvLoading.visible()
+                    binding.evError.gone()
                 }
                 is ViewState.Content<*> -> {
                     (viewState.value as Setlist).prepareUi()
-                    svContent.visible()
-                    lvLoading.gone()
-                    evError.gone()
+                    binding.svContent.visible()
+                    binding.lvLoading.gone()
+                    binding.evError.gone()
                 }
                 is ViewState.Error<*> -> {
-                    svContent.gone()
-                    lvLoading.gone()
-                    evError.visible()
-                    Snackbar.make(svContent, "Error: ${viewState.error.cause}", Snackbar.LENGTH_LONG).show()
+                    binding.svContent.gone()
+                    binding.lvLoading.gone()
+                    binding.evError.visible()
+                    Snackbar.make(binding.svContent, "Error: ${viewState.error.cause}", Snackbar.LENGTH_LONG).show()
                 }
             }
         })
@@ -70,21 +72,21 @@ class SetlistDetailActivity : AppCompatActivity(R.layout.activity_setlist_detail
     }
 
     private fun Setlist.prepareHeader() {
-        tvMonth.text = month
-        tvDay.text = day
-        tvYear.text = year
+        binding.clHeader.dvDate.tvMonth.text = month
+        binding.clHeader.dvDate.tvDay.text = day
+        binding.clHeader.dvDate.tvYear.text = year
 
-        tvTitle.text = "${artist.name} Setlist"
+        binding.clHeader.tvTitle.text = "${artist.name} Setlist"
 
         val locationHtmlText = "at <a href=\"\">${venue.name}, ${venue.city.name}, ${venue.city.country.name}</a>"
-        tvLocation.setHtmlText(locationHtmlText)
+        binding.clHeader.tvLocation.setHtmlText(locationHtmlText)
 
         with(tour.name) {
             when (isEmpty()) {
-                true -> tvTour.gone()
+                true -> binding.clHeader.tvTour.gone()
                 false -> {
                     val tourHtmlText = "Tour: <a href=\"\">$this</a>"
-                    tvTour.setHtmlText(tourHtmlText)
+                    binding.clHeader.tvTour.setHtmlText(tourHtmlText)
                 }
             }
         }
@@ -102,6 +104,7 @@ class SetlistDetailActivity : AppCompatActivity(R.layout.activity_setlist_detail
         var cell: View? = null
 
         var songCount = 1
+        val llSongList = binding.cvSetlist.llSongList
         this.sets.set.forEachIndexed { setIndex, setEntity ->
 
             when {

@@ -1,7 +1,9 @@
 package com.josuearevalodev.setlistfmpro.screens.artistsetlists.listsection
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -13,20 +15,18 @@ import com.josuearevalodev.base_android.extensions.visible
 import com.josuearevalodev.base_android.recyclerview.PaginationListener
 import com.josuearevalodev.setlistfmpro.models.setlistfm.models.Setlist
 import com.josuearevalodev.setlistfmpro.R
+import com.josuearevalodev.setlistfmpro.databinding.FragmentArtistSetlistsListBinding
 import com.josuearevalodev.setlistfmpro.screens.artistsetlists.shared.ArtistSetlistsSharedViewModel
 import com.josuearevalodev.setlistfmpro.screens.artistsetlists.shared.ArtistSetlistsSharedViewModelImpl
 import com.josuearevalodev.setlistfmpro.screens.setlistdetail.navigateToSetlistDetail
-import kotlinx.android.synthetic.main.activity_artist_setlists.clContent
-import kotlinx.android.synthetic.main.activity_artist_setlists.evError
-import kotlinx.android.synthetic.main.activity_artist_setlists.lvLoading
-import kotlinx.android.synthetic.main.activity_artist_setlists_list.*
-import kotlinx.android.synthetic.main.view_error.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class ArtistSetlistsListFragment : Fragment(R.layout.activity_artist_setlists_list) {
+class ArtistSetlistsListFragment : Fragment(R.layout.fragment_artist_setlists_list) {
 
+    private var _binding: FragmentArtistSetlistsListBinding? = null
+    private val binding get() = _binding!!
     private val viewModel: ArtistSetlistsListViewModel by viewModel()
     private val sharedViewModel: ArtistSetlistsSharedViewModel by sharedViewModel<ArtistSetlistsSharedViewModelImpl>()
 
@@ -47,6 +47,16 @@ class ArtistSetlistsListFragment : Fragment(R.layout.activity_artist_setlists_li
         }
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+
+        _binding = FragmentArtistSetlistsListBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -60,13 +70,18 @@ class ArtistSetlistsListFragment : Fragment(R.layout.activity_artist_setlists_li
         super.onSaveInstanceState(outState)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun prepareUi() {
         initList()
         addListeners()
     }
 
     private fun addListeners() {
-        bRetry.setOnClickListener {
+        binding.evError.bRetry.setOnClickListener {
             handleRetry()
         }
     }
@@ -84,13 +99,13 @@ class ArtistSetlistsListFragment : Fragment(R.layout.activity_artist_setlists_li
             when (viewState) {
                 is ViewState.Loading -> {
                     if (!listHasItems) {
-                        clContent.gone()
-                        lvLoading.visible()
-                        evError.gone()
+                        binding.clContent.gone()
+                        binding.lvLoading.visible()
+                        binding.evError.gone()
                     } else {
-                        clContent.visible()
-                        lvLoading.gone()
-                        evError.gone()
+                        binding.clContent.visible()
+                        binding.lvLoading.gone()
+                        binding.evError.gone()
                     }
                 }
                 is ViewState.Content<*> -> {
@@ -108,9 +123,9 @@ class ArtistSetlistsListFragment : Fragment(R.layout.activity_artist_setlists_li
 
                     viewModel.isLoading = false
 
-                    clContent.visible()
-                    lvLoading.gone()
-                    evError.gone()
+                    binding.clContent.visible()
+                    binding.lvLoading.gone()
+                    binding.evError.gone()
                 }
                 is ViewState.Error<*> -> {
                     viewState.handleViewStateError()
@@ -128,24 +143,24 @@ class ArtistSetlistsListFragment : Fragment(R.layout.activity_artist_setlists_li
 
     private fun ViewState.Error<*>.handleViewStateError() {
         if (!listHasItems) {
-            clContent.gone()
-            lvLoading.gone()
-            evError.visible()
+            binding.clContent.gone()
+            binding.lvLoading.gone()
+            binding.evError.visible()
         } else {
-            clContent.visible()
-            lvLoading.gone()
-            evError.gone()
+            binding.clContent.visible()
+            binding.lvLoading.gone()
+            binding.evError.gone()
 
             sharedViewModel.showRefreshButton.postValue(true)
             adapter.removeLoading()
             Snackbar.make(
-                clContent,
+                binding.clContent,
                 getString(R.string.setlist_list_error_in_next_pages), Snackbar.LENGTH_LONG).show()
         }
     }
 
     private fun initList() {
-        with (rvList) {
+        with (binding.rvList) {
             layoutManager = LinearLayoutManager(context)
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
             addClickListener()

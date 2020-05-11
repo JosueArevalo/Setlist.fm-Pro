@@ -11,20 +11,21 @@ import com.josuearevalodev.base.classes.Event
 import com.josuearevalodev.base_android.extensions.tintMenuItem
 import com.josuearevalodev.setlistfmpro.R
 import com.josuearevalodev.setlistfmpro.commons.PermissionRequester
+import com.josuearevalodev.setlistfmpro.databinding.ActivityArtistSetlistsBinding
 import com.josuearevalodev.setlistfmpro.screens.artistsetlists.shared.ArtistSetlistsSharedViewModel
 import com.josuearevalodev.setlistfmpro.screens.artistsetlists.shared.ArtistSetlistsSharedViewModelImpl
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.*
 import com.karumi.dexter.listener.single.PermissionListener
-import kotlinx.android.synthetic.main.activity_artist_setlists.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class ArtistSetlistsActivity : AppCompatActivity(R.layout.activity_artist_setlists),
+class ArtistSetlistsActivity : AppCompatActivity(),
     PermissionListener, PermissionRequestErrorListener {
 
-    val viewModel: ArtistSetlistsViewModel by viewModel()
-    val sharedViewModel: ArtistSetlistsSharedViewModel by viewModel<ArtistSetlistsSharedViewModelImpl>()
+    private lateinit var binding: ActivityArtistSetlistsBinding
+    private val viewModel: ArtistSetlistsViewModel by viewModel()
+    private val sharedViewModel: ArtistSetlistsSharedViewModel by viewModel<ArtistSetlistsSharedViewModelImpl>()
 
     private lateinit var artistSetlistsPagerAdapter: ArtistSetlistsPagerAdapter
 
@@ -32,6 +33,9 @@ class ArtistSetlistsActivity : AppCompatActivity(R.layout.activity_artist_setlis
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        binding = ActivityArtistSetlistsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         handleIntentData()
         handleSharedVariables()
@@ -105,14 +109,14 @@ class ArtistSetlistsActivity : AppCompatActivity(R.layout.activity_artist_setlis
                 viewModel.artistName
             )
 
-        vpArtistSetlists.adapter = artistSetlistsPagerAdapter
+        binding.vpArtistSetlists.adapter = artistSetlistsPagerAdapter
 
-        tlTabs.setupWithViewPager(vpArtistSetlists)
+        binding.tlTabs.setupWithViewPager(binding.vpArtistSetlists)
 
-        tlTabs.getTabAt(0)?.setIcon(R.drawable.ic_list)
-        tlTabs.getTabAt(1)?.setIcon(R.drawable.ic_map)
+        binding.tlTabs.getTabAt(0)?.setIcon(R.drawable.ic_list)
+        binding.tlTabs.getTabAt(1)?.setIcon(R.drawable.ic_map)
 
-        vpArtistSetlists.addOnPageChangeListener(object : OnTabChanged {
+        binding.vpArtistSetlists.addOnPageChangeListener(object : OnTabChanged {
             override fun onPageSelected(position: Int) {
                 viewModel.currentTab = position
                 invalidateOptionsMenu()
