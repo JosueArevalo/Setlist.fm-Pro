@@ -2,11 +2,10 @@ package com.josuearevalodev.setlistfmpro.screens.searchartists
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.josuearevalodev.setlistfmpro.R
 import com.josuearevalodev.setlistfmpro.databinding.ActivitySearchArtistsBinding
 import com.josuearevalodev.setlistfmpro.screens.artistsetlists.container.navigateToArtistSetlists
 
-class SearchArtistsActivity : AppCompatActivity(R.layout.activity_search_artists) {
+class SearchArtistsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySearchArtistsBinding
 
