@@ -72,6 +72,10 @@ ext {
             java     : "org.koin:koin-java:2.1.5"
      */
 
+    // RxLocationManager
+    rxlocationmanager = "com.github.zellius:rxlocationmanager-rxjava2:1.0.0"
+
+
     // Test
     junit = "androidx.test.ext:junit:1.1.1"
 
