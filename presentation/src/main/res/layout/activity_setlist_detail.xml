@@ -16,8 +16,13 @@
             android:background="@color/colorBackground"
             android:padding="@dimen/spacing_large">
 
-            <include layout="@layout/inc_setlist_detail_header"/>
-            <include layout="@layout/inc_setlist_detail_card"/>
+            <include
+                android:id="@+id/clHeader"
+                layout="@layout/inc_setlist_detail_header" />
+
+            <include
+                android:id="@+id/cvSetlist"
+                layout="@layout/inc_setlist_detail_card"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
