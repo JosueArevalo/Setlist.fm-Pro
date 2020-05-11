@@ -29,9 +29,9 @@ dependencies {
 
     // Default libraries from initial project
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.2.0'
+    implementation kotlinLib.stdlib
+    implementation androidx.appCompat
+    implementation androidx.coreKtx
 
     // Module
     implementation project (':base')
@@ -39,25 +39,25 @@ dependencies {
     implementation project (':data')
 
     // Gson
-    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation gson
 
     // Okhttp
-    implementation "com.squareup.okhttp3:logging-interceptor:4.2.1"
-    implementation "com.squareup.okhttp3:okhttp:4.2.1"
-    implementation "com.squareup.okhttp3:okhttp-urlconnection:3.11.0"
+    implementation okhttp.core
+    implementation okhttp.logging_interceptor
+    implementation okhttp.url_connection
 
     // Retrofit
-    implementation "com.squareup.retrofit2:retrofit:2.8.1"
-    implementation "com.squareup.retrofit2:converter-gson:2.5.0"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:2.8.1"
+    implementation retrofit.core
+    implementation retrofit.gson_converter
+    implementation retrofit.rxjava2_adapter
 
     // Koin (Core)
-    implementation "org.koin:koin-core:2.1.5" // Koin for Kotlin
-    implementation "org.koin:koin-core-ext:2.1.5" // Koin extended & experimental features
-    implementation "org.koin:koin-test:2.1.5" // Koin for Unit tests
+    implementation koin.core // Koin for Kotlin
+    implementation koin.ext // Koin extended & experimental features
+    implementation koin.test // Koin for Unit tests
 
     // Default test libraries from initial project
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    testImplementation 'junit:junit:4.13'
+    androidTestImplementation junit
+    androidTestImplementation espresso.core
 }

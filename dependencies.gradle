@@ -8,4 +8,75 @@ ext {
     minSdkVersion = 21
     targetSdkVersion = 29
 
+    androidx = [
+            appCompat        : "androidx.appcompat:appcompat:1.1.0",
+            coreKtx          : "androidx.core:core-ktx:1.1.0",
+            constraintLayout : "androidx.constraintlayout:constraintlayout:1.1.3",
+            recyclerView     : "androidx.recyclerview:recyclerview:1.1.0"
+    ]
+
+    material = "com.google.android.material:material:1.2.0-alpha06" // https://github.com/material-components/material-components-android/blob/master/docs/getting-started.md
+
+    kotlinLib = [
+            stdlib : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.60"
+    ]
+
+    rx = [
+            rxJava   : "io.reactivex.rxjava2:rxjava:2.2.10",
+            rxKotlin : "io.reactivex.rxjava2:rxkotlin:2.4.0",
+            rxAndroid: "io.reactivex.rxjava2:rxandroid:2.1.1"
+    ]
+
+    okhttp = [
+            core               : "com.squareup.okhttp3:okhttp:4.2.1",
+            logging_interceptor: "com.squareup.okhttp3:logging-interceptor:4.2.1",
+            url_connection     : "com.squareup.okhttp3:okhttp-urlconnection:3.11.0"
+    ]
+
+    retrofit = [
+            core              : "com.squareup.retrofit2:retrofit:2.8.1",
+            gson_converter    : "com.squareup.retrofit2:converter-gson:2.7.2",
+            rxjava2_adapter   : "com.squareup.retrofit2:adapter-rxjava2:2.8.1"
+    ]
+
+    gson = "com.google.code.gson:gson:2.8.6"
+
+    koin = [
+            core     : "org.koin:koin-core:2.1.5",
+            ext      : "org.koin:koin-core-ext:2.1.5",
+            test     : "org.koin:koin-test:2.1.5"
+    ]
+
+    koinAndroid = [
+            viewmodel : "org.koin:koin-androidx-viewmodel:2.1.5",
+            scope     : "org.koin:koin-androidx-scope:2.1.5",
+            fragment  : "org.koin:koin-androidx-fragment:2.1.5",
+            ext       : "org.koin:koin-android-ext:2.1.5"
+    ]
+
+    glide = [
+            glide    : "com.github.bumptech.glide:glide:4.11.0",
+            compiler : "com.github.bumptech.glide:compiler:4.11.0"
+    ]
+
+    room = [
+            runtime   : "androidx.room:room-runtime:2.2.5",
+            compiler  : "androidx.room:room-compiler:2.2.5",
+            rxjava2   : "androidx.room:room-rxjava2:2.2.5"
+    ]
+
+    maps = "com.google.android.gms:play-services-maps:17.0.0"
+
+    dexter = "com.karumi:dexter:6.1.0"
+
+    debugdb = "com.amitshekhar.android:debug-db:1.0.6"
+
+    rxlocationmanager = "com.github.zellius:rxlocationmanager-rxjava2:1.0.0"
+
+    // Test
+    junit = "androidx.test.ext:junit:1.1.1"
+
+    espresso = [
+            core         : "androidx.test.espresso:espresso-core:3.2.0"
+    ]
 }

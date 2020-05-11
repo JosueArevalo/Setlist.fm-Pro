@@ -37,10 +37,10 @@ dependencies {
 
     // Default libraries from initial project
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation kotlinLib.stdlib
+    implementation androidx.appCompat
+    implementation androidx.coreKtx
+    implementation androidx.constraintLayout
 
     // Modules
     implementation project (':domain')
@@ -54,45 +54,41 @@ dependencies {
     implementation project (':libs:lib_resources')
 
     // RecyclerView
-    implementation "androidx.recyclerview:recyclerview:1.1.0"
+    implementation androidx.recyclerView
 
     // RXJava
-    implementation "io.reactivex.rxjava2:rxjava:2.1.16"
-    implementation "io.reactivex.rxjava2:rxkotlin:2.4.0"
-    implementation "io.reactivex.rxjava2:rxandroid:2.0.2"
+    implementation rx.rxJava
+    implementation rx.rxKotlin
+    implementation rx.rxAndroid
 
     // Koin (Core)
-    implementation "org.koin:koin-core:2.1.5" // Koin for Kotlin
-    implementation "org.koin:koin-core-ext:2.1.5" // Koin extended & experimental features
-    implementation "org.koin:koin-test:2.1.5" // Koin for Unit tests
+    implementation koin.core // Koin for Kotlin
+    implementation koin.ext // Koin extended & experimental features
+    implementation koin.test // Koin for Unit tests
 
     // Koin (AndroidX)
-    implementation "org.koin:koin-androidx-scope:2.1.5" // Koin AndroidX Scope features
-    implementation "org.koin:koin-androidx-viewmodel:2.1.5" // Koin AndroidX ViewModel features
-    implementation "org.koin:koin-androidx-fragment:2.1.5" // Koin AndroidX Fragment features
-    implementation "org.koin:koin-android-ext:2.1.5" // Koin AndroidX Experimental features
+    implementation koinAndroid.scope // Koin AndroidX Scope features
+    implementation koinAndroid.viewmodel // Koin AndroidX ViewModel features
+    implementation koinAndroid.fragment // Koin AndroidX Fragment features
+    implementation koinAndroid.ext // Koin AndroidX Experimental features
 
     // Firebase?
 
     // Glide
-    implementation 'com.github.bumptech.glide:glide:4.11.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    implementation glide.glide
+    annotationProcessor glide.compiler
 
     // Maps
-    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation maps
 
     // Dexter
-    implementation 'com.karumi:dexter:6.1.0'
+    implementation dexter
 
     // Default test libraries from initial project
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    
-    // Doubts:
-    // Support? "androidx.legacy:legacy-support-v4:$support_version"
-    // Lifecycle? android.arch.lifecycle:extensions:$archLifecycle_Version //ViewModel and LiveData ???
-    // Material Components for Android
-    implementation "com.google.android.material:material:1.2.0-alpha05" // https://github.com/material-components/material-components-android/blob/master/docs/getting-started.md
+    testImplementation 'junit:junit:4.13'
+    androidTestImplementation junit
+    androidTestImplementation espresso.core
 
+    // Material Components for Android
+    implementation material
 }

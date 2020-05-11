@@ -5,20 +5,20 @@ dependencies {
 
     // Default libraries from initial project
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation kotlinLib.stdlib
 
     // Modules
     implementation project(':domain')
     implementation project(':base')
 
     // RXJava
-    implementation "io.reactivex.rxjava2:rxjava:2.1.16"
-    implementation "io.reactivex.rxjava2:rxkotlin:2.4.0"
+    implementation rx.rxJava
+    implementation rx.rxKotlin
 
     // Koin (Core)
-    implementation "org.koin:koin-core:2.1.5" // Koin for Kotlin
-    implementation "org.koin:koin-core-ext:2.1.5" // Koin extended & experimental features
-    implementation "org.koin:koin-test:2.1.5" // Koin for Unit tests
+    implementation koin.core // Koin for Kotlin
+    implementation koin.ext // Koin extended & experimental features
+    implementation koin.test // Koin for Unit tests
 }
 
 sourceCompatibility = "7"

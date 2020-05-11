@@ -29,27 +29,27 @@ dependencies {
 
     // Default libraries from initial project
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.2.0'
+    implementation kotlinLib.stdlib
+    implementation androidx.appCompat
+    implementation androidx.coreKtx
 
     // Modules
     implementation project(':domain')
     implementation project(':data')
 
     // RXJava
-    implementation "io.reactivex.rxjava2:rxjava:2.1.16"
+    implementation rx.rxJava
 
     // RxLocationManager
-    implementation 'com.github.zellius:rxlocationmanager-rxjava2:1.0.0'
+    implementation rxlocationmanager
 
     // Koin (Core)
-    implementation "org.koin:koin-core:2.1.5" // Koin for Kotlin
-    implementation "org.koin:koin-core-ext:2.1.5" // Koin extended & experimental features
-    implementation "org.koin:koin-test:2.1.5" // Koin for Unit tests
+    implementation koin.core // Koin for Kotlin
+    implementation koin.ext // Koin extended & experimental features
+    implementation koin.test // Koin for Unit tests
 
     // Default test libraries from initial project
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    testImplementation 'junit:junit:4.13'
+    androidTestImplementation junit
+    androidTestImplementation espresso.core
 }
