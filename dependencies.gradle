@@ -56,9 +56,7 @@ ext {
             rxjava2_adapter   : "com.squareup.retrofit2:adapter-rxjava2:2.8.1"
     ]
 
-    google = [
-            gson: "com.google.code.gson:gson:2.8.6"
-    ]
+    gson = "com.google.code.gson:gson:2.8.6"
 
     koin = [
             core     : "org.koin:koin-core:2.1.5",
@@ -71,6 +69,12 @@ ext {
             fragment : "org.koin:koin-androidx-fragment:2.1.5",
             java     : "org.koin:koin-java:2.1.5"
      */
+
+    room = [
+            runtime   : "androidx.room:room-runtime:2.2.5",
+            compiler  : "androidx.room:room-compiler:2.2.5",
+            rxjava2   : "androidx.room:room-rxjava2:2.2.5"
+    ]
 
     // RxLocationManager
     rxlocationmanager = "com.github.zellius:rxlocationmanager-rxjava2:1.0.0"

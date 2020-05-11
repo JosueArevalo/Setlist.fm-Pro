@@ -39,7 +39,7 @@ dependencies {
     implementation project (':data')
 
     // Gson
-    implementation google.gson
+    implementation gson
 
     // Okhttp
     implementation okhttp.core
