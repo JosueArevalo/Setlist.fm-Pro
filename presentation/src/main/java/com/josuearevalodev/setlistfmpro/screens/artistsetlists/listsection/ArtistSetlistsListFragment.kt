@@ -151,30 +151,46 @@ class ArtistSetlistsListFragment : Fragment(R.layout.fragment_artist_setlists_li
 
     private fun ViewState.Error<*>.handleViewStateError() {
         if (!listHasItems) {
-            binding.clContent.gone()
-            binding.lvLoading.gone()
-
-            when (this.error) {
-                is NoInternetConnection -> {
-                    binding.ncNoConnection.visible()
-                    binding.evError.gone()
-                }
-                else -> {
-                    binding.ncNoConnection.gone()
-                    binding.evError.visible()
-                }
-            }
+            handleViewStateErrorWithoutItems()
         } else {
-            binding.clContent.visible()
-            binding.lvLoading.gone()
-            binding.evError.gone()
-
-            sharedViewModel.showRefreshButton.postValue(true)
-            adapter.removeLoading()
-            Snackbar.make(
-                binding.clContent,
-                getString(R.string.setlist_list_error_in_next_pages), Snackbar.LENGTH_LONG).show()
+            handleViewStateErrorWithItems()
         }
+    }
+
+    private fun ViewState.Error<*>.handleViewStateErrorWithoutItems() {
+        binding.clContent.gone()
+        binding.lvLoading.gone()
+
+        when (this.error) {
+            is NoInternetConnection -> {
+                binding.ncNoConnection.visible()
+                binding.evError.gone()
+            }
+            else -> {
+                binding.ncNoConnection.gone()
+                binding.evError.visible()
+            }
+        }
+    }
+
+    private fun ViewState.Error<*>.handleViewStateErrorWithItems() {
+        binding.clContent.visible()
+        binding.lvLoading.gone()
+        binding.evError.gone()
+
+        sharedViewModel.showRefreshButton.postValue(true)
+        adapter.removeLoading()
+
+        val message = when (this.error) {
+            is NoInternetConnection -> {
+                getString(R.string.setlist_list_error_in_next_pages_without_internet_connection)
+            }
+            else -> {
+                getString(R.string.setlist_list_error_in_next_pages)
+            }
+        }
+
+        Snackbar.make(binding.clContent, message, Snackbar.LENGTH_LONG).show()
     }
 
     private fun initList() {

@@ -39,17 +39,21 @@ class RemoteSetlistFmDataSourceImpl(
     }
 
     override fun getArtistSetlists(artistId: String, page: Int): Single<ArtistSetlistsResponseEntity> {
-        return httpClient.create(SetlistFmService::class.java, baseUrl)
-            .getArtistSetlists(artistId, page)
-            .onErrorResumeNext {
-                if (it is HttpException) {
-                    Single.error(it.mapToRemoteError)
-                } else {
-                    Single.error(Unexpected(it))
+        return if (networkInfoProvider.hasInternetConnection()) {
+            httpClient.create(SetlistFmService::class.java, baseUrl)
+                .getArtistSetlists(artistId, page)
+                .onErrorResumeNext {
+                    if (it is HttpException) {
+                        Single.error(it.mapToRemoteError)
+                    } else {
+                        Single.error(Unexpected(it))
+                    }
                 }
-            }
-            .map { remoteArtistSetlistResponse ->
-                remoteArtistSetlistResponse.mapToArtistSetlistsResponseEntity
-            }
+                .map { remoteArtistSetlistResponse ->
+                    remoteArtistSetlistResponse.mapToArtistSetlistsResponseEntity
+                }
+        } else {
+            Single.error(NoInternetConnection())
+        }
     }
 }
