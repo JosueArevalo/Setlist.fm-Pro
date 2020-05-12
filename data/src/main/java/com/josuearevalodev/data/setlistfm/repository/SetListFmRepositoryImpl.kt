@@ -9,6 +9,7 @@ import com.josuearevalodev.domain.setlistfm.entities.SetlistEntity
 import com.josuearevalodev.domain.setlistfm.repository.SetListFmRepository
 import io.reactivex.Completable
 import io.reactivex.Single
+import java.util.concurrent.TimeUnit
 
 class SetListFmRepositoryImpl(
     private val databaseDS: SetListFmDatabaseDataSource,
@@ -74,8 +75,11 @@ class SetListFmRepositoryImpl(
     }
 
     private fun getArtistFromRemote(artistName: String): Single<ArtistEntity> {
+        // NOTE: Due a limitation of current api key for 2 requests per second,
+        // I wait 1 second betweeen search artists & getSetlists, to avoid to get 429 http error
         return remoteDS
             .getArtist(artistName)
+            .delay(1000, TimeUnit.MILLISECONDS)
             .doOnSuccess {
                 insertArtistInDatabase(it)
                     .subscribe { System.out.println("TEST - Remote item inserted in DB!") }
