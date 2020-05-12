@@ -30,7 +30,7 @@ class ArtistSetlistsListViewModelImpl(private val searchArtistByNamesUseCase: Se
         viewState.postValue(ViewState.Loading)
         searchArtistByNamesUseCase(text)
             .subscribeOn(ioThread)
-            .observeOn(mainThread)
+            .observeOn(ioThread)
             .subscribe(
                 { artist ->
                     Log.d("TEST", "TEST: Success! $artist")
