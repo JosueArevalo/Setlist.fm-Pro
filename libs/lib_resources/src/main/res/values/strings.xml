@@ -4,4 +4,7 @@
     <string name="tab_artist_setlist_lists_list">List</string>
     <string name="tab_artist_setlist_lists_map">Map</string>
     <string name="setlist_list_error_in_next_pages">Error obtaining more results…</string>
+    <string name="setlist_list_error_in_next_pages_without_internet_connection">Check your Internet connection</string>
+    <string name="no_internet_connection">You don\'t have Internet connection</string>
+
 </resources>

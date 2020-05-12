@@ -75,7 +75,7 @@ class ArtistSetlistsListViewModelImpl(private val searchArtistByNamesUseCase: Se
                     if (currentPage > 1) {
                         currentPage--
                     }
-                    viewState.postValue(ViewState.Error(Throwable()))
+                    viewState.postValue(ViewState.Error(error))
                 }
             )
             .addTo(composite)

@@ -13,6 +13,7 @@ import com.josuearevalodev.base.classes.ViewState
 import com.josuearevalodev.base_android.extensions.gone
 import com.josuearevalodev.base_android.extensions.visible
 import com.josuearevalodev.base_android.recyclerview.PaginationListener
+import com.josuearevalodev.data.setlistfm.error.NoInternetConnection
 import com.josuearevalodev.setlistfmpro.models.setlistfm.models.Setlist
 import com.josuearevalodev.setlistfmpro.R
 import com.josuearevalodev.setlistfmpro.databinding.FragmentArtistSetlistsListBinding
@@ -84,6 +85,10 @@ class ArtistSetlistsListFragment : Fragment(R.layout.fragment_artist_setlists_li
         binding.evError.bRetry.setOnClickListener {
             handleRetry()
         }
+
+        binding.ncNoConnection.bRetry.setOnClickListener {
+            handleRetry()
+        }
     }
 
     private fun handleRetry() {
@@ -102,10 +107,12 @@ class ArtistSetlistsListFragment : Fragment(R.layout.fragment_artist_setlists_li
                         binding.clContent.gone()
                         binding.lvLoading.visible()
                         binding.evError.gone()
+                        binding.ncNoConnection.gone()
                     } else {
                         binding.clContent.visible()
                         binding.lvLoading.gone()
                         binding.evError.gone()
+                        binding.ncNoConnection.gone()
                     }
                 }
                 is ViewState.Content<*> -> {
@@ -126,6 +133,7 @@ class ArtistSetlistsListFragment : Fragment(R.layout.fragment_artist_setlists_li
                     binding.clContent.visible()
                     binding.lvLoading.gone()
                     binding.evError.gone()
+                    binding.ncNoConnection.gone()
                 }
                 is ViewState.Error<*> -> {
                     viewState.handleViewStateError()
@@ -143,20 +151,46 @@ class ArtistSetlistsListFragment : Fragment(R.layout.fragment_artist_setlists_li
 
     private fun ViewState.Error<*>.handleViewStateError() {
         if (!listHasItems) {
-            binding.clContent.gone()
-            binding.lvLoading.gone()
-            binding.evError.visible()
+            handleViewStateErrorWithoutItems()
         } else {
-            binding.clContent.visible()
-            binding.lvLoading.gone()
-            binding.evError.gone()
-
-            sharedViewModel.showRefreshButton.postValue(true)
-            adapter.removeLoading()
-            Snackbar.make(
-                binding.clContent,
-                getString(R.string.setlist_list_error_in_next_pages), Snackbar.LENGTH_LONG).show()
+            handleViewStateErrorWithItems()
         }
+    }
+
+    private fun ViewState.Error<*>.handleViewStateErrorWithoutItems() {
+        binding.clContent.gone()
+        binding.lvLoading.gone()
+
+        when (this.error) {
+            is NoInternetConnection -> {
+                binding.ncNoConnection.visible()
+                binding.evError.gone()
+            }
+            else -> {
+                binding.ncNoConnection.gone()
+                binding.evError.visible()
+            }
+        }
+    }
+
+    private fun ViewState.Error<*>.handleViewStateErrorWithItems() {
+        binding.clContent.visible()
+        binding.lvLoading.gone()
+        binding.evError.gone()
+
+        sharedViewModel.showRefreshButton.postValue(true)
+        adapter.removeLoading()
+
+        val message = when (this.error) {
+            is NoInternetConnection -> {
+                getString(R.string.setlist_list_error_in_next_pages_without_internet_connection)
+            }
+            else -> {
+                getString(R.string.setlist_list_error_in_next_pages)
+            }
+        }
+
+        Snackbar.make(binding.clContent, message, Snackbar.LENGTH_LONG).show()
     }
 
     private fun initList() {

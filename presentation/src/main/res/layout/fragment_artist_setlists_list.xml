@@ -27,4 +27,11 @@
         android:id="@+id/evError"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+    <!-- No Connection -->
+    <com.josuearevalodev.setlistfmpro.customviews.NoConnectionView
+        android:id="@+id/ncNoConnection"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
