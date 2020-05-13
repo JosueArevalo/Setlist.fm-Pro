@@ -31,4 +31,7 @@ interface SetlistFmDao {
 
     @Query("UPDATE artists SET itemsPerPage = :itemsPerPage, totalSetlists = :totalSetlists WHERE mbid = :idArtist")
     fun updateArtistWithSetlistsHeaderData(idArtist: String, itemsPerPage: Int, totalSetlists: Int): Completable
+
+    @Query("UPDATE artists SET itemsPerPage = :itemsPerPage, totalSetlists = :totalSetlists, lastPage1RemoteCall = :lastPage1RemoteCall WHERE mbid = :idArtist")
+    fun updateArtistWithSetlistsHeaderData(idArtist: String, itemsPerPage: Int, totalSetlists: Int, lastPage1RemoteCall: Long): Completable
 }

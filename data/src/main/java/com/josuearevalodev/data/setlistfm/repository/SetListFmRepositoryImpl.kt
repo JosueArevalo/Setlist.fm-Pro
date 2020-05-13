@@ -9,6 +9,7 @@ import com.josuearevalodev.domain.setlistfm.entities.SetlistEntity
 import com.josuearevalodev.domain.setlistfm.repository.SetListFmRepository
 import io.reactivex.Completable
 import io.reactivex.Single
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 class SetListFmRepositoryImpl(
@@ -32,12 +33,22 @@ class SetListFmRepositoryImpl(
         return databaseDS.getSetlistDetail(setlistId)
     }
 
-    override fun updateArtistWithSetlistsHeaderData(idArtist: String, itemsPerPage: Int, totalSetlists: Int): Completable {
-        return databaseDS.updateArtistWithSetlistsHeaderData(
-            idArtist = idArtist,
-            itemsPerPage = itemsPerPage,
-            totalSetlists = totalSetlists
-        )
+    override fun updateArtistWithSetlistsHeaderData(idArtist: String, itemsPerPage: Int, totalSetlists: Int, lastPage1RemoteCall: Long): Completable {
+        return when (lastPage1RemoteCall) {
+            -1L -> databaseDS.updateArtistWithSetlistsHeaderData(
+                idArtist = idArtist,
+                itemsPerPage = itemsPerPage,
+                totalSetlists = totalSetlists
+            )
+            else -> {
+                databaseDS.updateArtistWithSetlistsHeaderData(
+                    idArtist = idArtist,
+                    itemsPerPage = itemsPerPage,
+                    totalSetlists = totalSetlists,
+                    lastPage1RemoteCall = lastPage1RemoteCall
+                )
+            }
+        }
     }
 
     //==============================================================================================
@@ -139,11 +150,28 @@ class SetListFmRepositoryImpl(
                     .subscribe { System.out.println("TEST - Remote item inserted in DB!") }
 
                 // Header data updated in DB (artists table)
-                updateArtistWithSetlistsHeaderData(
-                    idArtist = artistId,
-                    itemsPerPage = artistSetlistsResponse.itemsPerPage,
-                    totalSetlists = artistSetlistsResponse.total)
-                    .subscribe { System.out.println("TEST - Header values updated in DB!") }
+                // If this remote call is page is #1, we save timestamp in DB
+                // If is not page #1, we don't save anything, because we only want to know
+                // newest setlists.
+                val updateValuesCompletable = when (page) {
+                    1 -> {
+                        updateArtistWithSetlistsHeaderData(
+                            idArtist = artistId,
+                            itemsPerPage = artistSetlistsResponse.itemsPerPage,
+                            totalSetlists = artistSetlistsResponse.total,
+                            lastPage1RemoteCall = Date().time
+                        )
+                    }
+                    else -> {
+                        updateArtistWithSetlistsHeaderData(
+                            idArtist = artistId,
+                            itemsPerPage = artistSetlistsResponse.itemsPerPage,
+                            totalSetlists = artistSetlistsResponse.total
+                        )
+                    }
+                }.apply {
+                    subscribe { System.out.println("TEST - Header values updated in DB!") }
+                }
             }
     }
 

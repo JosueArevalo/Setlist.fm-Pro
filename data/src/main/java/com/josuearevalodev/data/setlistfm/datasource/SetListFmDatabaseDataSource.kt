@@ -19,5 +19,5 @@ interface SetListFmDatabaseDataSource {
 
     fun insertSetlists(setlists: List<SetlistEntity>): Completable
 
-    fun updateArtistWithSetlistsHeaderData(idArtist: String, itemsPerPage: Int, totalSetlists: Int): Completable
+    fun updateArtistWithSetlistsHeaderData(idArtist: String, itemsPerPage: Int, totalSetlists: Int, lastPage1RemoteCall: Long = -1): Completable
 }

@@ -14,5 +14,5 @@ interface SetListFmRepository {
 
     fun getSetlistDetail(setlistId: String): Single<SetlistEntity>
 
-    fun updateArtistWithSetlistsHeaderData(idArtist: String, itemsPerPage: Int, totalSetlists: Int): Completable
+    fun updateArtistWithSetlistsHeaderData(idArtist: String, itemsPerPage: Int, totalSetlists: Int, lastPage1RemoteCall: Long = -1L): Completable
 }

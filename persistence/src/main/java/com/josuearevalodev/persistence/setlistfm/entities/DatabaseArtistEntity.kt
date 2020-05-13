@@ -11,7 +11,8 @@ data class DatabaseArtistEntity(
     val disambiguation: String?,
     val url: String?,
     val itemsPerPage: Int,
-    val totalSetlists: Int
+    val totalSetlists: Int,
+    val lastPage1RemoteCall: Long
 
 )
 

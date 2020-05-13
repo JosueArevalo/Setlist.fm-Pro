@@ -98,11 +98,10 @@ val ArtistEntity.mapToDatabaseArtistEntity: DatabaseArtistEntity
             disambiguation = disambiguation,
             url = url,
             itemsPerPage = itemsPerPage,
-            totalSetlists = totalSetlists
+            totalSetlists = totalSetlists,
+            lastPage1RemoteCall = -1
         )
     }
-
-
 
 val SetlistEntity.mapToDatabaseSetlistEntity: DatabaseSetlistEntity
     get() = DatabaseSetlistEntity(

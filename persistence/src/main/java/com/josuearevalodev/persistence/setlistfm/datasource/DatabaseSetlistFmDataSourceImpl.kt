@@ -74,11 +74,25 @@ class DatabaseSetlistFmDataSourceImpl(private val dbDao: SetlistFmDao) :
             }
     }
 
-    override fun updateArtistWithSetlistsHeaderData(idArtist: String, itemsPerPage: Int, totalSetlists: Int): Completable {
-        return dbDao.updateArtistWithSetlistsHeaderData(
-            idArtist = idArtist,
-            itemsPerPage = itemsPerPage,
-            totalSetlists = totalSetlists
-        )
+    override fun updateArtistWithSetlistsHeaderData(idArtist: String, itemsPerPage: Int, totalSetlists: Int, lastPage1RemoteCall: Long): Completable {
+        // Only save lastPage1RemoteCall when lastPage1RemoteCall is a valid timestamp
+        return when (lastPage1RemoteCall) {
+            -1L -> {
+                dbDao.updateArtistWithSetlistsHeaderData(
+                    idArtist = idArtist,
+                    itemsPerPage = itemsPerPage,
+                    totalSetlists = totalSetlists
+                )
+            }
+
+            else -> {
+                dbDao.updateArtistWithSetlistsHeaderData(
+                    idArtist = idArtist,
+                    itemsPerPage = itemsPerPage,
+                    totalSetlists = totalSetlists,
+                    lastPage1RemoteCall = lastPage1RemoteCall
+                )
+            }
+        }
     }
 }
