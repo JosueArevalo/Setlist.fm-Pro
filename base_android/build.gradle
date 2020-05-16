@@ -40,8 +40,6 @@ dependencies {
     // RecyclerView
     implementation androidx.recyclerView
 
-    // Default test libraries from initial project
-    testImplementation 'junit:junit:4.13'
-    androidTestImplementation junit
-    androidTestImplementation espresso.core
+    // Testing
+    testImplementation testLibs.values()
 }
