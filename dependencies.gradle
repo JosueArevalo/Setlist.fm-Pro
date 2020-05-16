@@ -73,10 +73,30 @@ ext {
 
     rxlocationmanager = "com.github.zellius:rxlocationmanager-rxjava2:1.0.0"
 
-    // Test
-    junit = "androidx.test.ext:junit:1.1.1"
+    // Tests
+    testLibs = [
+            junit        : 'junit:junit:4.12',
+            mockitoKotlin: "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0",
+            mockitoInline: "org.mockito:mockito-inline:2.28.2",
+            koinTest     : 'org.koin:koin-test:2.1.1'
+    ]
+    // junit = "androidx.test.ext:junit:1.1.1"
+    // testShared   : project(':testShared')
 
-    espresso = [
-            core         : "androidx.test.espresso:espresso-core:3.2.0"
+    // Android tests
+    androidTestLibs = [
+            testRunner   : 'androidx.test:runner:1.2.0',
+            espresso     : 'androidx.test.espresso:espresso-contrib:3.2.0',
+            rules        : 'androidx.test:rules:1.2.0',
+            extJunit     : 'androidx.test.ext:junit-ktx:1.1.1',
+            koinTest     : 'org.koin:koin-test:2.1.1',
+            mockWebServer: 'com.squareup.okhttp3:mockwebserver:4.2.1',
+            okhttpIdling : 'com.jakewharton.espresso:okhttp3-idling-resource:1.0.0'
+    ]
+
+
+    // AndroidX tests
+    androidxTestLibs = [
+            archCoreTesting: 'androidx.arch.core:core-testing:2.1.0'
     ]
 }
