@@ -82,5 +82,6 @@ class GetArtistSetlistImplTests {
                 else -> false
             }
         }
+        testObserver.dispose()
     }
 }
