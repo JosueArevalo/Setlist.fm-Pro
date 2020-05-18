@@ -74,6 +74,7 @@ class GetArtistSetlistImplTests {
             itemsPerPage = itemsPerPage).test()
 
         // Then
+        testObserver.awaitTerminalEvent()
         testObserver.assertComplete()
         testObserver.assertNoErrors()
         testObserver.assertValue { artistSetlistResponseEntity ->
