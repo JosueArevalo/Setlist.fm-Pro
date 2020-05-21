@@ -68,6 +68,24 @@ class SetListFmRepositoryImplTests {
     }
 
     @Test
+    fun `try to get artist - Successful remote call - Entity is inserted in database`() {
+        // Given
+        val artistName = "Artist name"
+        val artistEntity = ArtistEntity(name = artistName)
+
+        whenever(databaseDS.getArtist(any())).thenReturn(Single.error(Throwable()))
+        whenever(remoteDS.getArtist(any())).thenReturn(Single.just(artistEntity))
+
+        // When
+        val result = setListFmRepository.getArtist(artistName)
+        val test = result.test()
+        test.awaitTerminalEvent()
+
+        // Then
+        verify(databaseDS).insertArtist(artistEntity!!)
+    }
+
+    @Test
     fun getArtistSetlists() {
         assertTrue(true);
     }
