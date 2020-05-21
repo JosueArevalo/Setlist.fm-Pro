@@ -3,6 +3,7 @@ package com.josuearevalodev.data.setlistfm.repository
 import com.josuearevalodev.data.setlistfm.datasource.SetListFmDatabaseDataSource
 import com.josuearevalodev.data.setlistfm.datasource.SetListFmRemoteDataSource
 import com.josuearevalodev.domain.setlistfm.entities.ArtistEntity
+import com.josuearevalodev.domain.setlistfm.entities.ArtistSetlistsResponseEntity
 import com.josuearevalodev.domain.setlistfm.entities.SetlistEntity
 import com.josuearevalodev.domain.setlistfm.repository.SetListFmRepository
 import com.nhaarman.mockitokotlin2.any
@@ -95,32 +96,206 @@ class SetListFmRepositoryImplTests {
     //region getArtistSetlists
     @Test
     fun `try to get artist setlists - databaseDS's getArtistSetlists called`() {
-        assertTrue(true);
+        // Given
+        val artistId = "artist Id"
+        val page = 1
+        val itemsPerPage = 20
+        val setlists = listOf<SetlistEntity>()
+
+        whenever(
+            databaseDS.getArtistSetlists(
+                artistId = any(),
+                page = any(),
+                itemsPerPage = any()
+            )
+        ).thenReturn(Single.just(setlists))
+
+        // When
+        val test = setListFmRepository.getArtistSetlists(
+            artistId = artistId,
+            page = page,
+            itemsPerPage = itemsPerPage).test()
+
+        // Then
+        verify(databaseDS).getArtistSetlists(
+            artistId = artistId,
+            page = page,
+            itemsPerPage = itemsPerPage
+        )
+
+        test.dispose()
     }
 
     @Test
     fun `try to get artist setlists - databaseDS's getArtistSetlists returns error - remoteDS's getSetlistsFromRemote is called`() {
-        assertTrue(true);
+
+        // Given
+        val artistId = "artist Id"
+        val page = 1
+        val itemsPerPage = 20
+
+        whenever(databaseDS.getArtistSetlists(
+            artistId = any(),
+            page = any(),
+            itemsPerPage = any())
+        ).thenReturn(Single.error(Throwable()))
+
+        // When
+        val test = setListFmRepository.getArtistSetlists(
+            artistId = artistId,
+            page = page,
+            itemsPerPage = itemsPerPage
+        ).test()
+
+        // Then
+        verify(remoteDS).getArtistSetlists(artistId, page)
+        test.dispose()
     }
 
     @Test
     fun `try to get artist setlists - After successful remote call, databaseDS's insertSetlists is called`() {
-        assertTrue(true);
+
+        // Given
+        val artistId = "artist Id"
+        val page = 1
+        val itemsPerPage = 20
+        val artistSetlistsResponseEntity = ArtistSetlistsResponseEntity(setlist = listOf())
+
+        whenever(databaseDS.getArtistSetlists(
+            artistId = any(),
+            page = any(),
+            itemsPerPage = any())
+        ).thenReturn(Single.error(Throwable()))
+
+        whenever(remoteDS.getArtistSetlists(
+            artistId = any(),
+            page = any())
+        ).thenReturn(Single.just(artistSetlistsResponseEntity))
+
+        // When
+        val test = setListFmRepository.getArtistSetlists(
+            artistId = artistId,
+            page = page,
+            itemsPerPage = itemsPerPage
+        ).test()
+
+        // Then
+        verify(databaseDS).insertSetlists(artistSetlistsResponseEntity.setlist)
+        test.dispose()
     }
 
     @Test
     fun `try to get artist setlists - After successful remote call, databaseDS's updateArtistWithSetlistsHeaderData is called`() {
-        assertTrue(true);
+
+        // Given
+        val artistId = "artist Id"
+        val page = 1
+        val itemsPerPage = 20
+        val artistSetlistsResponseEntity = ArtistSetlistsResponseEntity(
+            setlist = listOf(),
+            total = 8)
+
+        whenever(databaseDS.getArtistSetlists(
+            artistId = any(),
+            page = any(),
+            itemsPerPage = any())
+        ).thenReturn(Single.error(Throwable()))
+
+        whenever(remoteDS.getArtistSetlists(
+            artistId = any(),
+            page = any())
+        ).thenReturn(Single.just(artistSetlistsResponseEntity))
+
+        whenever(databaseDS.insertSetlists(any())).thenReturn(Completable.complete())
+
+        // When
+        val test = setListFmRepository.getArtistSetlists(
+            artistId = artistId,
+            page = page,
+            itemsPerPage = itemsPerPage
+        ).test()
+
+        // Then
+        verify(databaseDS).updateArtistWithSetlistsHeaderData(
+            idArtist = any(),
+            itemsPerPage = any(),
+            totalSetlists = any()
+        )
+        test.dispose()
     }
 
     @Test
-    fun `try to get artist setlists - databaseDS's getArtistWithId is called when haven't been errors`() {
-        assertTrue(true);
+    fun `try to get artist setlists - databaseDS's getArtistWithId is called when haven't been errors from DB`() {
+
+        // Given
+        val artistId = "artist Id"
+        val page = 1
+        val itemsPerPage = 20
+        val artistSetlistsResponseEntity = ArtistSetlistsResponseEntity(
+            setlist = listOf(),
+            total = 8)
+
+        whenever(databaseDS.getArtistSetlists(
+            artistId = any(),
+            page = any(),
+            itemsPerPage = any())
+        ).thenReturn(Single.just(listOf()))
+
+        // When
+        val test = setListFmRepository.getArtistSetlists(
+            artistId = artistId,
+            page = page,
+            itemsPerPage = itemsPerPage
+        ).test()
+
+        // Then
+        verify(databaseDS).getArtistWithId(any())
+        test.dispose()
     }
 
     @Test
-    fun `try to get artist setlists - databaseDS's getArtistWithId is called when don't haven't been errors`() {
-        assertTrue(true);
+    fun `try to get artist setlists - databaseDS's getArtistWithId is called when have been errors from DB`() {
+
+        assertTrue(true)
+
+        // TODO
+        /*// Given
+        val artistId = "artist Id"
+        val page = 1
+        val itemsPerPage = 20
+        val artistSetlistsResponseEntity = ArtistSetlistsResponseEntity(
+            setlist = listOf(),
+            total = 8)
+
+        whenever(databaseDS.getArtistSetlists(
+            artistId = any(),
+            page = any(),
+            itemsPerPage = any())
+        ).thenReturn(Single.error(Throwable()))
+
+        whenever(remoteDS.getArtistSetlists(
+            artistId = any(),
+            page = any())
+        ).thenReturn(Single.just(artistSetlistsResponseEntity))
+
+        whenever(databaseDS.insertSetlists(setlists = any())).thenReturn(Completable.complete())
+
+        whenever(databaseDS.updateArtistWithSetlistsHeaderData(
+            idArtist = any(),
+            itemsPerPage = any(),
+            totalSetlists = any()
+        )).thenReturn(Completable.complete())
+
+        // When
+        val test = setListFmRepository.getArtistSetlists(
+            artistId = artistId,
+            page = page,
+            itemsPerPage = itemsPerPage
+        ).test()
+
+        // Then
+        verify(databaseDS).getArtistWithId(any())
+        test.dispose()*/
     }
 
     //endregion
