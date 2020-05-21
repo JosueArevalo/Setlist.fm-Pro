@@ -37,6 +37,8 @@ class SetListFmRepositoryImplTests {
         )
     }
 
+    //region getArtist
+
     @Test
     fun `try to get artist - databaseDS getArtist() is called`() {
 
@@ -88,11 +90,17 @@ class SetListFmRepositoryImplTests {
         test.dispose()
     }
 
+    //endregion
+
+    //region getArtistSetlists
     @Test
     fun getArtistSetlists() {
         assertTrue(true);
     }
 
+    //endregion
+
+    //region getSetlistDetail
     @Test
     fun `try to get setlist detail - databaseDS's getSetlistDetail is called`() {
        // Given
@@ -107,6 +115,9 @@ class SetListFmRepositoryImplTests {
         test.dispose()
     }
 
+    //endregion
+
+    //region updateArtistWithSetlistsHeaderData
     @Test
     fun `try to update artist with setlist header data - databaseDS's updateArtistWithSetlistsHeaderData is called`() {
         // Given
@@ -131,6 +142,6 @@ class SetListFmRepositoryImplTests {
             totalSetlists = totalSetlists
         )
         test.dispose()
-
     }
+    //endregion
 }
