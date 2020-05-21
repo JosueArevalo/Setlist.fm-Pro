@@ -8,6 +8,7 @@ import com.josuearevalodev.domain.setlistfm.repository.SetListFmRepository
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
+import io.reactivex.Completable
 import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
@@ -44,10 +45,11 @@ class SetListFmRepositoryImplTests {
         whenever(databaseDS.getArtist(artistName)).thenReturn(Single.just(ArtistEntity(name = "Artist Name")))
 
         // When
-        val result = setListFmRepository.getArtist(artistName = artistName)
+        val test = setListFmRepository.getArtist(artistName = artistName).test()
 
         // Then
         verify(databaseDS).getArtist(artistName = artistName)
+        test.dispose()
     }
 
     @Test
@@ -83,6 +85,7 @@ class SetListFmRepositoryImplTests {
 
         // Then
         verify(databaseDS).insertArtist(artistEntity)
+        test.dispose()
     }
 
     @Test
@@ -101,10 +104,33 @@ class SetListFmRepositoryImplTests {
 
         // Then
         verify(databaseDS).getSetlistDetail(setlistId)
+        test.dispose()
     }
 
     @Test
-    fun updateArtistWithSetlistsHeaderData() {
-        assertTrue(true);
+    fun `try to update artist with setlist header data - databaseDS's updateArtistWithSetlistsHeaderData is called`() {
+        // Given
+        val idArtist = "0"
+        val itemsPerPage = 20
+        val totalSetlists = 100
+
+        whenever(databaseDS.updateArtistWithSetlistsHeaderData(any(), any(), any())).thenReturn(
+            Completable.complete())
+
+        // When
+        val test = setListFmRepository.updateArtistWithSetlistsHeaderData(
+            idArtist = idArtist,
+            itemsPerPage = itemsPerPage,
+            totalSetlists = totalSetlists
+        ).test()
+
+        // Then
+        verify(databaseDS).updateArtistWithSetlistsHeaderData(
+            idArtist = idArtist,
+            itemsPerPage = itemsPerPage,
+            totalSetlists = totalSetlists
+        )
+        test.dispose()
+
     }
 }
