@@ -3,6 +3,7 @@ package com.josuearevalodev.data.setlistfm.repository
 import com.josuearevalodev.data.setlistfm.datasource.SetListFmDatabaseDataSource
 import com.josuearevalodev.data.setlistfm.datasource.SetListFmRemoteDataSource
 import com.josuearevalodev.domain.setlistfm.entities.ArtistEntity
+import com.josuearevalodev.domain.setlistfm.entities.SetlistEntity
 import com.josuearevalodev.domain.setlistfm.repository.SetListFmRepository
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.verify
@@ -77,12 +78,11 @@ class SetListFmRepositoryImplTests {
         whenever(remoteDS.getArtist(any())).thenReturn(Single.just(artistEntity))
 
         // When
-        val result = setListFmRepository.getArtist(artistName)
-        val test = result.test()
+        val test = setListFmRepository.getArtist(artistName).test()
         test.awaitTerminalEvent()
 
         // Then
-        verify(databaseDS).insertArtist(artistEntity!!)
+        verify(databaseDS).insertArtist(artistEntity)
     }
 
     @Test
@@ -91,8 +91,16 @@ class SetListFmRepositoryImplTests {
     }
 
     @Test
-    fun getSetlistDetail() {
-        assertTrue(true);
+    fun `try to get setlist detail - databaseDS's getSetlistDetail is called`() {
+       // Given
+        val setlistId = "0"
+        whenever(databaseDS.getSetlistDetail(setlistId)).thenReturn(Single.just(SetlistEntity(id = setlistId)))
+
+        // When
+        val test = setListFmRepository.getSetlistDetail(setlistId = setlistId).test()
+
+        // Then
+        verify(databaseDS).getSetlistDetail(setlistId)
     }
 
     @Test
