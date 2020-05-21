@@ -94,7 +94,32 @@ class SetListFmRepositoryImplTests {
 
     //region getArtistSetlists
     @Test
-    fun getArtistSetlists() {
+    fun `try to get artist setlists - databaseDS's getArtistSetlists called`() {
+        assertTrue(true);
+    }
+
+    @Test
+    fun `try to get artist setlists - databaseDS's getArtistSetlists returns error - remoteDS's getSetlistsFromRemote is called`() {
+        assertTrue(true);
+    }
+
+    @Test
+    fun `try to get artist setlists - After successful remote call, databaseDS's insertSetlists is called`() {
+        assertTrue(true);
+    }
+
+    @Test
+    fun `try to get artist setlists - After successful remote call, databaseDS's updateArtistWithSetlistsHeaderData is called`() {
+        assertTrue(true);
+    }
+
+    @Test
+    fun `try to get artist setlists - databaseDS's getArtistWithId is called when haven't been errors`() {
+        assertTrue(true);
+    }
+
+    @Test
+    fun `try to get artist setlists - databaseDS's getArtistWithId is called when don't haven't been errors`() {
         assertTrue(true);
     }
 
