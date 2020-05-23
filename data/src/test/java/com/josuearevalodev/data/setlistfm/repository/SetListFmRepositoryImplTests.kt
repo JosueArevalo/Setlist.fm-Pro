@@ -256,10 +256,7 @@ class SetListFmRepositoryImplTests {
     @Test
     fun `try to get artist setlists - databaseDS's getArtistWithId is called when have been errors from DB`() {
 
-        assertTrue(true)
-
-        // TODO
-        /*// Given
+        // Given
         val artistId = "artist Id"
         val page = 1
         val itemsPerPage = 20
@@ -271,7 +268,9 @@ class SetListFmRepositoryImplTests {
             artistId = any(),
             page = any(),
             itemsPerPage = any())
-        ).thenReturn(Single.error(Throwable()))
+        ).thenReturn(
+            Single.error(Throwable()), // Error value for 1st call
+            Single.just(listOf())) // Success value for 2nd call (After remote call)
 
         whenever(remoteDS.getArtistSetlists(
             artistId = any(),
@@ -295,7 +294,7 @@ class SetListFmRepositoryImplTests {
 
         // Then
         verify(databaseDS).getArtistWithId(any())
-        test.dispose()*/
+        test.dispose()
     }
 
     //endregion
