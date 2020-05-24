@@ -19,6 +19,9 @@ dependencies {
     implementation koin.core // Koin for Kotlin
     implementation koin.ext // Koin extended & experimental features
     implementation koin.test // Koin for Unit tests
+
+    // Testing
+    testImplementation testLibs.values()
 }
 
 sourceCompatibility = "7"

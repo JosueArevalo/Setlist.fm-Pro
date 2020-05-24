@@ -84,11 +84,11 @@ dependencies {
     // Dexter
     implementation dexter
 
-    // Default test libraries from initial project
-    testImplementation 'junit:junit:4.13'
-    androidTestImplementation junit
-    androidTestImplementation espresso.core
-
     // Material Components for Android
     implementation material
+
+    // Testing
+    testImplementation testLibs.values()
+    testImplementation androidxTestLibs.values()
+    androidTestImplementation androidTestLibs.values()
 }
