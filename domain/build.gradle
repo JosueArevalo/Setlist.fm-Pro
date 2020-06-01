@@ -1,0 +1,15 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+
+dependencies {
+    // Default libraries from initial project
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation kotlinLib.stdlib
+
+    // RXJava
+    implementation rx.rxJava
+    implementation rx.rxKotlin
+}
+
+sourceCompatibility = "7"
+targetCompatibility = "7"

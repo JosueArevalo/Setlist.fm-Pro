@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/spacing_normal">
+
+    <include
+        android:id="@+id/llDate"
+        layout="@layout/view_date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvVenueTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        style="@style/Setlists.Text.List.Title"
+        android:layout_marginStart="@dimen/spacing_normal"
+        app:layout_constraintStart_toEndOf="@+id/llDate"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="This is my Id" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvSongsSummary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        style="@style/Setlists.Text.List.SongsSummary"
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:layout_marginTop="@dimen/spacing_normal"
+        app:layout_constraintTop_toBottomOf="@+id/tvVenueTitle"
+        app:layout_constraintStart_toEndOf="@+id/llDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="This is my Id" />
+</androidx.constraintlayout.widget.ConstraintLayout>

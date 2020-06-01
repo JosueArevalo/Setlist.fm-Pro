@@ -1,0 +1,28 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+
+dependencies {
+
+    // Default libraries from initial project
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation kotlinLib.stdlib
+
+    // Modules
+    implementation project(':domain')
+    implementation project(':base')
+
+    // RXJava
+    implementation rx.rxJava
+    implementation rx.rxKotlin
+
+    // Koin (Core)
+    implementation koin.core // Koin for Kotlin
+    implementation koin.ext // Koin extended & experimental features
+    implementation koin.test // Koin for Unit tests
+
+    // Testing
+    testImplementation testLibs.values()
+}
+
+sourceCompatibility = "7"
+targetCompatibility = "7"

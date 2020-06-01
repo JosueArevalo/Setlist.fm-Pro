@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Setlists"/>
+
+    <style name="Setlists.Text" parent="Setlists"/>
+
+    <style name="Setlists.Text.List.Title" parent="Setlists.Text">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Setlists.Text.List.SongsSummary" parent="Setlists.Text">
+        <item name="android:textColor">@color/colorSongsSummary</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:maxLines">2</item>
+    </style>
+
+    <style name="Setlists.Text.List.Month" parent="Setlists.Text">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="Setlists.Text.List.Day" parent="Setlists.Text">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="Setlists.Text.List.Year" parent="Setlists.Text">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="Setlists.Text.List.NoConnection" parent="Setlists.Text">
+        <item name="android:textColor">@color/colorSongsSummary</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="Setlists.Text.Detail.SetlistTitle" parent="Setlists.Text">
+        <item name="android:textColor">@color/colorSetlistDetailTitle</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">23sp</item>
+    </style>
+
+    <style name="Setlists.Text.Detail.SetlistDetailHeader" parent="Setlists.Text">
+        <item name="android:textColor">@color/colorSetlistDetailHeader</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColorLink">@color/colorHyperlink</item>
+    </style>
+
+    <style name="Setlists.Text.Detail.SongName" parent="Setlists.Text">
+        <item name="android:textColor">@color/colorSongName</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="Setlists.Text.Detail.SongInfo" parent="Setlists.Text">
+        <item name="android:textColor">@color/colorSongName</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="Setlists.Text.Detail.TapeName" parent="Setlists.Text">
+        <item name="android:textColor">@color/colorTapeIcon</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="Setlists.Text.Detail.EncoreTitle" parent="Setlists.Text">
+        <item name="android:textColor">@color/colorEncoreTitle</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+</resources>

@@ -1,0 +1,94 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.josuearevalodev.setlistfmpro"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "0.1"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    viewBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+
+    // Default libraries from initial project
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation kotlinLib.stdlib
+    implementation androidx.appCompat
+    implementation androidx.coreKtx
+    implementation androidx.constraintLayout
+
+    // Modules
+    implementation project (':domain')
+    implementation project (':data')
+    implementation project (':remote')
+    implementation project (':persistence')
+    implementation project (':location')
+    implementation project (':usecases')
+    implementation project (':base')
+    implementation project (':base_android')
+    implementation project (':libs:lib_resources')
+
+    // RecyclerView
+    implementation androidx.recyclerView
+
+    // RXJava
+    implementation rx.rxJava
+    implementation rx.rxKotlin
+    implementation rx.rxAndroid
+
+    // Koin (Core)
+    implementation koin.core // Koin for Kotlin
+    implementation koin.ext // Koin extended & experimental features
+    implementation koin.test // Koin for Unit tests
+
+    // Koin (AndroidX)
+    implementation koinAndroid.scope // Koin AndroidX Scope features
+    implementation koinAndroid.viewmodel // Koin AndroidX ViewModel features
+    implementation koinAndroid.fragment // Koin AndroidX Fragment features
+    implementation koinAndroid.ext // Koin AndroidX Experimental features
+
+    // Firebase?
+
+    // Glide
+    implementation glide.glide
+    annotationProcessor glide.compiler
+
+    // Maps
+    implementation maps
+
+    // Dexter
+    implementation dexter
+
+    // Material Components for Android
+    implementation material
+
+    // Testing
+    testImplementation testLibs.values()
+    testImplementation androidxTestLibs.values()
+    androidTestImplementation androidTestLibs.values()
+}
