@@ -8,8 +8,8 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import com.josuearevalodev.setlistfmpro.R
+import org.hamcrest.Matchers.not
 import org.junit.After
-import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -23,8 +23,8 @@ class SetlistDetailActivityTest {
                     InstrumentationRegistry.getInstrumentation()
                         .targetContext
                 val result = Intent(targetContext, SetlistDetailActivity::class.java)
-                result.putExtra("EXTRA_ARTIST_ID", "c4707a18-2236-4426-9e67-429ce023777c")
-                result.putExtra("EXTRA_SETLIST_ID", "39a9153")
+                result.putExtra("EXTRA_ARTIST_ID", "InventedArtistId")
+                result.putExtra("EXTRA_SETLIST_ID", "InventedSetlistId")
                 return result
             }
         }
@@ -39,7 +39,7 @@ class SetlistDetailActivityTest {
 
 
     @Test
-    fun testHeaderIsVisible() {
-        onView(withId(R.id.clHeader)).check(matches(isDisplayed()))
+    fun testHeaderIsNotVisibleWithInventedValues() {
+        onView(withId(R.id.clHeader)).check(matches(not(isDisplayed())))
     }
 }
