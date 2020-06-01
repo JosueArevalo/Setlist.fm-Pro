@@ -1,7 +1,6 @@
 package com.josuearevalodev.setlistfmpro.screens.setlistdetail
 
 import android.content.Intent
-import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
@@ -17,9 +16,8 @@ import org.junit.Test
 
 class SetlistDetailActivityTest {
 
-    @Rule
-    @JvmField
-    var activityTestRule: ActivityTestRule<SetlistDetailActivity> = object : ActivityTestRule<SetlistDetailActivity>(SetlistDetailActivity::class.java) {
+    @get:Rule
+    val activityTestRule: ActivityTestRule<SetlistDetailActivity> = object : ActivityTestRule<SetlistDetailActivity>(SetlistDetailActivity::class.java) {
             override fun getActivityIntent(): Intent {
                 val targetContext =
                     InstrumentationRegistry.getInstrumentation()
